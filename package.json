@@ -5,28 +5,32 @@
   "main": "build/bundle.js",
   "dependencies": {
     "flux": "^2.0.3",
-    "object-assign": "^2.0.0",
-    "react": "^0.13.3"
+    "object-assign": "^2.1.1",
+    "react": "^0.13.3",
+    "rsvp": "^3.0.18",
+    "superagent": "^1.2.0",
+    "wordpress-rest-api": "^0.4.0"
   },
   "devDependencies": {
+    "babel-jest": "*",
+    "babel-loader": "*",
+    "bootstrap": "*",
+    "bootstrap-webpack": "*",
     "css-loader": "*",
     "file-loader": "*",
+    "fs": "0.0.2",
+    "imports-loader": "*",
     "jest-cli": "*",
+    "jquery": "*",
     "react-hot-loader": "*",
     "react-tools": "*",
     "style-loader": "*",
-    "url-loader": "*",
-    "webpack-dev-server": "*",
-    "webpack": "*",
-    "babel-loader": "*",
-    "babel-jest": "*",
     "stylus": "*",
     "stylus-loader": "*",
-    "bootstrap": "*",
-    "bootstrap-webpack": "*",
-    "imports-loader": "*",
-    "jquery": "*"
-},
+    "url-loader": "*",
+    "webpack": "*",
+    "webpack-dev-server": "*"
+  },
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server --colors --content-base ./build",
@@ -37,12 +41,12 @@
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "testFileExtensions": [
-    "js"
-],
+      "js"
+    ],
     "moduleFileExtensions": [
-    "js",
-    "json"
-],
+      "js",
+      "json"
+    ],
     "globals": {
       "SCRIPTS": "<rootDir>/src/scripts"
     },
