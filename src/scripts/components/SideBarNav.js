@@ -54,8 +54,8 @@ var SideBarNav = React.createClass({
 			<div >
 				<input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
 				<ul> 
-					{ categories.map(function(l){
-					    return <a href={l.url}><li>{l.name}</li></a>
+					{ categories.map(function(category){
+					    return <a href={category.link}><li>{category.name}</li></a>
 					}) }
 				</ul>
 			</div>
