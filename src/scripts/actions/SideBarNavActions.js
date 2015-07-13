@@ -1,5 +1,6 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
-			WebAPIUtils = require('../utils/WebAPIUtils.js');
+			WebAPIUtils = require('../utils/WebAPIUtils.js'),
+			Constants = require('../constants/Constants');
 
 let ActionTypes = Constants.ActionTypes;
 
@@ -9,7 +10,7 @@ module.exports = {
 		AppDispatcher.handleViewAction({
       type: ActionTypes.LOAD_CATEGORIES
     });
-    WebAPIUtils.loadStories();
+    WebAPIUtils.loadCategories();
 	},
 
 	createComment(comment) {

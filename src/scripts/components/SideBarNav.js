@@ -1,9 +1,10 @@
 var React = require('react'),
-		SideBarNavStore = require('../stores/SideBarNavStore');
+		SideBarNavStore = require('../stores/SideBarNavStore'),
+		SideBarNavActions = require('../actions/SideBarNavActions');
 
 function getStateFromStore() {
 	return {
-		comments: SideBarNavStore.getAll()
+		categories: SideBarNavStore.getAll()
 	}
 }
 
@@ -13,11 +14,14 @@ var SideBarNav = React.createClass({
 	},
 
 	getInitialState() {
-		return getStateFromStore();
+		return {
+			categories: []
+		};
 	},
 
 	componentDidMount() {
 		SideBarNavStore.addChangeListener(this.onChange);
+		SideBarNavActions.getCategories();
 	},
 
 	componentWillUnmount() {
@@ -25,17 +29,18 @@ var SideBarNav = React.createClass({
 	},
 
 	render() {
-		var comments = this.state.comments.map(function(comment, index) {
+		console.log(this.state.categories);
+		var categories = this.state.categories.map(function(comment, index) {
 			return (
 				<div className='comment' key={'comment-' + index}>
-					{comment.text}
+					{comment.name}
 				</div>		
 			)
 		});
 
 		return (
-			<div className='comments'>
-				{comments}
+			<div className='categories'>
+				{categories}
 			</div>
 		);
 	}

@@ -1,21 +1,16 @@
-const AppDispatcher = require('../dispatcher/AppDispatcher');
+const AppDispatcher = require('../dispatcher/AppDispatcher'),
+			Constants = require('../constants/Constants'),
+			ActionTypes = Constants.ActionTypes;
 
 let EventEmitter = require('events').EventEmitter,
 	  assign = require('object-assign'),
 	  WP = require( 'wordpress-rest-api' ),
 	  wp = new WP({ endpoint: 'http://wordpress.api.dev/wp-json' });
 
-let comments = wp.categories().get(function( err, data ) {
-	    if ( err ) {
-	        // handle err 
-	        console.log(err);
-	    }
-		    // do something with the returned posts 
-		    return data
-		});
-console.log(comments);
+let categories = [];
 
-const SideBarNavStore = assign({}, EventEmitter.prototype, {
+let SideBarNavStore = assign({}, EventEmitter.prototype, {
+
 
 	emitChange() {
 		this.emit('change');
@@ -30,15 +25,16 @@ const SideBarNavStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getAll() {
-		return comments;
+		return categories;
 	}
 });
 
 AppDispatcher.register(function(action) {
+	console.log(action);
 	switch(action.actionType) {
 
-    case "CREATE_COMMENT":
-      comments.push(action.comment);
+		case "RECEIVE_CATEGORIES":
+      categories = action.categories;
       SideBarNavStore.emitChange();
       break;
 
