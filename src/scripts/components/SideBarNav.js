@@ -11,12 +11,20 @@ function getStateFromStore() {
 var SideBarNav = React.createClass({
 	onChange(e) {
 		this.setState(getStateFromStore());
-		this.setState({searchString:e.target.value});
+		// this.setState({searchString: e.target.value});
 	},
+
+	handleChange: function(e){
+	    // If you comment out this line, the text box will not change its value.
+	    // This is because in React, an input cannot change independently of the value
+	    // that was assigned to it. In our case this is this.state.searchString.
+
+	    this.setState({searchString:e.target.value});
+    },
 
 	getInitialState() {
 		return {
-			categories: [],
+			categories: SideBarNavStore.getAll(),
 			searchString: ''
 		};
 	},
@@ -44,8 +52,8 @@ var SideBarNav = React.createClass({
 		}
 
 		return (
-			<div>
-				<input type="text" value={this.state.searchString} onChange={this.onChange} placeholder="Type here" />
+			<div >
+				<input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
 				<ul> 
 					{ categories.map(function(l){
 					    return <a href={l.url}><li>{l.name}</li></a>
