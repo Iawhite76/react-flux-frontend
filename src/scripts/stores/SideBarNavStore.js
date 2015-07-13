@@ -29,11 +29,11 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 	}
 });
 
-AppDispatcher.register(function(action) {
-	console.log(action);
-	switch(action.actionType) {
+AppDispatcher.register(function(payload) {
+	let action = payload.action;
+	switch(action.type) {
 
-		case "RECEIVE_CATEGORIES":
+		case ActionTypes.RECEIVE_CATEGORIES:
       categories = action.categories;
       SideBarNavStore.emitChange();
       break;

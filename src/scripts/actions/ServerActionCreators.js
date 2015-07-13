@@ -1,22 +1,23 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher.js'),
       Constants = require('../constants/Constants.js');
 
-var ActionTypes = Constants.ActionTypes;
+let ActionTypes = Constants.ActionTypes;
 
 module.exports = {
 
   receiveCategories: function(categories) {
-    // AppDispatcher.handleServerAction({
-    //   actionType: "RECEIVE_CATEGORIES,
-    //   data: data
-    // });
-
-    var action = {
-      actionType: "RECEIVE_CATEGORIES",
+    AppDispatcher.handleServerAction({
+      // type: ActionTypes.RECEIVE_CATEGORIES,
+      type: "RECEIVE_CATEGORIES",
       categories: categories
-    };
+    });
 
-    AppDispatcher.dispatch(action);
+    // var action = {
+    //   actionType: "RECEIVE_CATEGORIES",
+    //   categories: categories
+    // };
+
+    // AppDispatcher.dispatch(action);
 
   },
 
