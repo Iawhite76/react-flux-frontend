@@ -9,9 +9,8 @@ function getStateFromStore() {
 }
 
 var SideBarNav = React.createClass({
-	onChange(e) {
+	onChange() {
 		this.setState(getStateFromStore());
-		// this.setState({searchString: e.target.value});
 	},
 
 	handleChange: function(e){
