@@ -13,12 +13,4 @@ module.exports = {
     WebAPIUtils.loadCategories();
 	},
 
-	createComment(comment) {
-		var action = {
-			actionType: "CREATE_COMMENT",
-			comment: comment
-		};
-
-		AppDispatcher.dispatch(action);
-	}
 };

@@ -3,11 +3,11 @@ const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			ActionTypes = Constants.ActionTypes;
 
 let EventEmitter = require('events').EventEmitter,
-	  assign = require('object-assign'),
-	  WP = require( 'wordpress-rest-api' ),
-	  wp = new WP({ endpoint: 'http://wordpress.api.dev/wp-json' });
+	  assign = require('object-assign');
 
-let categories = [];
+// Underscore because this is a private variable created by the 
+// module closure
+let _categories = [];
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
@@ -24,8 +24,8 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		this.removeListener('change', callback);
 	},
 
-	getAll() {
-		return categories;
+	getAllCategories() {
+		return _categories;
 	}
 });
 
@@ -34,7 +34,7 @@ AppDispatcher.register(function(payload) {
 	switch(action.type) {
 
 		case ActionTypes.RECEIVE_CATEGORIES:
-      categories = action.categories;
+      _categories = action.categories;
       SideBarNavStore.emitChange();
       break;
 

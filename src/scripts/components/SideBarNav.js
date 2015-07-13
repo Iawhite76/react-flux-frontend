@@ -4,7 +4,7 @@ const React = require('react'),
 
 function getStateFromStore() {
 	return {
-		categories: SideBarNavStore.getAll()
+		categories: SideBarNavStore.getAllCategories()
 	}
 }
 
@@ -23,7 +23,7 @@ let SideBarNav = React.createClass({
 
 	getInitialState() {
 		return {
-			categories: SideBarNavStore.getAll(),
+			categories: SideBarNavStore.getAllCategories(),
 			searchString: ''
 		};
 	},
