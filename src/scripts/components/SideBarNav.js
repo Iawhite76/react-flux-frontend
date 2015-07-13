@@ -52,7 +52,7 @@ var SideBarNav = React.createClass({
 
 		return (
 			<aside className='col-xs-6' id='react_search'>
-				<input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
+				<input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
 				<ul> 
 					{ categories.map(function(category){
 					    return <a href={category.link}><li>{category.name}</li></a>
