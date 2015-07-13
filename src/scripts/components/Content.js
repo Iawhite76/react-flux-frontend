@@ -1,11 +1,13 @@
-import React from 'react';
+const React = require('react');
+      // ContentStore = require('../stores/ContentStore'),
+      // ContentActions = require('../actions/ContentActions');
 
-const App = React.createClass({
+let Content = React.createClass({
   render() {
     var codeBlockStyle = { "fontFamily": "monospace",
                            "backgroundColor": "#D0D0D0" };
     return (
-    <div>
+    <div className="col-xs-12 col-sm-9">
       <header>
         <h1>another-flux-app</h1>
         <h3>A React/Flux app generate by RF, powered with Babel</h3>
@@ -24,4 +26,4 @@ const App = React.createClass({
   }
 });
 
-module.exports = App;
+module.exports = Content;

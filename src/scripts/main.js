@@ -4,8 +4,9 @@ require('../assets/stylesheets/style.styl');
 // TODO: Require assets here.
 // require('../assets/images/product.png');
 
-import React from 'react';
-import SideBarNav from './components/SideBarNav';
+const React = require('react'),
+			SideBarNav = require('./components/SideBarNav'),
+			Content = require('./components/Content');
 
 var App = React.createClass({
 
@@ -13,6 +14,7 @@ var App = React.createClass({
     return (
       <div>
         <SideBarNav />
+        <Content />
       </div>
     );
   }

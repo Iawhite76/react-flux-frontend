@@ -1,6 +1,6 @@
-var React = require('react'),
-		SideBarNavStore = require('../stores/SideBarNavStore'),
-		SideBarNavActions = require('../actions/SideBarNavActions');
+const React = require('react'),
+			SideBarNavStore = require('../stores/SideBarNavStore'),
+			SideBarNavActions = require('../actions/SideBarNavActions');
 
 function getStateFromStore() {
 	return {
@@ -8,7 +8,7 @@ function getStateFromStore() {
 	}
 }
 
-var SideBarNav = React.createClass({
+let SideBarNav = React.createClass({
 	onChange() {
 		this.setState(getStateFromStore());
 	},
@@ -51,7 +51,7 @@ var SideBarNav = React.createClass({
 		}
 
 		return (
-			<aside className='col-xs-6' id='react_search'>
+			<aside className='col-xs-12 col-sm-3' id='react_search'>
 				<input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
 				<ul> 
 					{ categories.map(function(category){
