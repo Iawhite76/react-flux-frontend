@@ -12,13 +12,6 @@ module.exports = {
       categories: categories
     });
 
-    // var action = {
-    //   actionType: "RECEIVE_CATEGORIES",
-    //   categories: categories
-    // };
-
-    // AppDispatcher.dispatch(action);
-
   },
 
 };
