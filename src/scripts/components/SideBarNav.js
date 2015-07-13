@@ -9,13 +9,15 @@ function getStateFromStore() {
 }
 
 var SideBarNav = React.createClass({
-	onChange() {
+	onChange(e) {
 		this.setState(getStateFromStore());
+		this.setState({searchString:e.target.value});
 	},
 
 	getInitialState() {
 		return {
-			categories: []
+			categories: [],
+			searchString: ''
 		};
 	},
 
@@ -30,19 +32,28 @@ var SideBarNav = React.createClass({
 
 	render() {
 		console.log(this.state.categories);
-		var categories = this.state.categories.map(function(comment, index) {
-			return (
-				<div className='comment' key={'comment-' + index}>
-					{comment.name}
-				</div>		
-			)
-		});
+		let searchString = this.state.searchString.trim().toLowerCase(),
+				categories = this.state.categories;
+
+		if(searchString.length > 0){
+	    // We are searching. Filter the results.
+
+	    categories = categories.filter(function(category){
+	        return category.name.toLowerCase().match( searchString );
+	    });
+		}
 
 		return (
-			<div className='categories'>
-				{categories}
+			<div>
+				<input type="text" value={this.state.searchString} onChange={this.onChange} placeholder="Type here" />
+				<ul> 
+					{ categories.map(function(l){
+					    return <a href={l.url}><li>{l.name}</li></a>
+					}) }
+				</ul>
 			</div>
-		);
+    );
+
 	}
 
 });
