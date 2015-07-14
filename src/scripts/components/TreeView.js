@@ -1,27 +1,17 @@
-const React = require('react/addons'),
+var React = require('react/addons'),
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
   TreeMenuUtils = require('../utils/react-tree-menu').TreeMenuUtils,
   Immutable = require('immutable'),
   _ = require('lodash'),
-  JSXView = require('../utils/react-jsx-view'),
-  pickDeep = require('../utils/Utils').pickDeep;
+  JSXView = require('../utils/react-jsx-view');
 
-let CSSTransitionGroup = React.addons.CSSTransitionGroup;
+var CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-let TreeView = React.createClass({
-
-  handleChange: function(e){
-    // If you comment out this line, the text box will not change its value.
-    // This is because in React, an input cannot change independently of the value
-    // that was assigned to it. In our case this is this.state.searchString.
-
-    this.setState({searchString:e.target.value});
-  },
+var TreeView = React.createClass({
 
   getInitialState: function() {
     return {
-      searchString: '',
       dynamicTreeDataMap2: {
         "Home" : {
           checkbox: false,
@@ -77,15 +67,8 @@ let TreeView = React.createClass({
 
   render: function() {
 
-    let searchString = this.state.searchString.trim(),
-        dynamicExample3 = this._getExamplePanel("Selection w/o Checkboxes", this._getDynamicTreeExample3()),
-        categories = this.state.dynamicTreeDataMap2;
-
-    if(searchString.length > 0){
-      // We are searching. Filter the results.
-
-      categories = pickDeep(categories, searchString);
-    }
+    
+    var dynamicExample3 = this._getExamplePanel("Selection w/o Checkboxes", this._getDynamicTreeExample3());
 
     return <div className="container">
 
@@ -93,17 +76,9 @@ let TreeView = React.createClass({
       <div className="row">
        
         <div className="col-lg-3">
-        <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
-
-            <TreeMenu
-              expandIconClass="fa fa-chevron-right"
-              collapseIconClass="fa fa-chevron-down"
-              onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2", "collapsed")}
-              onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","checked")}
-              onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","selected")}
-              data={categories} />
-        
+          {dynamicExample3}
         </div>
+        
        
       </div>
 
