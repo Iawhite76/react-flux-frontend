@@ -1,10 +1,10 @@
 var React = require('react/addons'),
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
-  TreeMenuUtils = require('../utils/react-tree-menu').Utils,
+  TreeMenuUtils = require('../utils/react-tree-menu').TreeMenuUtils,
   Immutable = require('immutable'),
   _ = require('lodash'),
-  JSXView = require('../utils/react-jsx-view/JSXView.jsx');
+  JSXView = require('../utils/react-jsx-view');
 
 var CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
