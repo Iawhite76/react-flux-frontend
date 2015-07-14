@@ -6,6 +6,19 @@ const SideBarNavActions = require('../actions/SideBarNavActions'),
       WP = require( 'wordpress-rest-api' ),
       wp = new WP({ endpoint: 'http://wordpress.api.dev/wp-json' });
 
+      function _getErrors(res) {
+        let errorMsgs = ["Something went wrong, please try again"],
+            json = JSON.parse(res.text);
+        if ((json)) {
+          if (json['errors']) {
+            errorMsgs = json['errors'];
+          } else if (json['error']) {
+            errorMsgs = [json['error']];
+          }
+        }
+        return errorMsgs;
+      }
+
 module.exports = {
 
 	loadCategories() {
@@ -20,6 +33,25 @@ module.exports = {
 		    // handle error 
 		    console.log(err)
 			});
+	},
+
+	loadPages() {
+
+		request.get(APIEndpoints.POSTS_BY_CATEGORY_HOME)
+		  .set('Accept', 'application/json')
+		  .end(function(error, res) {
+		    if (res) {
+		      if (res.error) {
+		        let errorMsgs = _getErrors(res);
+		        console.log(errorMsgs);
+		        // ServerActionCreators.receiveLogin(null, errorMsgs);
+		      } else {
+		        let json = JSON.parse(res.text);
+		        console.log(json);
+		        ServerActionCreators.receiveCategoriesJson(json);
+		      }
+		    }
+		  });
 	}
 
 };

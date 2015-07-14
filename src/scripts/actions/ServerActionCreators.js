@@ -5,7 +5,7 @@ let ActionTypes = Constants.ActionTypes;
 
 module.exports = {
 
-  receiveCategories: function(categories) {
+  receiveCategories(categories) {
     AppDispatcher.handleServerAction({
       // type: ActionTypes.RECEIVE_CATEGORIES,
       type: "RECEIVE_CATEGORIES",
@@ -13,5 +13,12 @@ module.exports = {
     });
 
   },
+
+  receiveCategoriesJson(categories) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_CATEGORIES,
+      categories: categories
+    });
+  }
 
 };

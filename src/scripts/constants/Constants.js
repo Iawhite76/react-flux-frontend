@@ -8,6 +8,7 @@ module.exports = {
     // LOGIN:          APIRoot + "/v1/login",
     // REGISTRATION:   APIRoot + "/v1/users",
     // STORIES:        APIRoot + "/v1/stories"
+    POSTS_BY_CATEGORY_HOME:   APIRoot + '/posts?filter[category_name]=home'
   },
 
   PayloadSources: keyMirror({
