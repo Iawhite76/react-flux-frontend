@@ -13,28 +13,52 @@ var TreeView = React.createClass({
   getInitialState: function() {
     return {
       dynamicTreeDataMap2: {
-        "Option 1" : {
+        "Home" : {
           checkbox: false,
+          ID: 1,
           children: {
-            "Sub Option 1" : {
-              checkbox: false
+            "Getting Started" : {
+              checkbox: false,
+              ID: 47,
+              slug: 'getting-started',
             },
-            "Sub Option 2" : {
+            "Visual Guidelines": {
               checkbox: false,
               children: {
                 "Sub-Sub Option 1" : {
                   selected: true,
-                  checkbox: false
-                },
-                "Sub-Sub Option 2" : {
-                  checkbox: false
+                  checkbox: false,
+                  ID: 67
                 }
               }
             }
           }
         },
-        "Option 2" : {
-          checkbox: false
+        "UPS Mobile (iOs, Android)" : {
+          checkbox: false,
+          children: {
+            "Sub-Sub Option 1" : {
+              checkbox: false,
+              ID: 22
+            },
+            "Sub-Sub Option 2" : {
+              checkbox: false,
+              ID: 14
+            }
+          }
+        },
+        "mDot" : {
+          checkbox: false,
+          children: {
+            "Overview" : {
+              checkbox: false,
+              ID: 19
+            },
+            "Sub-Sub Option 2" : {
+              checkbox: false,
+              ID: 90
+            }
+          }
         }
       }
 

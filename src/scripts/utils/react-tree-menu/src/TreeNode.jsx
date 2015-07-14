@@ -145,7 +145,7 @@ var TreeNode = React.createClass({
 
     if (props.labelFilter) displayLabel = props.labelFilter(displayLabel);
 
-    return <label className={labelClassName}>{displayLabel}</label>;
+    return <label className={labelClassName} data-id={props.ID}>{displayLabel}</label>;
   },
 
   _getCheckboxNode: function () {
