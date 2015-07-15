@@ -32,10 +32,10 @@ let TreeView = React.createClass({
               ID: 47,
               slug: 'getting-started',
             },
-            "Visual Guidelines": {
+            "Interaction Design Principles": {
               checkbox: false,
               children: {
-                "Sub-Sub Option 1" : {
+                "Design Principle the First" : {
                   selected: true,
                   checkbox: false,
                   ID: 67
@@ -77,14 +77,18 @@ let TreeView = React.createClass({
 
   render: function() {
 
-    let searchString = this.state.searchString.trim(),
+    let searchString = this.state.searchString.trim().toLowerCase(),
         dynamicExample3 = this._getExamplePanel("Selection w/o Checkboxes", this._getDynamicTreeExample3()),
         categories = this.state.dynamicTreeDataMap2;
 
     if(searchString.length > 0){
       // We are searching. Filter the results.
 
-      categories = pickDeep(categories, searchString);
+      // categories = pickDeep(categories, function(value, key, object) {
+      //   return key.toLowerCase().match(searchString);
+      // });
+
+      categories.pickDeep(categories, ["Getting Started", "Sub-Sub Option 2", "Overview"]);
     }
 
     return <div className="container">
