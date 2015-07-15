@@ -1,6 +1,6 @@
-var keyMirror = require('react/lib/keyMirror');
+let keyMirror = require('react/lib/keyMirror');
 
-var APIRoot = "http://wordpress.api.dev/wp-json";
+const APIRoot = "http://wordpress.api.dev";
 
 module.exports = {
 
@@ -8,7 +8,7 @@ module.exports = {
     // LOGIN:          APIRoot + "/v1/login",
     // REGISTRATION:   APIRoot + "/v1/users",
     // STORIES:        APIRoot + "/v1/stories"
-    POSTS_BY_CATEGORY_HOME:   APIRoot + '/posts?filter[category_name]=home'
+    QUERY_ROOT:   APIRoot + '/search-results/?ajaxSearch='
   },
 
   PayloadSources: keyMirror({
@@ -31,7 +31,11 @@ module.exports = {
     // CREATE_STORY: null,
     // RECEIVE_CREATED_STORY: null
     LOAD_CATEGORIES: null,
-    RECEIVE_CATEGORIES: null
+    RECEIVE_CATEGORIES: null,
+
+    // Pages
+    RECEIVE_PAGES: null,
+    RECEIVE_PAGES_ARRAY: null,
   })
 
 };

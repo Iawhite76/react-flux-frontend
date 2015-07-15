@@ -5,22 +5,32 @@ const React = require('react/addons'),
   Immutable = require('immutable'),
   _ = require('lodash'),
   JSXView = require('../utils/react-jsx-view'),
-  pickDeep = require('../utils/Utils').pickDeep;
+  pickDeep = require('../utils/Utils').pickDeep,
+  TreeViewActionCreators = require('../actions/TreeViewActionCreators'),
+  TreeViewStore = require('../stores/TreeViewStore');
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-let TreeView = React.createClass({
+function _getStateFromStore() {
+  return {
+    pages: TreeViewStore.getPages()
+  }
+}
 
+let TreeView = React.createClass({
+  
   handleChange: function(e){
     // If you comment out this line, the text box will not change its value.
     // This is because in React, an input cannot change independently of the value
     // that was assigned to it. In our case this is this.state.searchString.
 
     this.setState({searchString:e.target.value});
+    this.setState({pages: TreeViewStore.getPages()});
   },
 
   getInitialState: function() {
     return {
+      pages: [],
       searchString: '',
       dynamicTreeDataMap2: {
         "Home" : {
@@ -47,11 +57,11 @@ let TreeView = React.createClass({
         "UPS Mobile (iOs, Android)" : {
           checkbox: false,
           children: {
-            "Sub-Sub Option 1" : {
+            "Overview" : {
               checkbox: false,
               ID: 22
             },
-            "Sub-Sub Option 2" : {
+            "Reference" : {
               checkbox: false,
               ID: 14
             }
@@ -60,14 +70,16 @@ let TreeView = React.createClass({
         "mDot" : {
           checkbox: false,
           children: {
-            "Overview" : {
+            "Elements" : {
               checkbox: false,
-              ID: 19
+              ID: 19,
+              children: {
+                "Navigation" : {
+                  checkbox: false,
+                  ID: 90
+                }
+              }
             },
-            "Sub-Sub Option 2" : {
-              checkbox: false,
-              ID: 90
-            }
           }
         }
       }
@@ -75,20 +87,31 @@ let TreeView = React.createClass({
     };
   },
 
+  // componentDidMount() {
+  //   TreeViewStore.addChangeListener(this.change);
+  // },
+
+  // componentWillUnmount() {
+  //   TreeViewStore.removeChangeListener(this.handleChange);
+  // },
+
   render: function() {
 
     let searchString = this.state.searchString.trim().toLowerCase(),
         dynamicExample3 = this._getExamplePanel("Selection w/o Checkboxes", this._getDynamicTreeExample3()),
-        categories = this.state.dynamicTreeDataMap2;
+        menu = this.state.dynamicTreeDataMap2,
+        pages = this.state.pages;
 
     if(searchString.length > 0){
       // We are searching. Filter the results.
 
-      // categories = pickDeep(categories, function(value, key, object) {
+      // menu = pickDeep(menu, function(value, key, object) {
       //   return key.toLowerCase().match(searchString);
       // });
-
-      categories.pickDeep(categories, ["Getting Started", "Sub-Sub Option 2", "Overview"]);
+     console.log('state');
+      console.log(this.state);
+      TreeViewActionCreators.getPages(searchString);
+      menu = pickDeep(menu, pages);
     }
 
     return <div className="container">
@@ -105,7 +128,7 @@ let TreeView = React.createClass({
               onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2", "collapsed")}
               onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","checked")}
               onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","selected")}
-              data={categories} />
+              data={menu} />
         
         </div>
        

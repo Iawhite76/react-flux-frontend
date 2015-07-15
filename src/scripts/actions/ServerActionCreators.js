@@ -14,10 +14,10 @@ module.exports = {
 
   },
 
-  receiveCategoriesJson(categories) {
+  receivePagesJsonArray(pagesArray) {
     AppDispatcher.handleServerAction({
-      type: ActionTypes.RECEIVE_CATEGORIES,
-      categories: categories
+      type: ActionTypes.RECEIVE_PAGES_ARRAY,
+      pagesArray: pagesArray
     });
   }
 

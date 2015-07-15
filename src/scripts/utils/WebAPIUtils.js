@@ -26,29 +26,30 @@ module.exports = {
 		wp.categories()
 			.then(function( data ) {
 		    // do something with the returned posts 
-		     console.log(data);
+		     // console.log(data);
 		    ServerActionCreators.receiveCategories(data);
 			})
 			.catch(function( err ) {
 		    // handle error 
-		    console.log(err)
+		    // console.log(err)
 			});
 	},
 
-	loadPages() {
+	loadPages(query) {
 
-		request.get(APIEndpoints.POSTS_BY_CATEGORY_HOME)
+		request.get(APIEndpoints.QUERY_ROOT + query)
 		  .set('Accept', 'application/json')
 		  .end(function(error, res) {
 		    if (res) {
 		      if (res.error) {
 		        let errorMsgs = _getErrors(res);
-		        console.log(errorMsgs);
+		        // console.log(errorMsgs);
 		        // ServerActionCreators.receiveLogin(null, errorMsgs);
 		      } else {
+		        // console.log(res.text);
 		        let json = JSON.parse(res.text);
 		        console.log(json);
-		        ServerActionCreators.receiveCategoriesJson(json);
+		        ServerActionCreators.receivePagesJsonArray(json);
 		      }
 		    }
 		  });
