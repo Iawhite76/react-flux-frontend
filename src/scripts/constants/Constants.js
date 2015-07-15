@@ -1,6 +1,6 @@
 let keyMirror = require('react/lib/keyMirror');
 
-const APIRoot = "http://wordpress.api.dev";
+const APIRoot = "http://mobilestyle.ups.dev";
 
 module.exports = {
 
