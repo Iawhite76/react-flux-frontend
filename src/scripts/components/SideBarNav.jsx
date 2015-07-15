@@ -6,18 +6,18 @@ const React = require('react/addons'),
   _ = require('lodash'),
   JSXView = require('../utils/react-jsx-view'),
   pickDeep = require('../utils/Utils').pickDeep,
-  TreeViewActionCreators = require('../actions/TreeViewActionCreators'),
-  TreeViewStore = require('../stores/TreeViewStore');
+  SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
+  SideBarNavStore = require('../stores/SideBarNavStore');
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 function _getStateFromStore() {
   return {
-    pages: TreeViewStore.getPages()
+    pages: SideBarNavStore.getPages()
   }
 }
 
-let TreeView = React.createClass({
+let SideBarNav = React.createClass({
   
   handleChange: function(e){
     // If you comment out this line, the text box will not change its value.
@@ -25,7 +25,7 @@ let TreeView = React.createClass({
     // that was assigned to it. In our case this is this.state.searchString.
 
     this.setState({searchString:e.target.value});
-    this.setState({pages: TreeViewStore.getPages()});
+    this.setState({pages: SideBarNavStore.getPages()});
   },
 
   getInitialState: function() {
@@ -88,11 +88,11 @@ let TreeView = React.createClass({
   },
 
   // componentDidMount() {
-  //   TreeViewStore.addChangeListener(this.change);
+  //   SideBarNavStore.addChangeListener(this.change);
   // },
 
   // componentWillUnmount() {
-  //   TreeViewStore.removeChangeListener(this.handleChange);
+  //   SideBarNavStore.removeChangeListener(this.handleChange);
   // },
 
   render: function() {
@@ -102,37 +102,27 @@ let TreeView = React.createClass({
         menu = this.state.dynamicTreeDataMap2,
         pages = this.state.pages;
 
-    if(searchString.length > 0){
+    if(searchString.length > 2){
       // We are searching. Filter the results.
 
      console.log('state');
       console.log(this.state);
-      TreeViewActionCreators.getPages(searchString);
+      SideBarNavActionCreators.getPages(searchString);
       menu = pickDeep(menu, pages);
     }
 
-    return <div className="container">
+    return <div className="col-lg-3">
+            <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
 
-
-      <div className="row">
-       
-        <div className="col-lg-3">
-        <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
-
-            <TreeMenu
-              expandIconClass="fa fa-chevron-right"
-              collapseIconClass="fa fa-chevron-down"
-              onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2", "collapsed")}
-              onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","checked")}
-              onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","selected")}
-              data={menu} />
-        
-        </div>
-       
-      </div>
-
-    
-    </div>;
+                <TreeMenu
+                  expandIconClass="fa fa-chevron-right"
+                  collapseIconClass="fa fa-chevron-down"
+                  onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2", "collapsed")}
+                  onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","checked")}
+                  onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","selected")}
+                  data={menu} />
+            
+            </div>;
 
   },
 
@@ -238,4 +228,4 @@ let TreeView = React.createClass({
 });
 
 
-module.exports = TreeView;
+module.exports = SideBarNav;

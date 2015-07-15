@@ -5,10 +5,8 @@ require('../assets/stylesheets/style.styl');
 // require('../assets/images/product.png');
 
 const React = require('react'),
-			SideBarNav = require('./components/SideBarNav'),
-			Content = require('./components/Content'),
-      TreeView = require('./components/TreeView.jsx');
-
+			SideBarNav = require('./components/SideBarNav.jsx'),
+			Content = require('./components/Content');
 var App = React.createClass({
 
   render: function() {
@@ -16,7 +14,6 @@ var App = React.createClass({
       <div>
         <SideBarNav />
         <Content />
-        <TreeView />
       </div>
     );
   }

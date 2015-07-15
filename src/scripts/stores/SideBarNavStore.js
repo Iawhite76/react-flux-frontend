@@ -7,7 +7,7 @@ let EventEmitter = require('events').EventEmitter,
 
 // Underscore because this is a private variable created by the 
 // module closure
-let _categories = [];
+let _pages = [];
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
@@ -24,8 +24,8 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		this.removeListener('change', callback);
 	},
 
-	getAllCategories() {
-		return _categories;
+	getPages() {
+		return _pages;
 	}
 });
 
@@ -33,8 +33,8 @@ AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
 
-		case ActionTypes.RECEIVE_CATEGORIES:
-      _categories = action.categories;
+		case ActionTypes.RECEIVE_PAGES_ARRAY:
+      _pages = action.pagesArray;
       SideBarNavStore.emitChange();
       break;
 

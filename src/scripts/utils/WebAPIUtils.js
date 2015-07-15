@@ -1,4 +1,4 @@
-const SideBarNavActions = require('../actions/SideBarNavActions'),
+const SideBarNavActions = require('../actions/SideBarNavActionCreators'),
 			ServerActionCreators = require('../actions/ServerActionCreators'),
       Constants = require('../constants/Constants.js'),
       request = require('superagent'),
