@@ -105,8 +105,6 @@ let SideBarNav = React.createClass({
     if(searchString.length > 2){
       // We are searching. Filter the results.
 
-     console.log('state');
-      console.log(this.state);
       SideBarNavActionCreators.getPages(searchString);
       menu = pickDeep(menu, pages);
     }

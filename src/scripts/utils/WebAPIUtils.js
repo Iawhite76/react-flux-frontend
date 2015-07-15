@@ -4,7 +4,24 @@ const SideBarNavActions = require('../actions/SideBarNavActionCreators'),
       request = require('superagent'),
       APIEndpoints = Constants.APIEndpoints,
       WP = require( 'wordpress-rest-api' ),
-      wp = new WP({ endpoint: 'http://wordpress.api.dev/wp-json' });
+      wp = new WP({ endpoint: APIEndpoints.WP_JSON });
+
+      request.get(APIEndpoints.WP_JSON + APIEndpoints.WP_MAIN_NAV_MENU)
+		  .set('Accept', 'application/json')
+		  .end(function(error, res) {
+		    if (res) {
+		      if (res.error) {
+		        let errorMsgs = _getErrors(res);
+		        // console.log(errorMsgs);
+		        // ServerActionCreators.receiveLogin(null, errorMsgs);
+		      } else {
+		        // console.log(res.text);
+		        let json = JSON.parse(res.text);
+		        console.log(json);
+		        ServerActionCreators.receivePagesJsonArray(json);
+		      }
+		    }
+		  });
 
       function _getErrors(res) {
         let errorMsgs = ["Something went wrong, please try again"],
