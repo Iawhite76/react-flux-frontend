@@ -26,7 +26,7 @@ var TreeView = React.createClass({
               checkbox: false,
               children: {
                 "Sub-Sub Option 1" : {
-                  selected: true,
+                  selected: false,
                   checkbox: false,
                   ID: 67
                 }

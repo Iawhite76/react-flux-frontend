@@ -21,20 +21,6 @@ const SideBarNavActions = require('../actions/SideBarNavActionCreators'),
 
 module.exports = {
 
-	loadCategories() {
-
-		wp.categories()
-			.then(function( data ) {
-		    // do something with the returned posts 
-		     // console.log(data);
-		    ServerActionCreators.receiveCategories(data);
-			})
-			.catch(function( err ) {
-		    // handle error 
-		    // console.log(err)
-			});
-	},
-
 	loadPages(query) {
 
 		request.get(APIEndpoints.QUERY_ROOT + query)

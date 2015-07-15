@@ -30,8 +30,7 @@ module.exports = {
     // RECEIVE_STORY: null,
     // CREATE_STORY: null,
     // RECEIVE_CREATED_STORY: null
-    LOAD_CATEGORIES: null,
-    RECEIVE_CATEGORIES: null,
+   
 
     // Pages
     RECEIVE_PAGES: null,

@@ -19,7 +19,7 @@ function _getStateFromStore() {
 
 let SideBarNav = React.createClass({
   
-  handleChange: function(e){
+  handleChange(e){
     // If you comment out this line, the text box will not change its value.
     // This is because in React, an input cannot change independently of the value
     // that was assigned to it. In our case this is this.state.searchString.
@@ -28,7 +28,7 @@ let SideBarNav = React.createClass({
     this.setState({pages: SideBarNavStore.getPages()});
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       pages: [],
       searchString: '',
@@ -46,7 +46,7 @@ let SideBarNav = React.createClass({
               checkbox: false,
               children: {
                 "Design Principle the First" : {
-                  selected: true,
+                  selected: false,
                   checkbox: false,
                   ID: 67
                 }
@@ -95,7 +95,7 @@ let SideBarNav = React.createClass({
   //   SideBarNavStore.removeChangeListener(this.handleChange);
   // },
 
-  render: function() {
+  render() {
 
     let searchString = this.state.searchString.trim().toLowerCase(),
         dynamicExample3 = this._getExamplePanel("Selection w/o Checkboxes", this._getDynamicTreeExample3()),
@@ -126,7 +126,7 @@ let SideBarNav = React.createClass({
 
   },
 
-  _getDynamicTreeExample3: function () {
+  _getDynamicTreeExample3() {
 
     return  (
       <TreeMenu
@@ -140,7 +140,7 @@ let SideBarNav = React.createClass({
 
   },
 
-  _getExamplePanel: function (title, treeMenuNode) {
+  _getExamplePanel(title, treeMenuNode) {
     return <div>
       <div className="panel panel-default">
         <div className="panel-heading">{title + " Menu"}</div>
@@ -151,7 +151,7 @@ let SideBarNav = React.createClass({
     </div>;
   },
 
-  _handleDynamicObjectTreeNodePropChange: function (messageWindowKey, stateKey, propName, lineage) {
+  _handleDynamicObjectTreeNodePropChange(messageWindowKey, stateKey, propName, lineage) {
 
     this._setLastActionState(propName, messageWindowKey, lineage);
 
@@ -204,7 +204,7 @@ let SideBarNav = React.createClass({
 
   },
 
-  _setLastActionState: function (action, col, node) {
+  _setLastActionState(action, col, node) {
 
     var toggleEvents = ["collapsed", "checked", "selected"];
 
