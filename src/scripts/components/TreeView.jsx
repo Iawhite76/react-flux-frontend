@@ -105,9 +105,6 @@ let TreeView = React.createClass({
     if(searchString.length > 0){
       // We are searching. Filter the results.
 
-      // menu = pickDeep(menu, function(value, key, object) {
-      //   return key.toLowerCase().match(searchString);
-      // });
      console.log('state');
       console.log(this.state);
       TreeViewActionCreators.getPages(searchString);
