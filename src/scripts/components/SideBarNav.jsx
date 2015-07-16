@@ -80,31 +80,6 @@ let SideBarNav = React.createClass({
 
   },
 
-  _getDynamicTreeExample3() {
-
-    return  (
-      <TreeMenu
-        expandIconClass="fa fa-chevron-right"
-        collapseIconClass="fa fa-chevron-down"
-        onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2", "collapsed")}
-        onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","checked")}
-        onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","selected")}
-        data={this.state.dynamicTreeDataMap2} />
-    );
-
-  },
-
-  _getExamplePanel(title, treeMenuNode) {
-    return <div>
-      <div className="panel panel-default">
-        <div className="panel-heading">{title + " Menu"}</div>
-        <div className="panel-body">
-          {treeMenuNode}
-        </div>
-      </div>
-    </div>;
-  },
-
   _handleDynamicObjectTreeNodePropChange(messageWindowKey, stateKey, propName, lineage) {
 
     this._setLastActionState(propName, messageWindowKey, lineage);
