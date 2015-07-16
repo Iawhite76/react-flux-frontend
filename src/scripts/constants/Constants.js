@@ -10,7 +10,7 @@ module.exports = {
     // STORIES:        APIRoot + "/v1/stories"
     QUERY_ROOT:   APIRoot + '/search-results/?ajaxSearch=',
     WP_JSON: APIRoot + '/wp-json',
-    WP_MAIN_NAV_MENU: '/menus/2',
+    WP_MAIN_NAV_MENU: '/menu-locations/primary_navigation',
   },
 
   PayloadSources: keyMirror({
