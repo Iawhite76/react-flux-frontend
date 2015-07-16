@@ -8,6 +8,7 @@ let EventEmitter = require('events').EventEmitter,
 // Underscore because this is a private variable created by the 
 // module closure
 let _pages = [];
+let _navigationMenu = {};
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
@@ -26,7 +27,12 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
 	getPages() {
 		return _pages;
-	}
+	},
+
+	getNavigationMenu() {
+		return _navigationMenu;
+	},
+
 });
 
 AppDispatcher.register(function(payload) {
@@ -35,6 +41,12 @@ AppDispatcher.register(function(payload) {
 
 		case ActionTypes.RECEIVE_PAGES_ARRAY:
       _pages = action.pagesArray;
+      SideBarNavStore.emitChange();
+      break;
+
+    case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
+	    console.log(action.navigationMenu);
+      _navigationMenu = action.navigationMenu;
       SideBarNavStore.emitChange();
       break;
 

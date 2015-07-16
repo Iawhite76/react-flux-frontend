@@ -15,4 +15,11 @@ module.exports = {
       WebAPIUtils.loadPages(query);
     },
 
+  getNavigationMenu() {
+  	AppDispatcher.handleViewAction({
+  	  type: ActionTypes.LOAD_NAVIGATION_MENU
+  	});
+  	WebAPIUtils.loadNavigationMenu();
+  },
+
 };

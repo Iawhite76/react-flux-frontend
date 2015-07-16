@@ -5,13 +5,11 @@ let ActionTypes = Constants.ActionTypes;
 
 module.exports = {
 
-  receiveCategories(categories) {
+  receiveNavigationMenuJSON(navigationMenu) {
     AppDispatcher.handleServerAction({
-      // type: ActionTypes.RECEIVE_CATEGORIES,
-      type: "RECEIVE_CATEGORIES",
-      categories: categories
+      type: ActionTypes.RECEIVE_NAVIGATION_MENU_JSON,
+      navigationMenu: navigationMenu
     });
-
   },
 
   receivePagesJsonArray(pagesArray) {

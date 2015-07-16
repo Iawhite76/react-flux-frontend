@@ -11,14 +11,18 @@ const React = require('react/addons'),
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-function _getStateFromStore() {
+function getStateFromStore() {
   return {
-    pages: SideBarNavStore.getPages()
+    dynamicTreeDataMap2: SideBarNavStore.getNavigationMenu()
   }
 }
 
 let SideBarNav = React.createClass({
-  
+  onChange() {
+    this.setState(getStateFromStore());
+    console.log('change');
+  },
+
   handleChange(e){
     // If you comment out this line, the text box will not change its value.
     // This is because in React, an input cannot change independently of the value
@@ -26,79 +30,31 @@ let SideBarNav = React.createClass({
 
     this.setState({searchString:e.target.value});
     this.setState({pages: SideBarNavStore.getPages()});
+    console.log('handle chgange');
   },
 
   getInitialState() {
     return {
       pages: [],
       searchString: '',
-      dynamicTreeDataMap2: {
-        "Home" : {
-          checkbox: false,
-          ID: 1,
-          children: {
-            "Getting Started" : {
-              checkbox: false,
-              ID: 47,
-              slug: 'getting-started',
-            },
-            "Interaction Design Principles": {
-              checkbox: false,
-              children: {
-                "Design Principle the First" : {
-                  selected: false,
-                  checkbox: false,
-                  ID: 67
-                }
-              }
-            }
-          }
-        },
-        "UPS Mobile (iOs, Android)" : {
-          checkbox: false,
-          children: {
-            "Overview" : {
-              checkbox: false,
-              ID: 22
-            },
-            "Reference" : {
-              checkbox: false,
-              ID: 14
-            }
-          }
-        },
-        "mDot" : {
-          checkbox: false,
-          children: {
-            "Elements" : {
-              checkbox: false,
-              ID: 19,
-              children: {
-                "Navigation" : {
-                  checkbox: false,
-                  ID: 90
-                }
-              }
-            },
-          }
-        }
-      }
-
+      dynamicTreeDataMap2: {}
     };
   },
 
-  // componentDidMount() {
-  //   SideBarNavStore.addChangeListener(this.change);
-  // },
+  componentDidMount() {
+    if (this.isMounted()) {
+      SideBarNavActionCreators.getNavigationMenu();
+    }
+    SideBarNavStore.addChangeListener(this.onChange);
+  },
 
-  // componentWillUnmount() {
-  //   SideBarNavStore.removeChangeListener(this.handleChange);
-  // },
+  componentWillUnmount() {
+    SideBarNavStore.removeChangeListener(this.onChange);
+  },
 
   render() {
 
     let searchString = this.state.searchString.trim().toLowerCase(),
-        dynamicExample3 = this._getExamplePanel("Selection w/o Checkboxes", this._getDynamicTreeExample3()),
         menu = this.state.dynamicTreeDataMap2,
         pages = this.state.pages;
 
