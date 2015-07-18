@@ -5,9 +5,7 @@ const SideBarNavActions = require('../actions/SideBarNavActionCreators'),
       request = require('superagent-promise')(require('superagent'), Promise),
       APIEndpoints = Constants.APIEndpoints,
       WP = require( 'wordpress-rest-api' ),
-      wp = new WP({ endpoint: APIEndpoints.WP_JSON }),
-      buildMenu = require('./Utils').buildMenu;
-      
+      wp = new WP({ endpoint: APIEndpoints.WP_JSON });      
 module.exports = {
 
 	loadNavigationMenu() {
@@ -18,7 +16,6 @@ module.exports = {
 		  .then(function onResult(res) {
 		    // do stuff 
 		    let json = JSON.parse(res.text);
-		    // let navObj = buildMenu(json);
 		    ServerActionCreators.receiveNavigationMenuJSON(json);
 		  })
 		  .catch(function(error) {
