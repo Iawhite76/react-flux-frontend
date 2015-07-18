@@ -30,7 +30,7 @@ let SideBarNav = React.createClass({
 
     this.setState({searchString:e.target.value});
     this.setState({pages: SideBarNavStore.getPages()});
-    console.log('handle chgange');
+    console.log('handle change');
   },
 
   getInitialState() {
