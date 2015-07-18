@@ -18,9 +18,8 @@ module.exports = {
 		  .then(function onResult(res) {
 		    // do stuff 
 		    let json = JSON.parse(res.text);
-		    console.log(json);
-		    let navObj = buildMenu(json);
-		    ServerActionCreators.receiveNavigationMenuJSON(navObj);
+		    // let navObj = buildMenu(json);
+		    ServerActionCreators.receiveNavigationMenuJSON(json);
 		  })
 		  .catch(function(error) {
 		    // handle errors 

@@ -37,7 +37,7 @@ let SideBarNav = React.createClass({
     return {
       pages: [],
       searchString: '',
-      dynamicTreeDataMap2: {}
+      dynamicTreeDataMap2: {"Loading...": {}}
     };
   },
 

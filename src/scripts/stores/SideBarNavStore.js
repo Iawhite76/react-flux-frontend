@@ -1,6 +1,8 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			Constants = require('../constants/Constants'),
-			ActionTypes = Constants.ActionTypes;
+			ActionTypes = Constants.ActionTypes,
+      buildMenu = require('../utils/Utils').buildMenu;
+
 
 let EventEmitter = require('events').EventEmitter,
 	  assign = require('object-assign');
@@ -46,7 +48,7 @@ AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
 	    console.log(action.navigationMenu);
-      _navigationMenu = action.navigationMenu;
+      _navigationMenu = buildMenu(action.navigationMenu);
       SideBarNavStore.emitChange();
       break;
 
