@@ -58,7 +58,7 @@ module.exports = {
 		        // console.log(res.text);
 		        let json = JSON.parse(res.text);
 		        console.log(json);
-		        ServerActionCreators.receiveNavigationMenuJSON(json);
+		        ServerActionCreators.receivePagesJsonArray(json);
 		      }
 		    }
 		  });
