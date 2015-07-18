@@ -13,7 +13,7 @@ let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 function getStateFromStore() {
   return {
-    dynamicTreeDataMap2: SideBarNavStore.getNavigationMenu()
+    navigationMenuObject: SideBarNavStore.getNavigationMenu(),
   }
 }
 
@@ -28,8 +28,13 @@ let SideBarNav = React.createClass({
     // This is because in React, an input cannot change independently of the value
     // that was assigned to it. In our case this is this.state.searchString.
 
-    this.setState({searchString:e.target.value});
-    this.setState({pages: SideBarNavStore.getPages()});
+    this.setState({
+      pages: SideBarNavStore.getPages(),
+      searchString:e.target.value
+    });
+    if(this.state.pages.length) {
+      this.setState({navigationMenuObject: pickDeep(this.state.navigationMenuObject, this.state.pages)})
+    }
     console.log('handle change');
   },
 
@@ -37,7 +42,7 @@ let SideBarNav = React.createClass({
     return {
       pages: [],
       searchString: '',
-      dynamicTreeDataMap2: {"Loading...": {}}
+      navigationMenuObject: {"Loading...": {}}
     };
   },
 
@@ -55,14 +60,13 @@ let SideBarNav = React.createClass({
   render() {
 
     let searchString = this.state.searchString.trim().toLowerCase(),
-        menu = this.state.dynamicTreeDataMap2,
+        menu = this.state.navigationMenuObject,
         pages = this.state.pages;
 
-    if(searchString.length > 2){
+    if(searchString.length > 1){
       // We are searching. Filter the results.
 
       SideBarNavActionCreators.getPages(searchString);
-      menu = pickDeep(menu, pages);
     }
 
     return <div className="col-lg-3">
@@ -71,9 +75,9 @@ let SideBarNav = React.createClass({
                 <TreeMenu
                   expandIconClass="fa fa-chevron-right"
                   collapseIconClass="fa fa-chevron-down"
-                  onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2", "collapsed")}
-                  onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","checked")}
-                  onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "dynamicTreeDataMap2","selected")}
+                  onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject", "collapsed")}
+                  onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","checked")}
+                  onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","selected")}
                   data={menu} />
             
             </div>;
