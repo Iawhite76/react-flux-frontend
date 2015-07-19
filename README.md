@@ -1,6 +1,6 @@
 Object that can be used to stub navigationMenu object that Tree Menu component expects:
 
-{
+```{
   "Home": {
     "ID": 46,
     "children": {
@@ -41,4 +41,4 @@ Object that can be used to stub navigationMenu object that Tree Menu component e
       }
     }
   }
-}
+}```
