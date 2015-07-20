@@ -22,7 +22,6 @@ module.exports = {
 		    // handle errors 
 		    console.log(error);
 		  });
-		
 	},
 
 	loadPages(query) {

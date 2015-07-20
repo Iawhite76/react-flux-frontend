@@ -5,22 +5,28 @@ const React = require('react/addons'),
   Immutable = require('immutable'),
   _ = require('lodash'),
   JSXView = require('../utils/react-jsx-view'),
-  pickDeep = require('../utils/Utils').pickDeep,
   SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
-  SideBarNavStore = require('../stores/SideBarNavStore');
+  SideBarNavStore = require('../stores/SideBarNavStore'),
+  WebAPIUtils = require('../utils/WebAPIUtils');
+
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 function getStateFromStore() {
   return {
-    navigationMenuObject: SideBarNavStore.getNavigationMenu(),
-  }
+    pages: SideBarNavStore.getPages(),
+    searchString: '',
+    navigationMenuObject: SideBarNavStore.getNavigationMenu()
+  };
 }
 
 let SideBarNav = React.createClass({
   onChange() {
-    this.setState(getStateFromStore());
-    console.log('change');
+    this.setState({
+      pages: SideBarNavStore.getPages(),
+      searchString: '',
+      navigationMenuObject: SideBarNavStore.getNavigationMenu()
+    });
   },
 
   handleChange(e){
@@ -28,46 +34,41 @@ let SideBarNav = React.createClass({
     // This is because in React, an input cannot change independently of the value
     // that was assigned to it. In our case this is this.state.searchString.
 
-    this.setState({
-      pages: SideBarNavStore.getPages(),
-      searchString:e.target.value
-    });
-    if(this.state.pages.length) {
-      this.setState({navigationMenuObject: pickDeep(this.state.navigationMenuObject, this.state.pages)})
-    }
-    console.log('handle change');
+    // this.setState({
+    //   pages: SideBarNavStore.getPages(),
+    //   searchString:e.target.value
+    // });
+    // if(this.state.pages.length) {
+    //   this.setState({navigationMenuObject: pickDeep(this.state.navigationMenuObject, this.state.pages)})
+    // }
+    // console.log('handle change');
   },
 
   getInitialState() {
     return {
-      pages: [],
+      pages: SideBarNavStore.getPages(),
       searchString: '',
-      navigationMenuObject: {"Loading...": {}}
+      navigationMenuObject: SideBarNavStore.getNavigationMenu()
     };
   },
 
   componentDidMount() {
-    if (this.isMounted()) {
-      SideBarNavActionCreators.getNavigationMenu();
-    }
+    WebAPIUtils.loadNavigationMenu();
     SideBarNavStore.addChangeListener(this.onChange);
   },
 
-  componentWillUnmount() {
-    SideBarNavStore.removeChangeListener(this.onChange);
-  },
 
   render() {
 
-    let searchString = this.state.searchString.trim().toLowerCase(),
-        menu = this.state.navigationMenuObject,
-        pages = this.state.pages;
+    // let searchString = this.state.searchString.trim().toLowerCase(),
+    //     menu = this.state.navigationMenuObject,
+    //     pages = this.state.pages;
 
-    if(searchString.length > 1){
-      // We are searching. Filter the results.
+    // if(searchString.length > 1){
+    //   // We are searching. Filter the results.
 
-      SideBarNavActionCreators.getPages(searchString);
-    }
+    //   SideBarNavActionCreators.getPages(searchString);
+    // }
 
     return <div className="col-lg-3">
             <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
@@ -78,7 +79,7 @@ let SideBarNav = React.createClass({
                   onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject", "collapsed")}
                   onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","checked")}
                   onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","selected")}
-                  data={menu} />
+                  data={this.state.navigationMenuObject} />
             
             </div>;
 

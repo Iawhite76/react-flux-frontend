@@ -10,7 +10,7 @@ let EventEmitter = require('events').EventEmitter,
 // Underscore because this is a private variable created by the 
 // module closure
 let _pages = [];
-let _navigationMenu = {};
+let _navigationMenu = {'Loading...': {}};
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
@@ -37,6 +37,10 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
 });
 
+let updateNavMenu = function updateNavMenu(menu) {
+	_navigationMenu = buildMenu(menu);
+};
+
 AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
@@ -48,7 +52,7 @@ AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
 	    console.log(action.navigationMenu);
-      _navigationMenu = buildMenu(action.navigationMenu);
+      updateNavMenu(action.navigationMenu);
       SideBarNavStore.emitChange();
       break;
 
