@@ -7,6 +7,7 @@ const React = require('react/addons'),
   JSXView = require('../utils/react-jsx-view'),
   SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
   SideBarNavStore = require('../stores/SideBarNavStore'),
+  SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils');
 
 
@@ -15,7 +16,7 @@ let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 function getStateFromStore() {
   return {
     pages: SideBarNavStore.getPages(),
-    searchString: '',
+    searchString: SideBarNavStore.getSearchString(),
     navigationMenuObject: SideBarNavStore.getNavigationMenu()
   };
 }
@@ -63,7 +64,7 @@ let SideBarNav = React.createClass({
     // }
 
     return <div className="col-lg-3">
-            <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search For Keywords" />
+                <SearchInput searchString={this.state.searchString} />
 
                 <TreeMenu
                   expandIconClass="fa fa-chevron-right"

@@ -1,7 +1,8 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			Constants = require('../constants/Constants'),
 			ActionTypes = Constants.ActionTypes,
-      buildMenu = require('../utils/Utils').buildMenu;
+      buildMenu = require('../utils/Utils').buildMenu,
+      pickDeep = require('../utils/Utils').pickDeep;
 
 
 let EventEmitter = require('events').EventEmitter,
@@ -11,6 +12,7 @@ let EventEmitter = require('events').EventEmitter,
 // module closure
 let _pages = [];
 let _navigationMenu = {'Loading...': {}};
+let _query = '';
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
@@ -35,6 +37,10 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		return _navigationMenu;
 	},
 
+	getSearchString() {
+		return _query;
+	},
+
 });
 
 let updateNavMenu = function updateNavMenu(menu) {
@@ -47,6 +53,8 @@ AppDispatcher.register(function(payload) {
 
 		case ActionTypes.RECEIVE_PAGES_ARRAY:
       _pages = action.pagesArray;
+      _query = action.query;
+      _navigationMenu = pickDeep(_navigationMenu, _pages);
       SideBarNavStore.emitChange();
       break;
 
