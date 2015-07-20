@@ -22,11 +22,7 @@ function getStateFromStore() {
 
 let SideBarNav = React.createClass({
   onChange() {
-    this.setState({
-      pages: SideBarNavStore.getPages(),
-      searchString: '',
-      navigationMenuObject: SideBarNavStore.getNavigationMenu()
-    });
+    this.setState(getStateFromStore());
   },
 
   handleChange(e){
@@ -45,11 +41,7 @@ let SideBarNav = React.createClass({
   },
 
   getInitialState() {
-    return {
-      pages: SideBarNavStore.getPages(),
-      searchString: '',
-      navigationMenuObject: SideBarNavStore.getNavigationMenu()
-    };
+    return getStateFromStore();
   },
 
   componentDidMount() {
