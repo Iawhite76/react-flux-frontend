@@ -30,4 +30,10 @@ module.exports = {
     WebAPIUtils.loadPages(searchString);
   },
 
+  clearSearch() {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.CLEAR_SEARCH
+    })
+  },
+
 };

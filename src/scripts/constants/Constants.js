@@ -44,6 +44,7 @@ module.exports = {
 
     // Search
     UPDATE_SEARCH_STRING: null,
+    CLEAR_SEARCH: null,
   })
 
 };
