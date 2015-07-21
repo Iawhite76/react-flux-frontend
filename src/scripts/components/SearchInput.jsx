@@ -4,7 +4,6 @@ const React = require('react'),
 let SearchInput = React.createClass({
   handleChange(e) {
   	SideBarNavActionCreators.updateSearchString(e.target.value);
-    // SideBarNavActionCreators.getPages(e.target.value);
   },
 
   render() {

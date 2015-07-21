@@ -31,7 +31,6 @@ module.exports = {
 		  .then(function onResult(res) {
 		    // do stuff 
 		    let json = JSON.parse(res.text);
-        console.log(json);
         ServerActionCreators.receivePagesJsonArray(json);
 		  })
 		  .catch(function(error) {

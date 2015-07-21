@@ -28,21 +28,6 @@ let SideBarNav = React.createClass({
     this.setState(getStateFromStore());
   },
 
-  handleChange(e){
-    // If you comment out this line, the text box will not change its value.
-    // This is because in React, an input cannot change independently of the value
-    // that was assigned to it. In our case this is this.state.searchString.
-
-    // this.setState({
-    //   pages: SideBarNavStore.getPages(),
-    //   searchString:e.target.value
-    // });
-    // if(this.state.pages.length) {
-    //   this.setState({navigationMenuObject: pickDeep(this.state.navigationMenuObject, this.state.pages)})
-    // }
-    // console.log('handle change');
-  },
-
   getInitialState() {
     return getStateFromStore();
   },
@@ -55,21 +40,10 @@ let SideBarNav = React.createClass({
 
   render() {
 
-    // let searchString = this.state.searchString.trim().toLowerCase(),
-    //     menu = this.state.navigationMenuObject,
-    //     pages = this.state.pages;
-
-    // if(searchString.length > 1){
-    //   // We are searching. Filter the results.
-
-    //   SideBarNavActionCreators.getPages(searchString);
-    // }
-    // let menu = pickDeep(this.state.navigationMenuObject, this.state.searchString);
     let menu = this.state.navigationMenuObject,
         pages = this.state.pages;
 
         menu = pickDeep(menu, pages);
-        console.log(pages);
 
     return <div className="col-lg-3">
                 <SearchInput searchString={this.state.searchString} />

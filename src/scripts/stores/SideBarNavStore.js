@@ -53,12 +53,10 @@ AppDispatcher.register(function(payload) {
 
 		case ActionTypes.RECEIVE_PAGES_ARRAY:
       _pages = action.pagesArray;
-      // _navigationMenu = pickDeep(_navigationMenu, _pages);
       SideBarNavStore.emitChange();
       break;
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
-	    console.log(action.navigationMenu);
       updateNavMenu(action.navigationMenu);
       SideBarNavStore.emitChange();
       break;
