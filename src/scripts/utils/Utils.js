@@ -1,5 +1,9 @@
 module.exports = {
   pickDeep: function pickDeep(collection, identity, thisArg) {
+    if (!identity.length) {
+      return collection;
+    }
+
     var picked = _.pick(collection, identity, thisArg);
     var collections = _.pick(collection, _.isObject, thisArg);
 

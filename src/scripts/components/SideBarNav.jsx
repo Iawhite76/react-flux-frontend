@@ -8,7 +8,9 @@ const React = require('react/addons'),
   SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
   SideBarNavStore = require('../stores/SideBarNavStore'),
   SearchInput = require('./SearchInput.jsx'),
-  WebAPIUtils = require('../utils/WebAPIUtils');
+  WebAPIUtils = require('../utils/WebAPIUtils'),
+  pickDeep = require('../utils/Utils').pickDeep;
+
 
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -62,6 +64,12 @@ let SideBarNav = React.createClass({
 
     //   SideBarNavActionCreators.getPages(searchString);
     // }
+    // let menu = pickDeep(this.state.navigationMenuObject, this.state.searchString);
+    let menu = this.state.navigationMenuObject,
+        pages = this.state.pages;
+
+        menu = pickDeep(menu, pages);
+        console.log(pages);
 
     return <div className="col-lg-3">
                 <SearchInput searchString={this.state.searchString} />
@@ -72,7 +80,7 @@ let SideBarNav = React.createClass({
                   onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject", "collapsed")}
                   onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","checked")}
                   onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","selected")}
-                  data={this.state.navigationMenuObject} />
+                  data={menu} />
             
             </div>;
 

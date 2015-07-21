@@ -53,7 +53,7 @@ AppDispatcher.register(function(payload) {
 
 		case ActionTypes.RECEIVE_PAGES_ARRAY:
       _pages = action.pagesArray;
-      _navigationMenu = pickDeep(_navigationMenu, _pages);
+      // _navigationMenu = pickDeep(_navigationMenu, _pages);
       SideBarNavStore.emitChange();
       break;
 
