@@ -9,17 +9,8 @@ module.exports = {
 
     _.each(collections, function(item, key, collection) {
         var object;
-        if (_.isArray(item)) {
-            object = _.reduce(item, function(result, value) {
-                var picked = pickDeep(value, identity, thisArg);
-                if (!_.isEmpty(picked)) {
-                    result.push(picked);
-                }
-                return result;
-            }, []);
-        } else {
-            object = pickDeep(item, identity, thisArg);
-        }
+    
+        object = pickDeep(item, identity, thisArg);
 
         if (!_.isEmpty(object)) {
             picked[key] = object;
