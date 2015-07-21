@@ -44,7 +44,7 @@ let SideBarNav = React.createClass({
         pages = this.state.pages;
 
         menu = pickDeep(menu, pages);
-
+        console.log(menu);
     return <div className="col-lg-3">
                 <SearchInput searchString={this.state.searchString} />
 

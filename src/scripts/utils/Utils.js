@@ -28,7 +28,10 @@ module.exports = {
     if (source && source.length) {
 
       var item = source.shift(); //take first item from the array
-      result[item.title] = { ID : item.ID }; //make a new property in the result
+        result[item.title] = { 
+          ID : item.ID,
+          url: item.url
+        }; //make a new property in the result
 
       //if there are children, build them recursively
       if (item.children && item.children.length) {
