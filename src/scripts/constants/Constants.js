@@ -41,6 +41,9 @@ module.exports = {
     // Nav menu
     RECEIVE_NAVIGATION_MENU_JSON: null,
     LOAD_NAVIGATION_MENU: null,
+
+    // Search
+    UPDATE_SEARCH_STRING: null,
   })
 
 };

@@ -12,7 +12,7 @@ let EventEmitter = require('events').EventEmitter,
 // module closure
 let _pages = [];
 let _navigationMenu = {'Loading...': {}};
-let _query = '';
+let _searchString = '';
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
@@ -38,7 +38,7 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getSearchString() {
-		return _query;
+		return _searchString;
 	},
 
 });
@@ -53,7 +53,6 @@ AppDispatcher.register(function(payload) {
 
 		case ActionTypes.RECEIVE_PAGES_ARRAY:
       _pages = action.pagesArray;
-      _query = action.query;
       _navigationMenu = pickDeep(_navigationMenu, _pages);
       SideBarNavStore.emitChange();
       break;
@@ -63,6 +62,11 @@ AppDispatcher.register(function(payload) {
       updateNavMenu(action.navigationMenu);
       SideBarNavStore.emitChange();
       break;
+
+		case ActionTypes.UPDATE_SEARCH_STRING:
+			_searchString = action.searchString;
+      SideBarNavStore.emitChange();
+      break;      
 
     default:
   }

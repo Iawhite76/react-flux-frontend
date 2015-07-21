@@ -24,15 +24,15 @@ module.exports = {
 		  });
 	},
 
-	loadPages(query) {
-		request('GET', APIEndpoints.QUERY_ROOT + query)
+	loadPages(searchString) {
+		request('GET', APIEndpoints.QUERY_ROOT + searchString)
 		  .set('Accept', 'application/json')
 		  .end()
 		  .then(function onResult(res) {
 		    // do stuff 
 		    let json = JSON.parse(res.text);
         console.log(json);
-        ServerActionCreators.receivePagesJsonArray(json, query);
+        ServerActionCreators.receivePagesJsonArray(json);
 		  })
 		  .catch(function(error) {
 		    // handle errors 
