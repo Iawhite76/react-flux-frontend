@@ -43,11 +43,7 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
 });
 
-let updateNavMenu = function updateNavMenu(menu) {
-	_navigationMenu = buildMenu(menu);
-};
-
-AppDispatcher.register(function(payload) {
+SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
 
@@ -57,7 +53,7 @@ AppDispatcher.register(function(payload) {
       break;
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
-      updateNavMenu(action.navigationMenu);
+      _navigationMenu = buildMenu(action.navigationMenu);
       SideBarNavStore.emitChange();
       break;
 
@@ -65,6 +61,11 @@ AppDispatcher.register(function(payload) {
 			_searchString = action.searchString;
       SideBarNavStore.emitChange();
       break;      
+
+    case ActionTypes.CLEAR_SEARCH:
+    	_searchString = '';
+      SideBarNavStore.emitChange();
+      break; 
 
     default:
   }

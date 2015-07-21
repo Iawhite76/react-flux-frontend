@@ -25,18 +25,23 @@ module.exports = {
 	},
 
 	loadPages(searchString) {
-		request('GET', APIEndpoints.QUERY_ROOT + searchString)
-		  .set('Accept', 'application/json')
-		  .end()
-		  .then(function onResult(res) {
-		    // do stuff 
-		    let json = JSON.parse(res.text);
-        ServerActionCreators.receivePagesJsonArray(json);
-		  })
-		  .catch(function(error) {
-		    // handle errors 
-		    console.log(error);
-		  });
+		// Pass empty array to reset nav menu if search string is empty
+		if (!searchString.length) {
+			ServerActionCreators.receivePagesJsonArray([]);
+		}
+
+			request('GET', APIEndpoints.QUERY_ROOT + searchString)
+			  .set('Accept', 'application/json')
+			  .end()
+			  .then(function onResult(res) {
+			    // do stuff 
+			    let json = JSON.parse(res.text);
+	        ServerActionCreators.receivePagesJsonArray(json);
+			  })
+			  .catch(function(error) {
+			    // handle errors 
+			    console.log(error);
+			  });
 
 	}
 
