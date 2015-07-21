@@ -27,7 +27,10 @@ module.exports = {
       type: ActionTypes.UPDATE_SEARCH_STRING,
       searchString: searchString
     });
-    WebAPIUtils.loadPages(searchString);
+
+    if (searchString.length > 3 || !searchString.length) {
+      WebAPIUtils.loadPages(searchString);
+    }
   },
 
   clearSearch() {

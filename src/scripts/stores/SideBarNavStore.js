@@ -43,7 +43,7 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 
 });
 
-AppDispatcher.register(function(payload) {
+SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
 
