@@ -145,7 +145,9 @@ var TreeNode = React.createClass({
     var displayLabel = props.label;
 
     if (props.labelFilter) displayLabel = props.labelFilter(displayLabel);
-
+    if (props.children.length) {
+      return <label className={labelClassName} data-id={props.ID}>{displayLabel}</label>;
+    } 
     return <label className={labelClassName} data-id={props.ID}><Link to={`/page/${props.uri}`}>{displayLabel}</Link></label>;
   },
 
