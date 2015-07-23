@@ -1,17 +1,12 @@
 const React = require('react/addons'),
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
-  TreeMenuUtils = require('../utils/react-tree-menu').TreeMenuUtils,
-  Immutable = require('immutable'),
   _ = require('lodash'),
-  JSXView = require('../utils/react-jsx-view'),
-  SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
   SideBarNavStore = require('../stores/SideBarNavStore'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
-  pickDeep = require('../utils/Utils').pickDeep;
-
-
+  pickDeep = require('../utils/Utils').pickDeep,
+  buildMenu = require('../utils/Utils').buildMenu;
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -19,7 +14,7 @@ function getStateFromStore() {
   return {
     pages: SideBarNavStore.getPages(),
     searchString: SideBarNavStore.getSearchString(),
-    navigationMenuObject: SideBarNavStore.getNavigationMenu()
+    navigationMenuObject: _.cloneDeep(SideBarNavStore.getNavigationMenu())
   };
 }
 
@@ -40,7 +35,7 @@ let SideBarNav = React.createClass({
 
   render() {
 
-    let menu = this.state.navigationMenuObject,
+    let menu = buildMenu(_.cloneDeep(this.state.navigationMenuObject)),
         pages = this.state.pages;
 
         menu = pickDeep(menu, pages);
