@@ -35,7 +35,7 @@ let SideBarNav = React.createClass({
 
   render() {
 
-    let menu = buildMenu(_.cloneDeep(this.state.navigationMenuObject)),
+    let menu = buildMenu(this.state.navigationMenuObject),
         pages = this.state.pages;
 
         menu = pickDeep(menu, pages);
