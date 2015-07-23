@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 var React = require('react/addons'),
   TreeNodeMixin = require('./TreeNodeMixin'),
   noop = require('lodash/utility/noop');
@@ -145,7 +146,7 @@ var TreeNode = React.createClass({
 
     if (props.labelFilter) displayLabel = props.labelFilter(displayLabel);
 
-    return <label className={labelClassName} data-id={props.ID}>{displayLabel}</label>;
+    return <label className={labelClassName} data-id={props.ID}><Link to={`/page/${props.uri}`}>{displayLabel}</Link></label>;
   },
 
   _getCheckboxNode: function () {

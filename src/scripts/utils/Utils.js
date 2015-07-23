@@ -1,3 +1,5 @@
+let _ = require('lodash');
+
 module.exports = {
   pickDeep: function pickDeep(collection, identity, thisArg) {
     if (!identity.length) {
@@ -9,7 +11,7 @@ module.exports = {
 
     _.each(collections, function(item, key, collection) {
         var object;
-    
+
         object = pickDeep(item, identity, thisArg);
 
         if (!_.isEmpty(object)) {
@@ -22,16 +24,18 @@ module.exports = {
   },
 
   buildMenu: function buildMenu(source, result) {
+    let tree = _.cloneDeep(source);
+
     //build a return value if one wasn't passed in
     result = result || {};
 
-    if (source && source.length) {
+    if (tree && tree.length) {
 
-      var item = source.shift(); //take first item from the array
-        result[item.title] = { 
-          ID : item.ID,
-          url: item.url
-        }; //make a new property in the result
+      var item = tree.shift(); //take first item from the array
+      result[item.title] = { 
+        ID : item.ID,
+        uri: item.uri
+      }; //make a new property in the result
 
       //if there are children, build them recursively
       if (item.children && item.children.length) {
@@ -39,7 +43,7 @@ module.exports = {
       }
 
       //build additional items recursively, based on the remaining items in the array
-      return buildMenu(source, result);
+      return buildMenu(tree, result);
 
     } else {
       //none left, done
