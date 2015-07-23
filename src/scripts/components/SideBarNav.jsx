@@ -1,17 +1,12 @@
 const React = require('react/addons'),
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
-  TreeMenuUtils = require('../utils/react-tree-menu').TreeMenuUtils,
-  Immutable = require('immutable'),
   _ = require('lodash'),
-  JSXView = require('../utils/react-jsx-view'),
-  SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
   SideBarNavStore = require('../stores/SideBarNavStore'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
-  pickDeep = require('../utils/Utils').pickDeep;
-
-
+  pickDeep = require('../utils/Utils').pickDeep,
+  buildMenu = require('../utils/Utils').buildMenu;
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -19,12 +14,12 @@ function getStateFromStore() {
   return {
     pages: SideBarNavStore.getPages(),
     searchString: SideBarNavStore.getSearchString(),
-    navigationMenuObject: SideBarNavStore.getNavigationMenu()
+    navigationMenuObject: _.cloneDeep(SideBarNavStore.getNavigationMenu())
   };
 }
 
 let SideBarNav = React.createClass({
-  onChange() {
+  _onChange() {
     this.setState(getStateFromStore());
   },
 
@@ -34,106 +29,103 @@ let SideBarNav = React.createClass({
 
   componentDidMount() {
     WebAPIUtils.loadNavigationMenu();
-    SideBarNavStore.addChangeListener(this.onChange);
+    SideBarNavStore.addChangeListener(this._onChange);
   },
 
 
   render() {
 
-    let menu = this.state.navigationMenuObject,
+    let menu = buildMenu(this.state.navigationMenuObject),
         pages = this.state.pages;
 
         menu = pickDeep(menu, pages);
-        console.log(menu);
+        menu = this._collapseNodes(this.state.collapsedNodeKeys, menu);
+        menu = this._makeNodeSelected(this.state.selectedLineage, menu);
+
     return <div className="col-lg-3">
                 <SearchInput searchString={this.state.searchString} />
 
                 <TreeMenu
                   expandIconClass="fa fa-chevron-right"
                   collapseIconClass="fa fa-chevron-down"
-                  onTreeNodeCollapseChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject", "collapsed")}
-                  onTreeNodeCheckChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","checked")}
-                  onTreeNodeSelectChange={this._handleDynamicObjectTreeNodePropChange.bind(this, 6, "navigationMenuObject","selected")}
+                  onTreeNodeCollapseChange={this._onCollapseChange}
+                  onTreeNodeSelectChange={this._onSelectChange}
                   data={menu} />
-            
+
             </div>;
 
   },
 
-  _handleDynamicObjectTreeNodePropChange(messageWindowKey, stateKey, propName, lineage) {
-
-    this._setLastActionState(propName, messageWindowKey, lineage);
-
-    //Get a node path that includes children, given a key
-    function getNodePath(nodeKey) {
-
-      if (nodeKey.length === 1) return nodeKey;
-
-      return _(nodeKey).zip(nodeKey.map(function () {
-        return "children";
-      })).flatten().initial().value();
-
+  _onCollapseChange(lineage) {
+    let collapsedNodeKeys = this.state.collapsedNodeKeys || {};
+    let key = lineage.join('__');
+    collapsedNodeKeys[key] = !collapsedNodeKeys[key];
+    if (!collapsedNodeKeys[key]) {
+      delete collapsedNodeKeys[key];
     }
-
-    var oldState = Immutable.fromJS(this.state[stateKey]);
-    var nodePath = getNodePath(lineage),
-      keyPaths = [nodePath.concat([propName])];
-
-    //Build a list of key paths for all children
-    function addChildKeys(state, parentPath) {
-
-      var childrenPath = parentPath.concat('children'),
-        children = state.getIn(childrenPath);
-
-      if (!children || children.size === 0) return;
-
-      children.map(function (value, key) {
-        keyPaths.push(childrenPath.concat([key, propName]))
-        addChildKeys(state, childrenPath.concat([key]));
-      });
-    }
-
-    addChildKeys(oldState, nodePath);
-
-    //Get the new prop state
-    var newPropState = !oldState.getIn(keyPaths[0]);
-
-    //Now create a new map w/ all the changes
-    var newState = oldState.withMutations(function(state) {
-      keyPaths.forEach(function (keyPath) {
-        state.setIn(keyPath, newPropState);
-      })
-    });
-
-    var mutation = {};
-
-    mutation[stateKey] = newState.toJS();
-
-    this.setState(mutation);
-
+    this.setState({collapsedNodeKeys: collapsedNodeKeys});
   },
 
-  _setLastActionState(action, col, node) {
+  _onSelectChange(lineage) {
+    this.setState({selectedLineage: lineage});
+  },
 
-    var toggleEvents = ["collapsed", "checked", "selected"];
+  _nodeFromLineage(lineage, nodes) {
+    let names = _.clone(lineage);
 
-    if (toggleEvents.indexOf(action) >= 0) {
-      action += "Changed";
+    if (lineage && nodes) {
+      let name = names.shift();
+      let node = nodes[name];
+
+      while (node) {
+        if (names.length === 0) {
+          break;
+        } else if (node.children) {
+          name = names.shift();
+          node = node.children[name];
+        } else {
+          break;
+        }
+      }
+
+      return node;
+    } else {
+      return null;
     }
+  },
 
-    console.log("Controller View received tree menu " + action + " action: " + node.join(" > "));
+  _makeNodeSelected(lineage, menu) {
+    let nodes = _.cloneDeep(menu);
+    if (lineage && nodes) {
+      let node = this._nodeFromLineage(lineage, nodes);
+      if (node && !node.children) {
+        node.selected = true;
+      }
+      return nodes;
+    } else {
+      return menu;
+    }
+  },
 
-    var key = "lastAction" + col;
+  _collapseNodes(collapsedNodeKeys, menu) {
+    let nodeKeys = _.cloneDeep(collapsedNodeKeys);
+    let nodes = _.cloneDeep(menu);
 
-    var mutation = {};
-    mutation[key] = {
-      event: action,
-      node: node.join(" > "),
-      time: new Date().getTime()
-    };
+    if (nodeKeys && nodes) {
+      _.keys(nodeKeys).forEach(key => {
+        let lineage = key.split('__');
+        let node = this._nodeFromLineage(lineage, nodes);
+        if (node && node.children) {
+          node.collapsed = true;
+        }
+      });
 
-    this.setState(mutation)
+      return nodes;
+    } else {
+      return menu;
+    }
   }
+
 });
 
 

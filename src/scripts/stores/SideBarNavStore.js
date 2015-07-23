@@ -1,17 +1,16 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			Constants = require('../constants/Constants'),
 			ActionTypes = Constants.ActionTypes,
-      buildMenu = require('../utils/Utils').buildMenu,
       pickDeep = require('../utils/Utils').pickDeep;
 
 
 let EventEmitter = require('events').EventEmitter,
 	  assign = require('object-assign');
 
-// Underscore because this is a private variable created by the 
+// Underscore because this is a private variable created by the
 // module closure
 let _pages = [];
-let _navigationMenu = {'Loading...': {}};
+let _navigationMenu = [{title: 'Loading...'}];
 let _searchString = '';
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
@@ -53,19 +52,19 @@ SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
       break;
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
-      _navigationMenu = buildMenu(action.navigationMenu);
+      _navigationMenu = action.navigationMenu;
       SideBarNavStore.emitChange();
       break;
 
 		case ActionTypes.UPDATE_SEARCH_STRING:
 			_searchString = action.searchString;
       SideBarNavStore.emitChange();
-      break;      
+      break;
 
     case ActionTypes.CLEAR_SEARCH:
     	_searchString = '';
       SideBarNavStore.emitChange();
-      break; 
+      break;
 
     default:
   }
