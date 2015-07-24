@@ -13,7 +13,7 @@ let _pages = {
     content: 'Loading....'
   }
 };
-let _currentPageID = '15';
+let _currentPageID = 15;
 
 function _addPages (array) {
   array.forEach((page) => {
@@ -53,6 +53,9 @@ PageStore.dispatchToken = AppDispatcher.register(function(payload) {
       PageStore.emitChange();
       break;
 
+    case ActionTypes.CLICK_NAVIGATION_NODE:
+      _currentPageID = action.pageID;
+      PageStore.emitChange();
     default:
   }
 });

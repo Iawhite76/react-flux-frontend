@@ -53,7 +53,7 @@ let SideBarNav = React.createClass({
 
   _onSelectChange(lineage) {
     let node = SideBarNavStore.getNodeFromLineage(lineage);
-    if (node) {
+    if (node && node.ID !== SideBarNavStore.getSelectedPageID()) {
       SideBarNavActionCreators.clickNavNode(node.ID);
     }
   }

@@ -93,6 +93,10 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		return _searchString;
 	},
 
+  getSelectedPageID() {
+    return _selectedPageID;
+  },
+
   getNodeFromLineage(lineage) {
     let nodes = _buildMenu(_navigationMenu);
     return _nodeFromLineage(lineage, nodes);
