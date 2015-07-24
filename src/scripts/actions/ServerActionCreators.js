@@ -6,14 +6,14 @@ let ActionTypes = Constants.ActionTypes;
 module.exports = {
 
   receiveNavigationMenuJSON(navigationMenu) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleViewAction({
       type: ActionTypes.RECEIVE_NAVIGATION_MENU_JSON,
       navigationMenu: navigationMenu
     });
   },
 
   receivePagesJsonArray(pagesArray) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleViewAction({
       type: ActionTypes.RECEIVE_PAGES_ARRAY,
       pagesArray: pagesArray
     });
