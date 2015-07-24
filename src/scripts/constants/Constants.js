@@ -37,6 +37,7 @@ module.exports = {
     // Pages
     RECEIVE_PAGES: null,
     RECEIVE_PAGES_ARRAY: null,
+    RECEIVE_ALL_PAGES_ARRAY: null,
 
     // Nav menu
     RECEIVE_NAVIGATION_MENU_JSON: null,

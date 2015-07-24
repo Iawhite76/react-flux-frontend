@@ -17,6 +17,13 @@ module.exports = {
       type: ActionTypes.RECEIVE_PAGES_ARRAY,
       pagesArray: pagesArray
     });
+  },
+
+  receiveAllPagesJSON(pagesArray) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.RECEIVE_ALL_PAGES_ARRAY,
+      pagesArray: pagesArray
+    });
   }
 
 };

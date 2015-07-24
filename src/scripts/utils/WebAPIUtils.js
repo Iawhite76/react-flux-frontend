@@ -47,6 +47,13 @@ module.exports = {
 			    console.log(error);
 			  });
 
+	},
+
+	loadAllPages() {
+		setTimeout(() => {
+		  let pageText = ''; // TODO put json blog in here so zac can test
+		  ServerActionCreators.receiveAllPagesJSON(JSON.parse(pageText));
+		});
 	}
 
 };
