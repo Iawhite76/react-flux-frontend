@@ -12,6 +12,7 @@ const React = require('react'),
       WebAPIUtils = require('./utils/WebAPIUtils');
 
 WebAPIUtils.loadNavigationMenu();
+WebAPIUtils.loadAllPages();
 
 var App = React.createClass({
 
