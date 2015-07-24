@@ -8,7 +8,10 @@ import { history } from 'react-router/lib/BrowserHistory';
 
 const React = require('react'),
 			SideBarNav = require('./components/SideBarNav.jsx'),
-			Content = require('./components/Content');
+			Content = require('./components/Content'),
+      WebAPIUtils = require('./utils/WebAPIUtils');
+
+WebAPIUtils.loadNavigationMenu();
 
 var App = React.createClass({
 

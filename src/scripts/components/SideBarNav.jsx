@@ -6,7 +6,8 @@ const React = require('react/addons'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
   pickDeep = require('../utils/Utils').pickDeep,
-  buildMenu = require('../utils/Utils').buildMenu;
+  buildMenu = require('../utils/Utils').buildMenu,
+  SideBarNavActionCreators = require('../actions/SideBarNavActionCreators');
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -14,7 +15,9 @@ function getStateFromStore() {
   return {
     pages: SideBarNavStore.getPages(),
     searchString: SideBarNavStore.getSearchString(),
-    navigationMenuObject: _.cloneDeep(SideBarNavStore.getNavigationMenu())
+    navigationMenuObject: _.cloneDeep(SideBarNavStore.getNavigationMenu()),
+    selectedLineage: SideBarNavStore.getSelectedLineage(),
+    collapsedNodeLineages: SideBarNavStore.getCollapsedNodeLineages()
   };
 }
 
@@ -28,7 +31,6 @@ let SideBarNav = React.createClass({
   },
 
   componentDidMount() {
-    WebAPIUtils.loadNavigationMenu();
     SideBarNavStore.addChangeListener(this._onChange);
   },
 
@@ -39,7 +41,7 @@ let SideBarNav = React.createClass({
         pages = this.state.pages;
 
         menu = pickDeep(menu, pages);
-        menu = this._collapseNodes(this.state.collapsedNodeKeys, menu);
+        menu = this._collapseNodes(this.state.collapsedNodeLineages, menu);
         menu = this._makeNodeSelected(this.state.selectedLineage, menu);
         console.log(menu);
     return <div className="col-lg-3">
@@ -57,17 +59,11 @@ let SideBarNav = React.createClass({
   },
 
   _onCollapseChange(lineage) {
-    let collapsedNodeKeys = this.state.collapsedNodeKeys || {};
-    let key = lineage.join('__');
-    collapsedNodeKeys[key] = !collapsedNodeKeys[key];
-    if (!collapsedNodeKeys[key]) {
-      delete collapsedNodeKeys[key];
-    }
-    this.setState({collapsedNodeKeys: collapsedNodeKeys});
+    SideBarNavActionCreators.clickNavExpandCollapse(lineage);
   },
 
   _onSelectChange(lineage) {
-    this.setState({selectedLineage: lineage});
+    SideBarNavActionCreators.clickNavNode(lineage);
   },
 
   _nodeFromLineage(lineage, nodes) {
@@ -107,13 +103,12 @@ let SideBarNav = React.createClass({
     }
   },
 
-  _collapseNodes(collapsedNodeKeys, menu) {
-    let nodeKeys = _.cloneDeep(collapsedNodeKeys);
+  _collapseNodes(collapsedNodeLineages, menu) {
+    let nodeLineages = _.cloneDeep(collapsedNodeLineages);
     let nodes = _.cloneDeep(menu);
 
-    if (nodeKeys && nodes) {
-      _.keys(nodeKeys).forEach(key => {
-        let lineage = key.split('__');
+    if (nodeLineages && nodes) {
+      nodeLineages.forEach(lineage => {
         let node = this._nodeFromLineage(lineage, nodes);
         if (node && node.children) {
           node.collapsed = true;
