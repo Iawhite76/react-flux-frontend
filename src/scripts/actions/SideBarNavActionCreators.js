@@ -7,19 +7,18 @@ let ActionTypes = Constants.ActionTypes;
 
 module.exports = {
 
-  getPages(query) {
+  clickNavNode(lineage) {
     AppDispatcher.handleViewAction({
-      type: ActionTypes.LOAD_PAGES,
-      query: query
+      type: ActionTypes.CLICK_NAVIGATION_NODE,
+      lineage: lineage
     });
-    WebAPIUtils.loadPages(query);
   },
 
-  getNavigationMenu() {
-  	AppDispatcher.handleViewAction({
-  	  type: ActionTypes.LOAD_NAVIGATION_MENU
-  	});
-  	WebAPIUtils.loadNavigationMenu();
+  clickNavExpandCollapse(lineage) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.CLICK_NAVIGATION_EXPAND_COLLAPSE,
+      lineage: lineage
+    });
   },
 
   updateSearchString(searchString) {

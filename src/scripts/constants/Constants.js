@@ -32,7 +32,7 @@ module.exports = {
     // RECEIVE_STORY: null,
     // CREATE_STORY: null,
     // RECEIVE_CREATED_STORY: null
-   
+
 
     // Pages
     RECEIVE_PAGES: null,
@@ -41,6 +41,8 @@ module.exports = {
     // Nav menu
     RECEIVE_NAVIGATION_MENU_JSON: null,
     LOAD_NAVIGATION_MENU: null,
+    CLICK_NAVIGATION_NODE: null,
+    CLICK_NAVIGATION_EXPAND_COLLAPSE: null,
 
     // Search
     UPDATE_SEARCH_STRING: null,

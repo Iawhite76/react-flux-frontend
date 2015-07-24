@@ -12,9 +12,10 @@ let EventEmitter = require('events').EventEmitter,
 let _pages = [];
 let _navigationMenu = [{title: 'Loading...'}];
 let _searchString = '';
+let _selectedLineage = [];
+let _collapsedNodeKeys = {};
 
 let SideBarNavStore = assign({}, EventEmitter.prototype, {
-
 
 	emitChange() {
 		this.emit('change');
@@ -40,11 +41,35 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		return _searchString;
 	},
 
+  getSelectedLineage() {
+    return _selectedLineage;
+  },
+
+  getCollapsedNodeLineages() {
+    return _.keys(_collapsedNodeKeys).map(key => {
+      return key.split('__')
+    });
+  }
+
 });
 
 SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
+
+    case ActionTypes.CLICK_NAVIGATION_NODE:
+      _selectedLineage = action.lineage;
+      SideBarNavStore.emitChange();
+      break;
+
+    case ActionTypes.CLICK_NAVIGATION_EXPAND_COLLAPSE:
+      let key = action.lineage.join('__');
+      _collapsedNodeKeys[key] = !_collapsedNodeKeys[key];
+      if (!_collapsedNodeKeys[key]) {
+        delete _collapsedNodeKeys[key];
+      }
+      SideBarNavStore.emitChange();
+      break;
 
 		case ActionTypes.RECEIVE_PAGES_ARRAY:
       _pages = action.pagesArray;
