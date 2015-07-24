@@ -14,10 +14,10 @@ module.exports = {
     });
   },
 
-  clickNavExpandCollapse(lineage) {
+  clickNavExpandCollapse(pageID) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.CLICK_NAVIGATION_EXPAND_COLLAPSE,
-      lineage: lineage
+      pageID: pageID
     });
   },
 

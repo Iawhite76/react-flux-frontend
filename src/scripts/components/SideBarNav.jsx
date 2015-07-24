@@ -45,7 +45,10 @@ let SideBarNav = React.createClass({
   },
 
   _onCollapseChange(lineage) {
-    SideBarNavActionCreators.clickNavExpandCollapse(lineage);
+    let node = SideBarNavStore.getNodeFromLineage(lineage);
+    if (node) {
+      SideBarNavActionCreators.clickNavExpandCollapse(node.ID);
+    }
   },
 
   _onSelectChange(lineage) {

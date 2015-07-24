@@ -11,7 +11,7 @@ let EventEmitter = require('events').EventEmitter,
 let _navigationMenu = [{title: 'Loading...'}];
 let _searchString = '';
 let _selectedPageID = null;
-let _collapsedNodeKeys = {};
+let _collapsedPageIDs = {};
 
 function _nodeFromLineage (lineage, nodes) {
   let names = _.clone(lineage);
@@ -37,55 +37,37 @@ function _nodeFromLineage (lineage, nodes) {
   }
 }
 
-
-function _collapseNodes(collapsedNodeLineages, nodes) {
-  let nodeLineages = _.cloneDeep(collapsedNodeLineages);
-
-  if (nodeLineages && nodes) {
-    nodeLineages.forEach(lineage => {
-      let node = _nodeFromLineage(lineage, nodes);
-      if (node && node.children) {
-        node.collapsed = true;
-      }
-    });
-
-    return nodes;
-  } else {
-    return menu;
-  }
-}
-
-function _getCollapsedNodeLineages() {
-  return _.keys(_collapsedNodeKeys).map(key => {
-    return key.split('__')
-  });
-}
-
 /*
   Convert the flat array structure to a tree of hashes
   this is what TreeMenu will need to draw
 */
-function _buildMenu(source, result, selectedID) {
+function _buildMenu(source, result, opts={}) {
   let tree = _.cloneDeep(source);
+  let selectedID = opts.selectedID;
+  let collapsedIDs = opts.collapsedIDs;
 
   //build a return value if one wasn't passed in
   result = result || {};
 
   if (tree && tree.length) {
 
-    var item = tree.shift(); //take first item from the array
+    let item = tree.shift(); //take first item from the array
+    let selected = selectedID && selectedID === item.ID ? true : false;
+    let collapsed = collapsedIDs && collapsedIDs[item.ID] ? true : false;
+
     result[item.title] = {
       ID : item.ID,
-      selected: selectedID && selectedID === item.ID ? true : false
+      selected: selected,
+      collapsed: collapsed
     }; //make a new property in the result
 
     //if there are children, build them recursively
     if (item.children && item.children.length) {
-      result[item.title].children = _buildMenu(item.children, null, selectedID);
+      result[item.title].children = _buildMenu(item.children, null, opts);
     }
 
     //build additional items recursively, based on the remaining items in the array
-    return _buildMenu(tree, result, selectedID);
+    return _buildMenu(tree, result, opts);
 
   } else {
     //none left, done
@@ -117,8 +99,10 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
   },
 
   getNavigationMenuObject() {
-    let menu = _buildMenu(_navigationMenu, null, _selectedPageID);
-    menu = _collapseNodes(_getCollapsedNodeLineages(), menu);
+    let menu = _buildMenu(_navigationMenu, null, {
+      selectedID: _selectedPageID,
+      collapsedIDs: _collapsedPageIDs
+    });
     return menu;
   }
 
@@ -134,10 +118,10 @@ SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
       break;
 
     case ActionTypes.CLICK_NAVIGATION_EXPAND_COLLAPSE:
-      let key = action.lineage.join('__');
-      _collapsedNodeKeys[key] = !_collapsedNodeKeys[key];
-      if (!_collapsedNodeKeys[key]) {
-        delete _collapsedNodeKeys[key];
+      let pageID = action.pageID;
+      _collapsedPageIDs[pageID] = !_collapsedPageIDs[pageID];
+      if (!_collapsedPageIDs[pageID]) {
+        delete _collapsedPageIDs[pageID];
       }
       SideBarNavStore.emitChange();
       break;
