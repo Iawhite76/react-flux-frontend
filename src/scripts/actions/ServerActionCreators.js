@@ -12,16 +12,9 @@ module.exports = {
     });
   },
 
-  receivePagesJsonArray(pagesArray) {
+  receivePages(pagesArray) {
     AppDispatcher.handleViewAction({
-      type: ActionTypes.RECEIVE_PAGES_ARRAY,
-      pagesArray: pagesArray
-    });
-  },
-
-  receiveAllPagesJSON(pagesArray) {
-    AppDispatcher.handleViewAction({
-      type: ActionTypes.RECEIVE_ALL_PAGES_ARRAY,
+      type: ActionTypes.RECEIVE_PAGES,
       pagesArray: pagesArray
     });
   }

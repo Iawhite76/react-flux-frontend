@@ -10,7 +10,6 @@
     "object-assign": "^2.1.1",
     "promise": "^7.0.3",
     "react": "^0.13.3",
-    "react-router": "^1.0.0-beta3",
     "superagent": "^1.2.0",
     "superagent-promise": "^1.0.3",
     "wordpress-rest-api": "^0.4.0"

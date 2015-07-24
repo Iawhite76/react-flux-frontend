@@ -6,9 +6,20 @@ const AppDispatcher = require('../dispatcher/AppDispatcher'),
 let EventEmitter = require('events').EventEmitter,
     assign = require('object-assign');
 
-// pages keyed by id
-let _pages = {};
-let _currentPageSlug = null;
+// pages keyed by slug
+let _pages = {
+  '15': {
+    title: '',
+    content: 'Loading....'
+  }
+};
+let _currentPageID = '15';
+
+function _addPages (array) {
+  array.forEach((page) => {
+    _pages[page.ID] = page;
+  });
+}
 
 let PageStore = assign({}, EventEmitter.prototype, {
 
@@ -29,21 +40,16 @@ let PageStore = assign({}, EventEmitter.prototype, {
   },
 
   getCurrentPage() {
-    if (_currentPageSlug) {
-      // traverse the arrary and return the page if you find it
-    } else {
-      return null;
-    }
+    return _pages[_currentPageID];
   }
-
 });
 
 PageStore.dispatchToken = AppDispatcher.register(function(payload) {
   let action = payload.action;
   switch(action.type) {
 
-    case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
-      _pages = action.pagesArrary;
+    case ActionTypes.RECEIVE_PAGES:
+      _addPages(action.pagesArray);
       PageStore.emitChange();
       break;
 

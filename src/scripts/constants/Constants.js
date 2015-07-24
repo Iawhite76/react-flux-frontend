@@ -19,25 +19,8 @@ module.exports = {
   }),
 
   ActionTypes: keyMirror({
-    // Session
-    // LOGIN_REQUEST: null,
-    // LOGIN_RESPONSE: null,
-
-    // Routes
-    // REDIRECT: null,
-
-    // LOAD_STORIES: null,
-    // RECEIVE_STORIES: null,
-    // LOAD_STORY: null,
-    // RECEIVE_STORY: null,
-    // CREATE_STORY: null,
-    // RECEIVE_CREATED_STORY: null
-
-
     // Pages
     RECEIVE_PAGES: null,
-    RECEIVE_PAGES_ARRAY: null,
-    RECEIVE_ALL_PAGES_ARRAY: null,
 
     // Nav menu
     RECEIVE_NAVIGATION_MENU_JSON: null,

@@ -7,10 +7,10 @@ let ActionTypes = Constants.ActionTypes;
 
 module.exports = {
 
-  clickNavNode(lineage) {
+  clickNavNode(pageID) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.CLICK_NAVIGATION_NODE,
-      lineage: lineage
+      pageID: pageID
     });
   },
 

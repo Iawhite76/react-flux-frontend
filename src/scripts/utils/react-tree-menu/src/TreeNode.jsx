@@ -56,7 +56,7 @@ var TreeNode = React.createClass({
       collapseIconClass: ""
     }
   },
-  
+
   _getCollapseNode: function() {
     var props = this.props,
       collapseNode = null;
@@ -123,7 +123,7 @@ var TreeNode = React.createClass({
           checked : state.checked
         })
       });
-    } 
+    }
 
     return (
       <div className={this._getRootCssClass() + "-children"}>
@@ -145,11 +145,8 @@ var TreeNode = React.createClass({
     var displayLabel = props.label;
 
     if (props.labelFilter) displayLabel = props.labelFilter(displayLabel);
-    if (props.children.length) {
-      return <label className={labelClassName} data-id={props.ID}>{displayLabel}</label>;
-    } 
-    //return <label className={labelClassName} data-id={props.ID}><Link to={`/page/${props.uri}`}>{displayLabel}</Link></label>;
-    return <label className={labelClassName} data-id={props.ID}><a href={`http://mobilestyle.ups.dev/${props.uri}`}>{displayLabel}</a></label>;
+
+    return <label className={labelClassName}>{displayLabel}</label>;
   },
 
   _getCheckboxNode: function () {
