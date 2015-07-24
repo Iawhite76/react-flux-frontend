@@ -41,7 +41,7 @@ let SideBarNav = React.createClass({
         menu = pickDeep(menu, pages);
         menu = this._collapseNodes(this.state.collapsedNodeKeys, menu);
         menu = this._makeNodeSelected(this.state.selectedLineage, menu);
-
+        console.log(menu);
     return <div className="col-lg-3">
                 <SearchInput searchString={this.state.searchString} />
 
