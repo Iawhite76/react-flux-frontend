@@ -38,43 +38,72 @@ function _nodeFromLineage (lineage, nodes) {
 
 /*
   Convert the flat array structure to a tree of hashes
-  this is what TreeMenu will need to draw
+  this is what TreeMenu will need to draw, looks like:
+
+  {
+    "Item Title": {
+      ID: 1,
+      selected: false,
+      collapsed: false,
+      children: {
+        "A child": {
+          ID: 2,
+          selected: false,
+          collapsed: false,
+        },
+        "Another child": {
+          ID: 3,
+          selected: true,
+          collapsed: false,
+        }
+      }
+    }
+  }
 */
-function _buildMenu(source, result, opts={}) {
-  let tree = _.cloneDeep(source);
+function _buildMenu(sourceNodeArrays, result, opts={}) {
+  let nodeArray = _.cloneDeep(sourceNodeArrays);
   let selectedID = opts.selectedID;
   let collapsedIDs = opts.collapsedIDs;
-  let visibleIDs = opts.visibleIDs;
+  let visibleIDs = opts.visibleIDs || [];
 
-  //build a return value if one wasn't passed in
+  // build a return value if one wasn't passed in
   result = result || {};
 
-  if (tree && tree.length) {
+  if (nodeArray && nodeArray.length) {
+    let node = nodeArray.shift(); // take first node
+    let isLeafNode = !node.children || node.children.length === 0;
 
-    let item = tree.shift(); //take first item from the array
-    let selected = selectedID && selectedID === item.ID ? true : false;
-    let collapsed = collapsedIDs && collapsedIDs[item.ID] ? true : false;
+    let newNode = {
+      ID: node.ID
+    };
 
-    let visible = (item.children && item.children.length) || visibleIDs.indexOf(item.ID) > -1;
+    let isVisible = true;
 
-    if (visible) {
-      result[item.title] = {
-        ID : item.ID,
-        selected: selected,
-        collapsed: collapsed
-      }; //make a new property in the result
+    if (isLeafNode) {
+      newNode.selected = selectedID && selectedID === node.ID ? true : false;
+      isVisible = visibleIDs.length === 0 || visibleIDs.indexOf(node.ID) > -1;
+    } else { // its a category node!
+      newNode.collapsed = collapsedIDs && collapsedIDs[node.ID] ? true : false;
+    }
 
-      //if there are children, build them recursively
-      if (item.children && item.children.length) {
-        result[item.title].children = _buildMenu(item.children, null, opts);
+    if (isVisible) {
+      result[node.title] = newNode;
+    }
+
+    // if there are children, build them recursively
+    if (!isLeafNode) {
+      result[node.title].children = _buildMenu(node.children, null, opts);
+
+      // if there are no childen, dont show the category node silly!
+      if (_.keys(result[node.title].children).length === 0) {
+        delete result[node.title]
       }
     }
 
-    //build additional items recursively, based on the remaining items in the array
-    return _buildMenu(tree, result, opts);
-
+    // build additional items recursively, based on the remaining items in the array
+    return _buildMenu(nodeArray, result, opts);
   } else {
-    //none left, done
+    // none left, done
     return result;
   }
 }
@@ -99,7 +128,7 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
   },
 
   getNavigationMenuObject() {
-    var searchMatchingPageIDs = _.pluck(PageStore.getPagesMatchingSearchString(), 'ID');
+    var searchMatchingPageIDs = _.compact(_.pluck(PageStore.getPagesMatchingSearchString(), 'ID'));
 
     let menu = _buildMenu(_navigationMenu, null, {
       selectedID: PageStore.getCurrentPageID(),

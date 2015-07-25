@@ -26,7 +26,6 @@ let SideBarNav = React.createClass({
   },
 
   componentDidMount() {
-    // TODO: remove SideBarNavStore alltogether and only have a page store
     SideBarNavStore.addChangeListener(this._onChange);
     PageStore.addChangeListener(this._onChange);
   },
