@@ -15,6 +15,7 @@ let _pages = {
   }
 };
 let _currentPageID = 15;
+let _searchString = '';
 
 function _addPages (array) {
   array.forEach((page) => {
@@ -40,6 +41,10 @@ let PageStore = assign({}, EventEmitter.prototype, {
     return _pages;
   },
 
+  getCurrentPageID() {
+    return _currentPageID;
+  },
+
   getCurrentPage() {
     return _pages[_currentPageID];
   },
@@ -47,6 +52,17 @@ let PageStore = assign({}, EventEmitter.prototype, {
   getPageBySlug(slug) {
     return _.find(_pages, (page) => {
       return page.slug === slug;
+    });
+  },
+
+  getSearchString() {
+    return _searchString;
+  },
+
+  getPagesMatchingSearchString() {
+    var q = (_searchString || '').toLowerCase();
+    return _.filter(_.values(_pages), (page) => {
+      return page.title.toLowerCase().indexOf(q) > -1 || page.content.toLowerCase().indexOf(q) > -1;
     });
   }
 });
@@ -63,6 +79,12 @@ PageStore.dispatchToken = AppDispatcher.register(function(payload) {
     case ActionTypes.CLICK_NAVIGATION_NODE:
       _currentPageID = action.pageID;
       PageStore.emitChange();
+
+    case ActionTypes.SEARCH_STRING_CHANGED:
+      _searchString = action.searchString;
+      PageStore.emitChange();
+      break;
+
     default:
   }
 });

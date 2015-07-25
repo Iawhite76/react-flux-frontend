@@ -1,6 +1,7 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			Constants = require('../constants/Constants'),
-			ActionTypes = Constants.ActionTypes;
+			ActionTypes = Constants.ActionTypes,
+      PageStore = require('./PageStore');
 
 
 let EventEmitter = require('events').EventEmitter,
@@ -9,8 +10,6 @@ let EventEmitter = require('events').EventEmitter,
 // Underscore because this is a private variable created by the
 // module closure
 let _navigationMenu = [{title: 'Loading...'}];
-let _searchString = '';
-let _selectedPageID = null;
 let _collapsedPageIDs = {};
 
 function _nodeFromLineage (lineage, nodes) {
@@ -45,6 +44,7 @@ function _buildMenu(source, result, opts={}) {
   let tree = _.cloneDeep(source);
   let selectedID = opts.selectedID;
   let collapsedIDs = opts.collapsedIDs;
+  let visibleIDs = opts.visibleIDs;
 
   //build a return value if one wasn't passed in
   result = result || {};
@@ -55,15 +55,19 @@ function _buildMenu(source, result, opts={}) {
     let selected = selectedID && selectedID === item.ID ? true : false;
     let collapsed = collapsedIDs && collapsedIDs[item.ID] ? true : false;
 
-    result[item.title] = {
-      ID : item.ID,
-      selected: selected,
-      collapsed: collapsed
-    }; //make a new property in the result
+    let visible = (item.children && item.children.length) || visibleIDs.indexOf(item.ID) > -1;
 
-    //if there are children, build them recursively
-    if (item.children && item.children.length) {
-      result[item.title].children = _buildMenu(item.children, null, opts);
+    if (visible) {
+      result[item.title] = {
+        ID : item.ID,
+        selected: selected,
+        collapsed: collapsed
+      }; //make a new property in the result
+
+      //if there are children, build them recursively
+      if (item.children && item.children.length) {
+        result[item.title].children = _buildMenu(item.children, null, opts);
+      }
     }
 
     //build additional items recursively, based on the remaining items in the array
@@ -89,23 +93,18 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		this.removeListener('change', callback);
 	},
 
-	getSearchString() {
-		return _searchString;
-	},
-
-  getSelectedPageID() {
-    return _selectedPageID;
-  },
-
   getNodeFromLineage(lineage) {
     let nodes = _buildMenu(_navigationMenu);
     return _nodeFromLineage(lineage, nodes);
   },
 
   getNavigationMenuObject() {
+    var searchMatchingPageIDs = _.pluck(PageStore.getPagesMatchingSearchString(), 'ID');
+
     let menu = _buildMenu(_navigationMenu, null, {
-      selectedID: _selectedPageID,
-      collapsedIDs: _collapsedPageIDs
+      selectedID: PageStore.getCurrentPageID(),
+      collapsedIDs: _collapsedPageIDs,
+      visibleIDs: searchMatchingPageIDs
     });
     return menu;
   }
@@ -115,11 +114,6 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
-
-    case ActionTypes.CLICK_NAVIGATION_NODE:
-      _selectedPageID = action.pageID;
-      SideBarNavStore.emitChange();
-      break;
 
     case ActionTypes.CLICK_NAVIGATION_EXPAND_COLLAPSE:
       let pageID = action.pageID;
@@ -132,16 +126,6 @@ SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
       _navigationMenu = action.navigationMenu;
-      SideBarNavStore.emitChange();
-      break;
-
-		case ActionTypes.UPDATE_SEARCH_STRING:
-			_searchString = action.searchString;
-      SideBarNavStore.emitChange();
-      break;
-
-    case ActionTypes.CLEAR_SEARCH:
-    	_searchString = '';
       SideBarNavStore.emitChange();
       break;
 
