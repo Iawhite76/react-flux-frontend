@@ -5,10 +5,7 @@ const APIRoot = "http://mobilestyle.ups.dev";
 module.exports = {
 
   APIEndpoints: {
-    // LOGIN:          APIRoot + "/v1/login",
-    // REGISTRATION:   APIRoot + "/v1/users",
-    // STORIES:        APIRoot + "/v1/stories"
-    QUERY_ROOT:   APIRoot + '/search-results/?ajaxSearch=',
+    ALL_PAGES_ENDPOINT:   APIRoot + '/search-results/?pagesSearch=all',
     WP_JSON: APIRoot + '/wp-json',
     WP_MAIN_NAV_MENU: '/menu-locations/primary_navigation',
   },
