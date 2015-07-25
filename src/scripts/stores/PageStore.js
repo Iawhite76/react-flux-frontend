@@ -67,7 +67,7 @@ let PageStore = assign({}, EventEmitter.prototype, {
   },
 
   getPagesMatchingSearchString() {
-    var q = (_searchString || '').toLowerCase();
+    var q = (_searchString || '').toLowerCase().trim();
     return _.filter(_.values(_pages), (page) => {
       return page.title.toLowerCase().indexOf(q) > -1 || page.content.toLowerCase().indexOf(q) > -1;
     });
