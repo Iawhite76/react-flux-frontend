@@ -1,12 +1,13 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
       Constants = require('../constants/Constants'),
-      ActionTypes = Constants.ActionTypes;
+      ActionTypes = Constants.ActionTypes,
+      _ = require('lodash');
 
 
 let EventEmitter = require('events').EventEmitter,
     assign = require('object-assign');
 
-// pages keyed by slug
+// pages keyed by ID
 let _pages = {
   '15': {
     title: '',
@@ -41,6 +42,12 @@ let PageStore = assign({}, EventEmitter.prototype, {
 
   getCurrentPage() {
     return _pages[_currentPageID];
+  },
+
+  getPageBySlug(slug) {
+    return _.find(_pages, (page) => {
+      return page.slug === slug;
+    });
   }
 });
 

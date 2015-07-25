@@ -1,7 +1,6 @@
 const React = require('react/addons'),
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
-  _ = require('lodash'),
   SideBarNavStore = require('../stores/SideBarNavStore'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
