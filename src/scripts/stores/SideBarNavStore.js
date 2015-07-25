@@ -37,9 +37,7 @@ function _nodeFromLineage (lineage, nodes) {
 }
 
 /*
-  Convert the flat array structure to a tree of hashes
-  this is what TreeMenu will need to draw, looks like:
-
+  End product looks like:
   {
     "Item Title": {
       ID: 1,
@@ -62,10 +60,6 @@ function _nodeFromLineage (lineage, nodes) {
 */
 function _buildMenu(sourceNodeArrays, result, opts={}) {
   let nodeArray = _.cloneDeep(sourceNodeArrays);
-  let selectedID = opts.selectedID;
-  let collapsedIDs = opts.collapsedIDs;
-  let visibleIDs = opts.visibleIDs || [];
-
   // build a return value if one wasn't passed in
   result = result || {};
 
@@ -80,10 +74,11 @@ function _buildMenu(sourceNodeArrays, result, opts={}) {
     let isVisible = true;
 
     if (isLeafNode) {
-      newNode.selected = selectedID && selectedID === node.ID ? true : false;
+      newNode.selected = opts.selectedID && opts.selectedID === node.ID ? true : false;
+      let visibleIDs = opts.visibleIDs || [];
       isVisible = visibleIDs.length === 0 || visibleIDs.indexOf(node.ID) > -1;
     } else { // its a category node!
-      newNode.collapsed = collapsedIDs && collapsedIDs[node.ID] ? true : false;
+      newNode.collapsed = opts.collapsedIDs && opts.collapsedIDs[node.ID] ? true : false;
     }
 
     if (isVisible) {
@@ -94,7 +89,7 @@ function _buildMenu(sourceNodeArrays, result, opts={}) {
     if (!isLeafNode) {
       result[node.title].children = _buildMenu(node.children, null, opts);
 
-      // if there are no childen, dont show the category node silly!
+      // if there are no childen, we don't need the node silly!
       if (_.keys(result[node.title].children).length === 0) {
         delete result[node.title]
       }
@@ -103,7 +98,7 @@ function _buildMenu(sourceNodeArrays, result, opts={}) {
     // build additional items recursively, based on the remaining items in the array
     return _buildMenu(nodeArray, result, opts);
   } else {
-    // none left, done
+    // the end of recursion has occurred
     return result;
   }
 }
