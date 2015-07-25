@@ -2,6 +2,7 @@ const React = require('react/addons'),
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
   SideBarNavStore = require('../stores/SideBarNavStore'),
+  PageStore = require('../stores/PageStore'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
   SideBarNavActionCreators = require('../actions/SideBarNavActionCreators');
@@ -10,7 +11,7 @@ let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 function getStateFromStore() {
   return {
-    searchString: SideBarNavStore.getSearchString(),
+    searchString: PageStore.getSearchString(),
     navigationMenuObject: SideBarNavStore.getNavigationMenuObject(),
   };
 }
@@ -26,6 +27,7 @@ let SideBarNav = React.createClass({
 
   componentDidMount() {
     SideBarNavStore.addChangeListener(this._onChange);
+    PageStore.addChangeListener(this._onChange);
   },
 
   render() {
@@ -52,7 +54,7 @@ let SideBarNav = React.createClass({
 
   _onSelectChange(lineage) {
     let node = SideBarNavStore.getNodeFromLineage(lineage);
-    if (node && node.ID !== SideBarNavStore.getSelectedPageID() && !node.children) {
+    if (node && node.ID !== PageStore.getCurrentPageID() && !node.children) {
       SideBarNavActionCreators.clickNavNode(node.ID);
     }
   }

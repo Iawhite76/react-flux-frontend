@@ -1,6 +1,7 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			Constants = require('../constants/Constants'),
-			ActionTypes = Constants.ActionTypes;
+			ActionTypes = Constants.ActionTypes,
+      PageStore = require('./PageStore');
 
 
 let EventEmitter = require('events').EventEmitter,
@@ -9,8 +10,6 @@ let EventEmitter = require('events').EventEmitter,
 // Underscore because this is a private variable created by the
 // module closure
 let _navigationMenu = [{title: 'Loading...'}];
-let _searchString = '';
-let _selectedPageID = null;
 let _collapsedPageIDs = {};
 
 function _nodeFromLineage (lineage, nodes) {
@@ -38,39 +37,68 @@ function _nodeFromLineage (lineage, nodes) {
 }
 
 /*
-  Convert the flat array structure to a tree of hashes
-  this is what TreeMenu will need to draw
+  End product looks like:
+  {
+    "Item Title": {
+      ID: 1,
+      selected: false,
+      collapsed: false,
+      children: {
+        "A child": {
+          ID: 2,
+          selected: false,
+          collapsed: false,
+        },
+        "Another child": {
+          ID: 3,
+          selected: true,
+          collapsed: false,
+        }
+      }
+    }
+  }
 */
-function _buildMenu(source, result, opts={}) {
-  let tree = _.cloneDeep(source);
-  let selectedID = opts.selectedID;
-  let collapsedIDs = opts.collapsedIDs;
-
-  //build a return value if one wasn't passed in
+function _buildMenu(sourceNodeArrays, result, opts={}) {
+  let nodeArray = _.cloneDeep(sourceNodeArrays);
+  // build a return value if one wasn't passed in
   result = result || {};
 
-  if (tree && tree.length) {
+  if (nodeArray && nodeArray.length) {
+    let node = nodeArray.shift(); // take first node
+    let isLeafNode = !node.children || node.children.length === 0;
 
-    let item = tree.shift(); //take first item from the array
-    let selected = selectedID && selectedID === item.ID ? true : false;
-    let collapsed = collapsedIDs && collapsedIDs[item.ID] ? true : false;
+    let newNode = {
+      ID: node.ID
+    };
 
-    result[item.title] = {
-      ID : item.ID,
-      selected: selected,
-      collapsed: collapsed
-    }; //make a new property in the result
+    let isVisible = true;
 
-    //if there are children, build them recursively
-    if (item.children && item.children.length) {
-      result[item.title].children = _buildMenu(item.children, null, opts);
+    if (isLeafNode) {
+      newNode.selected = opts.selectedID && opts.selectedID === node.ID ? true : false;
+      let visibleIDs = opts.visibleIDs || [];
+      isVisible = visibleIDs.length === 0 || visibleIDs.indexOf(node.ID) > -1;
+    } else { // its a category node!
+      newNode.collapsed = opts.collapsedIDs && opts.collapsedIDs[node.ID] ? true : false;
     }
 
-    //build additional items recursively, based on the remaining items in the array
-    return _buildMenu(tree, result, opts);
+    if (isVisible) {
+      result[node.title] = newNode;
+    }
 
+    // if there are children, build them recursively
+    if (!isLeafNode) {
+      result[node.title].children = _buildMenu(node.children, null, opts);
+
+      // if there are no childen, we don't need the node silly!
+      if (_.keys(result[node.title].children).length === 0) {
+        delete result[node.title]
+      }
+    }
+
+    // build additional items recursively, based on the remaining items in the array
+    return _buildMenu(nodeArray, result, opts);
   } else {
-    //none left, done
+    // the end of recursion has occurred
     return result;
   }
 }
@@ -89,23 +117,18 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 		this.removeListener('change', callback);
 	},
 
-	getSearchString() {
-		return _searchString;
-	},
-
-  getSelectedPageID() {
-    return _selectedPageID;
-  },
-
   getNodeFromLineage(lineage) {
     let nodes = _buildMenu(_navigationMenu);
     return _nodeFromLineage(lineage, nodes);
   },
 
   getNavigationMenuObject() {
+    var searchMatchingPageIDs = _.compact(_.pluck(PageStore.getPagesMatchingSearchString(), 'ID'));
+
     let menu = _buildMenu(_navigationMenu, null, {
-      selectedID: _selectedPageID,
-      collapsedIDs: _collapsedPageIDs
+      selectedID: PageStore.getCurrentPageID(),
+      collapsedIDs: _collapsedPageIDs,
+      visibleIDs: searchMatchingPageIDs
     });
     return menu;
   }
@@ -115,11 +138,6 @@ let SideBarNavStore = assign({}, EventEmitter.prototype, {
 SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 	let action = payload.action;
 	switch(action.type) {
-
-    case ActionTypes.CLICK_NAVIGATION_NODE:
-      _selectedPageID = action.pageID;
-      SideBarNavStore.emitChange();
-      break;
 
     case ActionTypes.CLICK_NAVIGATION_EXPAND_COLLAPSE:
       let pageID = action.pageID;
@@ -132,16 +150,6 @@ SideBarNavStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_NAVIGATION_MENU_JSON:
       _navigationMenu = action.navigationMenu;
-      SideBarNavStore.emitChange();
-      break;
-
-		case ActionTypes.UPDATE_SEARCH_STRING:
-			_searchString = action.searchString;
-      SideBarNavStore.emitChange();
-      break;
-
-    case ActionTypes.CLEAR_SEARCH:
-    	_searchString = '';
       SideBarNavStore.emitChange();
       break;
 

@@ -8,18 +8,26 @@ let EventEmitter = require('events').EventEmitter,
     assign = require('object-assign');
 
 // pages keyed by ID
-let _pages = {
-  '15': {
-    title: '',
-    content: 'Loading....'
-  }
-};
-let _currentPageID = 15;
+let _pages = {};
+let _currentPageID = null;
+let _searchString = '';
 
 function _addPages (array) {
   array.forEach((page) => {
     _pages[page.ID] = page;
   });
+}
+
+function _setInitialPage () {
+  let slug = window.location.hash.split('#')[1];
+  if (slug && slug.length) {
+    let page = PageStore.getPageBySlug(slug);
+    if (page) {
+      _currentPageID = page.ID;
+    }
+  } else  {
+    _currentPageID = 15;
+  }
 }
 
 let PageStore = assign({}, EventEmitter.prototype, {
@@ -40,6 +48,10 @@ let PageStore = assign({}, EventEmitter.prototype, {
     return _pages;
   },
 
+  getCurrentPageID() {
+    return _currentPageID;
+  },
+
   getCurrentPage() {
     return _pages[_currentPageID];
   },
@@ -47,6 +59,17 @@ let PageStore = assign({}, EventEmitter.prototype, {
   getPageBySlug(slug) {
     return _.find(_pages, (page) => {
       return page.slug === slug;
+    });
+  },
+
+  getSearchString() {
+    return _searchString;
+  },
+
+  getPagesMatchingSearchString() {
+    var q = (_searchString || '').toLowerCase();
+    return _.filter(_.values(_pages), (page) => {
+      return page.title.toLowerCase().indexOf(q) > -1 || page.content.toLowerCase().indexOf(q) > -1;
     });
   }
 });
@@ -57,12 +80,19 @@ PageStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_PAGES:
       _addPages(action.pagesArray);
+      _setInitialPage();
       PageStore.emitChange();
       break;
 
     case ActionTypes.CLICK_NAVIGATION_NODE:
       _currentPageID = action.pageID;
       PageStore.emitChange();
+
+    case ActionTypes.SEARCH_STRING_CHANGED:
+      _searchString = action.searchString;
+      PageStore.emitChange();
+      break;
+
     default:
   }
 });

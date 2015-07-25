@@ -23,19 +23,9 @@ module.exports = {
 
   updateSearchString(searchString) {
     AppDispatcher.handleViewAction({
-      type: ActionTypes.UPDATE_SEARCH_STRING,
+      type: ActionTypes.SEARCH_STRING_CHANGED,
       searchString: searchString
     });
-
-    if (searchString.length > 3 || !searchString.length) {
-      WebAPIUtils.loadPages(searchString);
-    }
-  },
-
-  clearSearch() {
-    AppDispatcher.handleViewAction({
-      type: ActionTypes.CLEAR_SEARCH
-    })
-  },
+  }
 
 };

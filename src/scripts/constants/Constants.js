@@ -26,8 +26,7 @@ module.exports = {
     CLICK_NAVIGATION_EXPAND_COLLAPSE: null,
 
     // Search
-    UPDATE_SEARCH_STRING: null,
-    CLEAR_SEARCH: null,
+    SEARCH_STRING_CHANGED: null
   })
 
 };
