@@ -30,9 +30,8 @@ let PageBrowsingApp = React.createClass({
   _onHashChange() {
     let slug = window.location.hash.split('#')[1];
     let page = PageStore.getPageBySlug(slug);
-    if (page) {
-      SideBarNavActionCreators.clickNavNode(page.ID);
-    }
+    let pageID = page ? page.ID : null;
+    SideBarNavActionCreators.clickNavNode(pageID);
   },
 
   render: function() {

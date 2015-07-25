@@ -21,12 +21,19 @@ let PageContent = React.createClass({
   },
 
   render() {
-    return (
-    <div className="col-xs-12 col-sm-9">
-      <h1>{this.state.page.title}</h1>
-      <div className="page-body" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
-    </div>
-    );
+    let page = this.state.page;
+    if (page) {
+      return (
+      <div className="col-xs-12 col-sm-9">
+        <h1>{this.state.page.title}</h1>
+        <div className="page-body" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+      </div>
+      );
+    } else {
+      return (
+        <div className="col-xs-12 col-sm-9">Page Not Found</div>
+      );
+    }
   }
 });
 
