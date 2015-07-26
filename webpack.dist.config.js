@@ -6,14 +6,15 @@ module.exports = {
   entry: {
     app: [
       'font-awesome-webpack!./src/font-awesome.config.js',
-      "webpack-dev-server/client?http://0.0.0.0:8080",
-      "webpack/hot/only-dev-server",
       "./src/scripts/main.js"
     ]
   },
+  output: {
+    path: "./build",
+    filename: "bundle.js",
+    publicPath: './'
+  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin('main.css'),
   ],
   stats: {

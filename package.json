@@ -39,8 +39,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "prod": "webpack -p",
-    "dev": "webpack-dev-server --colors --content-base ./build",
+    "prod": "webpack -p --config webpack.dist.config.js",
+    "dev": "webpack-dev-server -d --progress --colors --content-base ./build",
     "test": "jest"
   },
   "author": "",
