@@ -1,9 +1,11 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: "eval",
   entry: {
     app: [
+      'font-awesome-webpack!./src/font-awesome.config.js',
       "webpack-dev-server/client?http://0.0.0.0:8080",
       "webpack/hot/only-dev-server",
       "./src/scripts/main.js"
@@ -11,14 +13,20 @@ module.exports = {
   },
   output: {
     path: "./build",
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: './'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('main.css'),
   ],
+  stats: {
+    colors: true,
+    reasons: true
+  },
   resolve: {
-    modulesDirectories: ['node_modules'],
+    modulesDirectories: ['node_modules']
   },
   module: {
     loaders: [
@@ -34,18 +42,28 @@ module.exports = {
       },
 
       {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+      },
+
+      {
         test: /bootstrap\/js\//,
         loader: 'imports?jQuery=jquery'
       },
 
-      {
-        test: /\.(ttf|eot|svg)$/,
-        loader: 'file-loader'
+      // the url-loader uses DataUrls. 
+      // the file-loader emits files. 
+      { 
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+        loader: "url-loader?limit=10000&minetype=application/font-woff" 
       },
 
-      {
-        test: /\.woff2?$/,
-        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      { 
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
+        loader: "file-loader" 
       },
 
       {

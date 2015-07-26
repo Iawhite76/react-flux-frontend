@@ -20,7 +20,10 @@
     "bootstrap": "*",
     "bootstrap-webpack": "*",
     "css-loader": "*",
+    "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "*",
+    "font-awesome": "^4.3.0",
+    "font-awesome-webpack": "0.0.3",
     "fs": "0.0.2",
     "imports-loader": "*",
     "jest-cli": "*",
@@ -36,6 +39,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "prod": "webpack -p",
     "dev": "webpack-dev-server --colors --content-base ./build",
     "test": "jest"
   },
