@@ -25,8 +25,10 @@ let PageContent = React.createClass({
     if (page) {
       return (
       <div>
-        <h1>{this.state.page.title}</h1>
-        <div className="page-body" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+        <div className="page_header">
+          <h1>{this.state.page.title}</h1>
+        </div>
+        <div id="page_body" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
       </div>
       );
     } else {

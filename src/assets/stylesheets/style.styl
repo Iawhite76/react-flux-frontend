@@ -1,10 +1,23 @@
 @import "variables"
 @import "side-bar-nav"
 @import "header"
+@import "page-content"
 
 * {
   font-family: Arial, sans-serif;
-  margin: 0;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 23px;
+}
+
+main[class^="col-"] {
+  padding: 0;
 }
 
 html, body, #sidebar, #content {
