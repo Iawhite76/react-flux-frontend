@@ -41,9 +41,13 @@ let PageBrowsingApp = React.createClass({
     }
 
     return (
-      <div>
+      <div id="wrapper">
+        <header>
+        </header>
        <SideBarNav />
-       <PageContent />
+       <main className="col-xs-12 col-sm-9">
+         <PageContent />
+       </main>
       </div>
     );
   }

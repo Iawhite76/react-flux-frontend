@@ -31,7 +31,11 @@ let SideBarNav = React.createClass({
   },
 
   render() {
-    return <div className="col-lg-3">
+    return <div id="sidebar" className="col-lg-3">
+                <div id="sidebar_header">
+                  <img src={'http://mobilestyle.ups.dev/wp-content/uploads/2015/07/UPS_logo.svg'} width="45" height="50" alt="boohoo" className="img-responsive"/>
+                  <h4>Mobile Style Library</h4>
+                </div>
                 <SearchInput searchString={this.state.searchString} />
 
                 <TreeMenu
