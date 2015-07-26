@@ -11,10 +11,17 @@ let SearchInput = React.createClass({
   },
 
   render() {
+    var searchButton;
+    if (this.props.searchString && this.props.searchString.length) {
+      searchButton = <button onClick={this._onClearSearch}>✕</button>;
+    } else {
+      searchButton = <button onClick={this._onClearSearch}>O</button>;
+    }
+
     return	<div>
 							<input type="text" value={this.props.searchString} onChange={this._onChange} placeholder="Search For Keywords" />
-							<button onClick={this._onClearSearch}>✕</button>
-						</div>;
+						  {searchButton}
+            </div>;
   }
 });
 
