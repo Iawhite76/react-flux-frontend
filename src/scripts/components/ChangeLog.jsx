@@ -21,8 +21,8 @@ let ChangeLog = React.createClass({
                 <small>(last 3 updates)</small>
 
                 {
-                  changeLog.map((logItem) => {
-                      return  <p>
+                  changeLog.map((logItem, i) => {
+                      return  <p id={`log_item ${i}`} key={`log_item ${i}`}>
                                 <span>{logItem.date} - </span> 
                                 <span>{logItem.description}</span>
                               </p>;

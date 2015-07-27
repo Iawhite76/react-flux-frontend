@@ -31,7 +31,6 @@ function _setInitialPage () {
   }
 }
 
-
 function _setPageChangeLog () {
   _pageChangeLog = _pages[_currentPageID].acf.change_log || [];
 }
