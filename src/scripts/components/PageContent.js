@@ -1,5 +1,6 @@
 const React = require('react'),
-      PageStore = require('../stores/PageStore');
+      PageStore = require('../stores/PageStore'),
+      ChangeLog = require('./ChangeLog.jsx');
 
 function getStateFromStore() {
   return {
@@ -28,7 +29,12 @@ let PageContent = React.createClass({
         <div className="page_header">
           <h1>{this.state.page.title}</h1>
         </div>
-        <div id="page_body" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+
+        <div id="page_body">
+          <div dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+
+          <ChangeLog changeLogArray={this.state.page.acf.change_log} />
+        </div>
       </div>
       );
     } else {
