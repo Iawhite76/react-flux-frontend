@@ -2,6 +2,16 @@
   background-color: ups-tan;
   padding: 15px;
   
+  input {
+    font-family: Arial, sans-serif;
+    border: none;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   #sidebar_header {
     padding-bottom: 35px;
     
@@ -14,3 +24,19 @@
     }
   }
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width screen-sm-min) 
+  #sidebar_inner 
+    padding 0 18px 0 28px
+  
+  #search_input 
+    position relative
+    
+    input 
+      font-size 14px
+    
+    .search_icon 
+      position absolute
+      top 0
+      right 10px

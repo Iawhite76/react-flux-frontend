@@ -34,18 +34,24 @@ let SideBarNav = React.createClass({
 
   render() {
     return <div id="sidebar" className="col-lg-3">
-                <div id="sidebar_header">
-                  <img src={upsLogo} width="45" height="50" alt="UPS logo" />
-                  <h4>Mobile Style Library</h4>
-                </div>
-                <SearchInput searchString={this.state.searchString} />
 
-                <TreeMenu
-                  expandIconClass="fa fa-chevron-right"
-                  collapseIconClass="fa fa-chevron-down"
-                  onTreeNodeCollapseChange={this._onCollapseChange}
-                  onTreeNodeSelectChange={this._onSelectChange}
-                  data={this.state.navigationMenuObject} />
+              <div id="sidebar_header">
+                <img src={upsLogo} width="45" height="50" alt="UPS logo" />
+                <h4>Mobile Style Library</h4>
+              </div>
+
+              <div id="sidebar_inner">
+
+                  <SearchInput searchString={this.state.searchString} />
+
+                  <TreeMenu
+                    expandIconClass="fa fa-chevron-right"
+                    collapseIconClass="fa fa-chevron-down"
+                    onTreeNodeCollapseChange={this._onCollapseChange}
+                    onTreeNodeSelectChange={this._onSelectChange}
+                    data={this.state.navigationMenuObject} />
+
+              </div>
 
             </div>;
 
