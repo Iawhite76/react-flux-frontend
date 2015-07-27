@@ -39,14 +39,76 @@ module.exports = {
                         "ID": 24,
                         "title": "Design Principle the First",
                         "content": "foist",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "ooga booga. "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "design-principle-the-first"
                       },
                       {
                         "ID": 30,
                         "title": "Elements",
                         "content": "",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "elements"
                       },
                       {
@@ -67,6 +129,22 @@ module.exports = {
                           }, {
                             "date": "4\/17\/15 ",
                             "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
                           }]
                         },
                         "slug": "getting-started"
@@ -75,21 +153,114 @@ module.exports = {
                         "ID": 2,
                         "title": "Home",
                         "content": "",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "home"
                       },
                       {
                         "ID": 22,
                         "title": "Interaction Design Principles",
                         "content": "",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "interaction-design-principles"
                       },
                       {
                         "ID": 8,
                         "title": "mDot",
                         "content": "oinkers zoinkers",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "mdot"
                       },
                       {
@@ -97,7 +268,36 @@ module.exports = {
                         "title": "Navigation",
                         "content": "manoj",
                         "acf": {
-                          "ups_mobile_for_ios": []
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
                         },
                         "slug": "navigation"
                       },
@@ -105,28 +305,152 @@ module.exports = {
                         "ID": 26,
                         "title": "Overview",
                         "content": "",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "overview"
                       },
                       {
                         "ID": 28,
                         "title": "Reference",
                         "content": "manoj",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "reference"
                       },
                       {
                         "ID": 19,
                         "title": "search results",
                         "content": "",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "search-results"
                       },
                       {
                         "ID": 13,
                         "title": "UPS Mobile (iOS, Android)",
                         "content": "",
-                        "acf": false,
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "5\/26\/15 ",
+                            "description": "Update to capitalization rules across platforms (SDC email). "
+                          }, {
+                            "date": "5\/24\/15 ",
+                            "description": "Required fields rule updated across platforms (5\/23 meeting). "
+                          }, {
+                            "date": "4\/17\/15 ",
+                            "description": "Changes made to button UI (ER 1600 review). "
+                          },
+                          {
+                            "date": "3\/17\/15 ",
+                            "description": "Example 4 "
+                          },
+                          {
+                            "date": "2\/17\/15 ",
+                            "description": "Example 5 "
+                          },
+                          {
+                            "date": "1\/17\/15 ",
+                            "description": "Example 6 "
+                          },
+                           {
+                            "date": "12\/17\/14 ",
+                            "description": "Example 7 "
+                          }]
+                        },
                         "slug": "ups-mobile"
                       }
                     ];
