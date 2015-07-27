@@ -34,7 +34,94 @@ module.exports = {
     loadAllPages() {
       // For Zacharias 
       setTimeout(() => {
-        let pages = [{"ID":24,"title":"Design Principle the First","content":"foist","acf":false,"slug":"design-principle-the-first"},{"ID":30,"title":"Elements","content":"","acf":false,"slug":"elements"},{"ID":15,"title":"Getting Started","content":"test content zoinkers boinkers\r\n\r\nlove bat!\r\n\r\n&nbsp;\r\n<ul>\r\n\t<li>test list<\/li>\r\n\t<li>list<\/li>\r\n\t<li>now<\/li>\r\n<\/ul>\r\n<a href=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/abe.jpg\"><img class=\"alignnone size-full wp-image-73\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/abe.jpg\" alt=\"abe\" width=\"720\" height=\"540\" \/><\/a>","acf":{"":false,"ups_mobile_for_ios":[{"mobile_link_ios":"<a href=#>http:\/\/m.ups.com<\/a>"}]},"slug":"getting-started"},{"ID":2,"title":"Home","content":"","acf":false,"slug":"home"},{"ID":22,"title":"Interaction Design Principles","content":"","acf":false,"slug":"interaction-design-principles"},{"ID":8,"title":"mDot","content":"oinkers zoinkers","acf":false,"slug":"mdot"},{"ID":32,"title":"Navigation","content":"navbar","acf":false,"slug":"navigation"},{"ID":26,"title":"Overview","content":"","acf":false,"slug":"overview"},{"ID":28,"title":"Reference","content":"manoj","acf":false,"slug":"reference"},{"ID":70,"title":"sdvhkdsjvfad","content":"","acf":false,"slug":"sdvhkdsjvfad"},{"ID":19,"title":"search results","content":"","acf":false,"slug":"search-results"},{"ID":13,"title":"UPS Mobile (iOS, Android)","content":"","acf":false,"slug":"ups-mobile"}];
+        let pages = [
+                      {
+                        "ID": 24,
+                        "title": "Design Principle the First",
+                        "content": "foist",
+                        "acf": false,
+                        "slug": "design-principle-the-first"
+                      },
+                      {
+                        "ID": 30,
+                        "title": "Elements",
+                        "content": "",
+                        "acf": false,
+                        "slug": "elements"
+                      },
+                      {
+                        "ID": 15,
+                        "title": "Getting Started",
+                        "content": "<p>Welcome! Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes.</p>\r\n\r\n<img class=\"alignnone size-full wp-image-78\" src=\"http://mobilestyle.ups.dev/wp-content/uploads/2015/07/getting-started.png\" alt=\"getting-started\" width=\"591\" height=\"256\" />\r\n<h2>Purpose of this site</h2>\r\n<p>Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes.</p>\r\n\r\n<a href=\"http://www.google.com\" target=\"_blank\">test link </a>",
+                        "acf": {
+                          "": false,
+                          "ups_mobile_for_ios": [
+                            {
+                              "mobile_link_ios": "<a href=#>http://m.ups.com</a>"
+                            }
+                          ]
+                        },
+                        "slug": "getting-started"
+                      },
+                      {
+                        "ID": 2,
+                        "title": "Home",
+                        "content": "",
+                        "acf": false,
+                        "slug": "home"
+                      },
+                      {
+                        "ID": 22,
+                        "title": "Interaction Design Principles",
+                        "content": "",
+                        "acf": false,
+                        "slug": "interaction-design-principles"
+                      },
+                      {
+                        "ID": 8,
+                        "title": "mDot",
+                        "content": "oinkers zoinkers",
+                        "acf": false,
+                        "slug": "mdot"
+                      },
+                      {
+                        "ID": 32,
+                        "title": "Navigation",
+                        "content": "manoj",
+                        "acf": {
+                          "ups_mobile_for_ios": []
+                        },
+                        "slug": "navigation"
+                      },
+                      {
+                        "ID": 26,
+                        "title": "Overview",
+                        "content": "",
+                        "acf": false,
+                        "slug": "overview"
+                      },
+                      {
+                        "ID": 28,
+                        "title": "Reference",
+                        "content": "manoj",
+                        "acf": false,
+                        "slug": "reference"
+                      },
+                      {
+                        "ID": 19,
+                        "title": "search results",
+                        "content": "",
+                        "acf": false,
+                        "slug": "search-results"
+                      },
+                      {
+                        "ID": 13,
+                        "title": "UPS Mobile (iOS, Android)",
+                        "content": "",
+                        "acf": false,
+                        "slug": "ups-mobile"
+                      }
+                    ];
         ServerActionCreators.receivePages(pages);
       });
       
