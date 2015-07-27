@@ -4,8 +4,7 @@ const React = require('react'),
 
 function getStateFromStore() {
   return {
-    page: PageStore.getCurrentPage(),
-    pageChangeLog: PageStore.getPageChangeLog()
+    page: PageStore.getCurrentPage()
   };
 }
 
@@ -24,7 +23,10 @@ let PageContent = React.createClass({
 
   render() {
     let page = this.state.page;
+
     if (page) {
+      let pageChangeLog = (page.acf || {}).change_log;
+      
       return (
       <div>
         <div className="page_header">
@@ -34,7 +36,7 @@ let PageContent = React.createClass({
         <div id="page_body">
           <div dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
 
-          <ChangeLog pageChangeLog={this.state.pageChangeLog} />
+          <ChangeLog pageChangeLog={pageChangeLog} />
         </div>
       </div>
       );

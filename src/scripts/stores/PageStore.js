@@ -11,7 +11,6 @@ let EventEmitter = require('events').EventEmitter,
 let _pages = {};
 let _currentPageID = null;
 let _searchString = '';
-let _pageChangeLog = [];
 
 function _addPages (array) {
   array.forEach((page) => {
@@ -29,10 +28,6 @@ function _setInitialPage () {
   } else  {
     _currentPageID = 15;
   }
-}
-
-function _setPageChangeLog () {
-  _pageChangeLog = _pages[_currentPageID].acf.change_log || [];
 }
 
 let PageStore = assign({}, EventEmitter.prototype, {
@@ -90,13 +85,11 @@ PageStore.dispatchToken = AppDispatcher.register(function(payload) {
     case ActionTypes.RECEIVE_PAGES:
       _addPages(action.pagesArray);
       _setInitialPage();
-      _setPageChangeLog();
       PageStore.emitChange();
       break;
 
     case ActionTypes.CLICK_NAVIGATION_NODE:
       _currentPageID = action.pageID;
-      _setPageChangeLog();
       PageStore.emitChange();
       break;
 

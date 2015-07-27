@@ -7,7 +7,7 @@ let ChangeLog = React.createClass({
 
     let cta;
 
-    if (changeLog.length) {
+    if (changeLog && changeLog.length) {
 
       // if (changeLog.length === 6) {
       //   cta = <a href="">See all changes</a>;
