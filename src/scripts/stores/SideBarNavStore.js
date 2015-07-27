@@ -1,7 +1,8 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
 			Constants = require('../constants/Constants'),
 			ActionTypes = Constants.ActionTypes,
-      PageStore = require('./PageStore');
+      PageStore = require('./PageStore'),
+      _ = require('lodash');
 
 
 let EventEmitter = require('events').EventEmitter,
@@ -9,7 +10,7 @@ let EventEmitter = require('events').EventEmitter,
 
 // Underscore because this is a private variable created by the
 // module closure
-let _navigationMenu = [{title: 'Loading...'}];
+let _navigationMenu = [{ID: 0, title: 'Loading...'}];
 let _collapsedPageIDs = {};
 
 function _nodeFromLineage (lineage, nodes) {
