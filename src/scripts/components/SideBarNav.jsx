@@ -37,7 +37,7 @@ let SideBarNav = React.createClass({
 
               <div id="sidebar_header">
                 <img src={upsLogo} width="45" height="50" alt="UPS logo" />
-                <h4>Mobile Style Library</h4>
+                <h2>Mobile Style Library</h2>
               </div>
 
               <div id="sidebar_inner">
