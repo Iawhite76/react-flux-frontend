@@ -52,6 +52,10 @@ let PageStore = assign({}, EventEmitter.prototype, {
     return _currentPageID;
   },
 
+  getSearchString() {
+    return _searchString;
+  },
+
   getCurrentPage() {
     return _pages[_currentPageID];
   },
@@ -62,15 +66,11 @@ let PageStore = assign({}, EventEmitter.prototype, {
     });
   },
 
-  getSearchString() {
-    return _searchString;
-  },
-
   getPagesMatchingSearchString() {
     var q = (_searchString || '').toLowerCase().trim();
     return _.filter(_.values(_pages), (page) => {
       return page.title.toLowerCase().indexOf(q) > -1 || page.content.toLowerCase().indexOf(q) > -1;
-    });
+    }) || [];
   }
 });
 
@@ -87,6 +87,7 @@ PageStore.dispatchToken = AppDispatcher.register(function(payload) {
     case ActionTypes.CLICK_NAVIGATION_NODE:
       _currentPageID = action.pageID;
       PageStore.emitChange();
+      break;
 
     case ActionTypes.SEARCH_STRING_CHANGED:
       _searchString = action.searchString;
