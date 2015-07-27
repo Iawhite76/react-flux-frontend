@@ -52,14 +52,16 @@ module.exports = {
                       {
                         "ID": 15,
                         "title": "Getting Started",
-                        "content": "<p>Welcome! Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes.</p>\r\n\r\n<img class=\"alignnone size-full wp-image-78\" src=\"http://mobilestyle.ups.dev/wp-content/uploads/2015/07/getting-started.png\" alt=\"getting-started\" width=\"591\" height=\"256\" />\r\n<h2>Purpose of this site</h2>\r\n<p>Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes.</p>\r\n\r\n<a href=\"http://www.google.com\" target=\"_blank\">test link </a>",
+                        "content": "<p>Welcome! Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes.<\/p>\r\n\r\n<img class=\"alignnone size-full wp-image-78\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/getting-started.png\" alt=\"getting-started\" width=\"591\" height=\"256\" \/>\r\n\r\n<h2>Purpose of this site<\/h2>\r\n<p>Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes.<\/p>\r\n\r\n<h2>How to use this site<\/h2> \r\n<p>Lorem ipsum dolor sit amet, vel ne graecis maiorum definitiones, eos ad modo porro platonem. Singulis accusata ne sit. Vim at libris nonumes vocibus.<\/p>\r\n\r\n<h2>Help contact at UPS Mobile - SDC<\/h2> \r\n<p>Do you have questions about the site or any topics listed on this site? Is there anything new you would like added to this library? <a href=\"http:\/\/www.google.com\" target=\"_blank\">Email us at mobilealias@ups.com<\/a>.<\/p>\r\n",
                         "acf": {
                           "": false,
-                          "ups_mobile_for_ios": [
-                            {
-                              "mobile_link_ios": "<a href=#>http://m.ups.com</a>"
-                            }
-                          ]
+                          "ups_mobile_for_ios": [{
+                            "mobile_link_ios": "<a href=#>http:\/\/m.ups.com<\/a>"
+                          }],
+                          "change_log": [{
+                            "date": "7\/27\/15 12:00 am",
+                            "description": "change log test"
+                          }]
                         },
                         "slug": "getting-started"
                       },
