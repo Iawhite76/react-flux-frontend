@@ -26,26 +26,24 @@ describe('PageStore', () => {
   });
 
   describe('after RECEIVE_PAGES', () => {
-    let pagesArray;
+    let pagesArray = [
+      {
+        "ID": 15,
+        "title": "Design Principle the First",
+        "content": "foist",
+        "acf": false,
+        "slug": "design-principle-the-first"
+      },
+      {
+        "ID": 30,
+        "title": "Elements",
+        "content": "blah",
+        "acf": false,
+        "slug": "elements"
+      }
+    ];
 
     beforeEach(() => {
-      pagesArray = [
-        {
-          "ID": 15,
-          "title": "Design Principle the First",
-          "content": "foist",
-          "acf": false,
-          "slug": "design-principle-the-first"
-        },
-        {
-          "ID": 30,
-          "title": "Elements",
-          "content": "blah",
-          "acf": false,
-          "slug": "elements"
-        }
-      ];
-
       dispatchCallback({
         action: {
           type: 'RECEIVE_PAGES',
@@ -55,15 +53,19 @@ describe('PageStore', () => {
     });
 
     it('should RECEIVE_PAGES', () => {
-      expect(PageStore.getPages()).toEqual({'15': pagesArray[0], '30': pagesArray[1]});
+      expect(PageStore.getPages()).toEqual({
+        '15': pagesArray[0],
+        '30': pagesArray[1]
+      });
       expect(PageStore.getCurrentPageID()).toBe(15);
       expect(PageStore.getSearchString()).toBe('');
       expect(PageStore.getCurrentPage()).toEqual(pagesArray[0]);
       expect(PageStore.getPageBySlug('elements')).toEqual(pagesArray[1]);
+      expect(PageStore.getPageBySlug('xxxx')).toBeUndefined();
       expect(PageStore.getPagesMatchingSearchString()).toEqual(pagesArray);
     });
 
-    it('should CLICK_NAVIGATION_NODE', () => {
+    it('should CLICK_NAVIGATION_NODE with valid ID', () => {
       dispatchCallback({
         action: {
           type: 'CLICK_NAVIGATION_NODE',
@@ -73,6 +75,19 @@ describe('PageStore', () => {
 
       expect(PageStore.getCurrentPageID()).toBe(30);
       expect(PageStore.getCurrentPage()).toEqual(pagesArray[1]);
+      expect(PageStore.getPagesMatchingSearchString()).toEqual(pagesArray);
+    });
+
+    it('should CLICK_NAVIGATION_NODE with invalid ID', () => {
+      dispatchCallback({
+        action: {
+          type: 'CLICK_NAVIGATION_NODE',
+          pageID: 666
+        }
+      });
+
+      expect(PageStore.getCurrentPageID()).toBe(666);
+      expect(PageStore.getCurrentPage()).toBeUndefined();
       expect(PageStore.getPagesMatchingSearchString()).toEqual(pagesArray);
     });
 
@@ -91,6 +106,4 @@ describe('PageStore', () => {
     });
 
   });
-
-
 });
