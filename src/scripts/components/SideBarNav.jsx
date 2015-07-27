@@ -9,6 +9,8 @@ const React = require('react/addons'),
 
 let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+let upsLogo = require('../../assets/images/UPS_logo.svg');
+
 function getStateFromStore() {
   return {
     searchString: PageStore.getSearchString(),
@@ -33,7 +35,7 @@ let SideBarNav = React.createClass({
   render() {
     return <div id="sidebar" className="col-lg-3">
                 <div id="sidebar_header">
-                  <img src={'http://mobilestyle.ups.dev/wp-content/uploads/2015/07/UPS_logo.svg'} width="45" height="50" alt="boohoo" className="img-responsive"/>
+                  <img src={upsLogo} width="45" height="50" alt="UPS logo" />
                   <h4>Mobile Style Library</h4>
                 </div>
                 <SearchInput searchString={this.state.searchString} />
