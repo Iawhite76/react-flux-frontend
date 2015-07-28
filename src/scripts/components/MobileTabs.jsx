@@ -5,34 +5,40 @@ let entities = new Entities();
 
 let MobileTabs = React.createClass({
   
-  // getInitialState() {
-  //   return {
-  //     pageChangeLog: this.props.pageChangeLog.slice(0, 3)
-  //   }
-  // },
+  getInitialState() {
+    return {
+      togglePage: false
+    }
+  },
 
-  // handleClick(e) {
-  //   this.setState({
-  //     pageChangeLog: this.state.pageChangeLog.concat(this.props.pageChangeLog.slice(3, 6))
-  //   })
-  // },
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     pageChangeLog: nextProps.pageChangeLog.slice(0, 3)
-  //   });
-  // },
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
+      togglePage: !this.state.togglePage
+    })
+  },
 
   render() {
     let acf = this.props.page.acf;
 
-       
+    if (this.state.togglePage) {
       return  <div className="page__mobile_tabs">
-                <h2>iOS</h2>
+                <h2 onClick={this.handleClick}>Android</h2>
+
+                <div dangerouslySetInnerHTML={{__html: entities.decode(acf.android)}}></div>
+               
+              </div>;
+      
+    } else {
+      return  <div className="page__mobile_tabs">
+                <h2 onClick={this.handleClick}>iOS</h2>
 
                 <div dangerouslySetInnerHTML={{__html: entities.decode(acf.ios)}}></div>
                
               </div>;
+    }
+
+       
 
   }
 });
