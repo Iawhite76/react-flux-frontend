@@ -50,25 +50,6 @@ module.exports = {
                           }, {
                             "date": "5\/24\/15 ",
                             "description": "Required fields rule updated across platforms (5\/23 meeting). "
-                          }, {
-                            "date": "4\/17\/15 ",
-                            "description": "Changes made to button UI (ER 1600 review). "
-                          },
-                          {
-                            "date": "3\/17\/15 ",
-                            "description": "Example 4 "
-                          },
-                          {
-                            "date": "2\/17\/15 ",
-                            "description": "Example 5 "
-                          },
-                          {
-                            "date": "1\/17\/15 ",
-                            "description": "Example 6 "
-                          },
-                           {
-                            "date": "12\/17\/14 ",
-                            "description": "Example 7 "
                           }]
                         },
                         "slug": "design-principle-the-first"
@@ -289,14 +270,6 @@ module.exports = {
                           {
                             "date": "2\/17\/15 ",
                             "description": "Example 5 "
-                          },
-                          {
-                            "date": "1\/17\/15 ",
-                            "description": "Example 6 "
-                          },
-                           {
-                            "date": "12\/17\/14 ",
-                            "description": "Example 7 "
                           }]
                         },
                         "slug": "navigation"
