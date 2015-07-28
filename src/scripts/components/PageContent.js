@@ -27,13 +27,24 @@ let PageContent = React.createClass({
 
     if (page) {
 
-      var pageChangeLog;
+      var pageChangeLog,
+          MobileTabsComponent;
 
-      if (page.acf === undefined || page.acf.change_log === undefined) {
-        pageChangeLog = [];
-      } else {
-        pageChangeLog = page.acf.change_log;
+
+      if (page.acf) {
+
+        if (page.acf.ios && page.acf.android) {
+          MobileTabsComponent = <MobileTabs page={this.state.page} />;
+        }
+
+        if (page.acf.change_log) {
+          pageChangeLog = page.acf.change_log;
+        } else {
+          pageChangeLog = [];
+        }
+        
       }
+
       
       return (
       <div>
@@ -44,7 +55,7 @@ let PageContent = React.createClass({
         <div id="page_body">
           <div id="page_content" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
 
-          <MobileTabs page={this.state.page} />
+          {MobileTabsComponent}
 
           <ChangeLog pageChangeLog={pageChangeLog} />
         </div>
