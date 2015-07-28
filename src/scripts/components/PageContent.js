@@ -25,7 +25,14 @@ let PageContent = React.createClass({
     let page = this.state.page;
 
     if (page) {
-      let pageChangeLog = (page.acf || {}).change_log;
+
+      var pageChangeLog;
+
+      if (page.acf === undefined || page.acf.change_log === undefined) {
+        pageChangeLog = [];
+      } else {
+        pageChangeLog = page.acf.change_log;
+      }
       
       return (
       <div>

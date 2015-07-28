@@ -1,4 +1,7 @@
-const React = require('react');
+const React = require('react'),
+      Entities = require('html-entities').XmlEntities;
+ 
+let entities = new Entities();
 
 let ChangeLog = React.createClass({
   
@@ -13,29 +16,32 @@ let ChangeLog = React.createClass({
       pageChangeLog: this.state.pageChangeLog.concat(this.props.pageChangeLog.slice(3, 6))
     })
   },
-  componentWillReceiveProps: function(nextProps) {
+
+  componentWillReceiveProps(nextProps) {
     this.setState({
       pageChangeLog: nextProps.pageChangeLog.slice(0, 3)
     });
   },
+
   render() {
     let changeLog = this.state.pageChangeLog;
 
     let cta;
 
-    if (changeLog && changeLog.length) {
+    if (changeLog.length) {
 
-      let lengthOfChangeLog = this.state.pageChangeLog.length;
+      let lengthOfChangeLog = changeLog.length,
+          propsChangeLogLength = this.props.pageChangeLog.length
 
-      if (lengthOfChangeLog < 3 || this.props.pageChangeLog.length === 3) {
+      if (lengthOfChangeLog === propsChangeLogLength) {
         cta = null;
       } 
       else if (lengthOfChangeLog === 6){
         cta = <a href="/#design-principle-the-first">See all changes</a>;
-      } else
-       {
+      } 
+      else {
         cta = <p onClick={this.handleClick}>Load more</p>;
-       }
+      }
 
        
       return  <div className="page__change_log">
@@ -46,7 +52,7 @@ let ChangeLog = React.createClass({
                   changeLog.map((logItem, i) => {
                       return  <p id={`log_item ${i}`} key={`log_item ${i}`}>
                                 <span>{logItem.date} - </span> 
-                                <span>{logItem.description}</span>
+                                <span>{entities.decode(logItem.description)}</span>
                               </p>;
                   })
                 }
