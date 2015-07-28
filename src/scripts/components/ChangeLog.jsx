@@ -2,22 +2,44 @@ const React = require('react');
 
 let ChangeLog = React.createClass({
   
+  getInitialState() {
+    return {
+      pageChangeLog: this.props.pageChangeLog.slice(0, 3)
+    }
+  },
+
+  handleClick(e) {
+    this.setState({
+      pageChangeLog: this.state.pageChangeLog.concat(this.props.pageChangeLog.slice(3, 6))
+    })
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      pageChangeLog: nextProps.pageChangeLog.slice(0, 3)
+    });
+  },
   render() {
-    let changeLog = this.props.pageChangeLog;
+    let changeLog = this.state.pageChangeLog;
 
     let cta;
 
     if (changeLog && changeLog.length) {
 
-      // if (changeLog.length === 6) {
-      //   cta = <a href="">See all changes</a>;
-      // } 
-      // else {
-      //   cta = <p onClick={this.handleClick}>Load more</p>;
-      // }
-      cta = <a href="/#design-principle-the-first">See all changes</a>;
+      let lengthOfChangeLog = this.state.pageChangeLog.length;
+
+      if (lengthOfChangeLog < 3 || this.props.pageChangeLog.length === 3) {
+        cta = null;
+      } 
+      else if (lengthOfChangeLog === 6){
+        cta = <a href="/#design-principle-the-first">See all changes</a>;
+      } else
+       {
+        cta = <p onClick={this.handleClick}>Load more</p>;
+       }
+
+       
       return  <div className="page__change_log">
-                <h2>Style Guide Change Log </h2>
+                <h2>Decision History </h2>
                 <small>(last 3 updates)</small>
 
                 {
