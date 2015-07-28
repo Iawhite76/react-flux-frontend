@@ -1,6 +1,7 @@
 const React = require('react'),
       PageStore = require('../stores/PageStore'),
-      ChangeLog = require('./ChangeLog.jsx');
+      ChangeLog = require('./ChangeLog.jsx'),
+      MobileTabs = require('./MobileTabs.jsx');
 
 function getStateFromStore() {
   return {
@@ -41,10 +42,14 @@ let PageContent = React.createClass({
         </div>
 
         <div id="page_body">
-          <div dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+          <div id="page_content" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+
+          <MobileTabs page={this.state.page} />
 
           <ChangeLog pageChangeLog={pageChangeLog} />
         </div>
+
+
       </div>
       );
     } else {

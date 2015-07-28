@@ -65,14 +65,20 @@ html, body, #sidebar, #content {
     font-size: 14px;
   }
   
-  main {
-    .page_header {
-      padding 20px 50px
-    }
+  .page_header {
+    padding 20px 50px
+  }
 
-    #page_body {
-      padding 30px 50px
-    }
+  #page_content, .page__change_log {
+    padding 0 50px 30px
+  }
+  
+  .page__change_log > div {
+    border-top: 2px solid change-history-border-color;
+  }
+  
+  .page__mobile_tabs {
+    padding: 35px 90px 35px;
   }
 
 }

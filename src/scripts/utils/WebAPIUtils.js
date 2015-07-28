@@ -126,7 +126,9 @@ module.exports = {
                            {
                             "date": "12\/17\/14 ",
                             "description": "Example 7 "
-                          }]
+                          }],
+                          "ios": "<p>&lt;h1&gt;How it works&lt;\/h1&gt;<\/p>\n<p>Navigation menus are reached from the header by tapping an associated menu icon.<\/p>\n<p>When a user clicks on the hamburger icon in the header, the main navigation menu opens.<\/p>\n<p>The main menu can appear in several states:<\/p>\n<ul>\n<li>Logged Out<\/li>\n<li>Logged In<\/li>\n<\/ul>\n<p>Navigation menu items are displayed with title casing.<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n",
+                          "android": "<p>&lt;h1&gt;Android stuff&lt;\/h1&gt;<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n"
                         },
                         "slug": "getting-started"
                       },
@@ -247,7 +249,7 @@ module.exports = {
                       {
                         "ID": 32,
                         "title": "Navigation",
-                        "content": "manoj",
+                        "content": "Navigation menus house links that allow a user to move between screens.\r\n\r\n<h1>What problem does this solve?<\/h1>\r\nIn order to accomplish tasks, users need to be able to locate content and features, and move between sections of the app.  \r\n\r\n<h1>When to use this pattern (and when not to)<h1>\r\nUse this pattern for navigation menus. At minimum, a main navigation menu must exist to allow users to move between sections of the app.\r\n\r\n\r\n",
                         "acf": {
                           "": false,
                           "ups_mobile_for_ios": [{
@@ -270,7 +272,9 @@ module.exports = {
                           {
                             "date": "2\/17\/15 ",
                             "description": "Example 5 "
-                          }]
+                          }],
+                          "ios": "<p>&lt;h1&gt;How it works&lt;\/h1&gt;<\/p>\n<p>Navigation menus are reached from the header by tapping an associated menu icon.<\/p>\n<p>When a user clicks on the hamburger icon in the header, the main navigation menu opens.<\/p>\n<p>The main menu can appear in several states:<\/p>\n<ul>\n<li>Logged Out<\/li>\n<li>Logged In<\/li>\n<\/ul>\n<p>Navigation menu items are displayed with title casing.<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n",
+                          "android": "<p>&lt;h1&gt;Android stuff&lt;\/h1&gt;<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n"
                         },
                         "slug": "navigation"
                       },

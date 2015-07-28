@@ -45,19 +45,21 @@ let ChangeLog = React.createClass({
 
        
       return  <div className="page__change_log">
-                <h2>Decision History </h2>
-                <small>(last 3 updates)</small>
+                <div>
+                  <h2>Decision History </h2>
+                  <small>(last 3 updates)</small>
 
-                {
-                  changeLog.map((logItem, i) => {
-                      return  <p id={`log_item ${i}`} key={`log_item ${i}`}>
-                                <span>{logItem.date} - </span> 
-                                <span>{entities.decode(logItem.description)}</span>
-                              </p>;
-                  })
-                }
+                  {
+                    changeLog.map((logItem, i) => {
+                        return  <p id={`log_item ${i}`} key={`log_item ${i}`}>
+                                  <span>{logItem.date} - </span> 
+                                  <span>{entities.decode(logItem.description)}</span>
+                                </p>;
+                    })
+                  }
 
-                {cta}
+                  {cta}
+                </div>
               </div>;
 
     }
