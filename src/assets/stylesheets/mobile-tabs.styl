@@ -1,0 +1,25 @@
+.mobile_tab_header_container {
+	border-bottom: 1px solid mobile-tab-default-color;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	
+	h2 {
+		color: mobile-tab-default-color;
+		display: inline-block;
+		width: 140px;
+		margin: 0 auto;
+		
+		&.mobile_tab_header__selected {
+			color: ups-aqua;
+			border-bottom: 3px solid ups-aqua;
+		}
+	}
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width screen-sm-min) {
+	 .page__mobile_tabs {
+    padding: 35px 90px 35px;
+  }
+}

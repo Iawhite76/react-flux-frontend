@@ -23,7 +23,10 @@ let MobileTabs = React.createClass({
 
     if (this.state.togglePage) {
       return  <div className="page__mobile_tabs">
-                <h2 onClick={this.handleClick}>Android</h2>
+                <div className="mobile_tab_header_container">
+                  <h2 onClick={this.handleClick}>iOS</h2>
+                  <h2 className="mobile_tab_header__selected">Android</h2>
+                </div>
 
                 <div dangerouslySetInnerHTML={{__html: entities.decode(acf.android)}}></div>
                
@@ -31,7 +34,10 @@ let MobileTabs = React.createClass({
       
     } else {
       return  <div className="page__mobile_tabs">
-                <h2 onClick={this.handleClick}>iOS</h2>
+                <div className="mobile_tab_header_container">
+                  <h2 className="mobile_tab_header__selected">iOS</h2>
+                  <h2 onClick={this.handleClick}>Android</h2>
+                </div>
 
                 <div dangerouslySetInnerHTML={{__html: entities.decode(acf.ios)}}></div>
                
