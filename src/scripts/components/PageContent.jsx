@@ -28,6 +28,7 @@ let PageContent = React.createClass({
     if (page) {
 
       let pageChangeLog,
+          changeLogHeaderText,
           MobileTabsComponent,
           ChangeLogComponent,
           acf = page.acf;
@@ -40,8 +41,9 @@ let PageContent = React.createClass({
         }
 
         pageChangeLog = page.acf.change_log || [];
+        changeLogHeaderText = page.acf.change_log_label;
         if (pageChangeLog.length) {
-          ChangeLogComponent = <ChangeLog pageChangeLog={pageChangeLog} />
+          ChangeLogComponent = <ChangeLog pageChangeLog={pageChangeLog} changeLogHeaderText={changeLogHeaderText} moreLoaded={false} />
         }
       }
 

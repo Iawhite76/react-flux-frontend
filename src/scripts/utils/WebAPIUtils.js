@@ -79,7 +79,8 @@ module.exports = {
         }
       ],
       "ios": "<h2>How it works<\/h2>\n<p>Navigation menus are reached from the header by tapping an associated menu icon.<\/p>\n<p>When a user clicks on the hamburger icon in the header, the main navigation menu opens.<\/p>\n<p>The main menu can appear in several states:<\/p>\n<ul>\n<li>Logged Out<\/li>\n<li>Logged In<\/li>\n<\/ul>\n<p>Navigation menu items are displayed with title casing.<\/p>\n<div class=\"col-sm-6\">\nLogged out<br \/>\n<img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/>\n<\/div>\n<div class=\"col-sm-6\">\nLogged in<br \/>\n<img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/>\n<\/div>\n<div class=\"col-sm-6\">\nLogged out<br \/>\n<img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/>\n<\/div>\n<div class=\"col-sm-6\">\nLogged in<br \/>\n<img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/>\n<\/div>\n<div class=\"col-sm-6\">\nLogged out<br \/>\n<img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/>\n<\/div>\n<div class=\"col-sm-6\">\nLogged in<br \/>\n<img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/>\n<\/div>\n",
-      "android": "<h2>Android stuff<\/h2>\n<p>text without a p tag &#8211; wordpress wysiwyg editor<\/p>\n<p>text with a p tag<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n"
+      "android": "<h2>Android stuff<\/h2>\n<p>text without a p tag &#8211; wordpress wysiwyg editor<\/p>\n<p>text with a p tag<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n",
+      "change_log_label": "Style Guide Change Log"
     },
     "slug": "getting-started"
   },
@@ -152,7 +153,8 @@ module.exports = {
         }
       ],
       "ios": "<p>&lt;h1&gt;How it works&lt;\/h1&gt;<\/p>\n<p>Navigation menus are reached from the header by tapping an associated menu icon.<\/p>\n<p>When a user clicks on the hamburger icon in the header, the main navigation menu opens.<\/p>\n<p>The main menu can appear in several states:<\/p>\n<ul>\n<li>Logged Out<\/li>\n<li>Logged In<\/li>\n<\/ul>\n<p>Navigation menu items are displayed with title casing.<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n",
-      "android": "<p>&lt;h1&gt;Android stuff&lt;\/h1&gt;<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n"
+      "android": "<p>&lt;h1&gt;Android stuff&lt;\/h1&gt;<\/p>\n<p><img class=\"alignnone size-full wp-image-89\" src=\"http:\/\/mobilestyle.ups.dev\/wp-content\/uploads\/2015\/07\/logged-out.jpg\" alt=\"logged-out\" width=\"292\" height=\"519\" \/><\/p>\n",
+      "change_log_label": "Decision History"
     },
     "slug": "navigation"
   },

@@ -17,12 +17,19 @@ let ChangeLog = React.createClass({
     })
   },
 
+  componentWillReceiveProps() {
+    this.setState({
+      moreLoaded: this.props.moreLoaded
+    })
+  },
+
   render() {
     let loadMoreButton,
         showAllButton,
         subTitle,
         numShown,
-        changeLog = this.props.pageChangeLog || [];
+        changeLog = this.props.pageChangeLog || [],
+        changeLogHeaderText = this.props.changeLogHeaderText;
 
     if (changeLog.length) {
       numShown = changeLog.length;
@@ -35,7 +42,7 @@ let ChangeLog = React.createClass({
           }
         } else {
           numShown = 3;
-          loadMoreButton = <p onClick={this._handleClick}>Load more</p>;
+          loadMoreButton = <a onClick={this._handleClick}>Load more</a>;
         }
       }
 
@@ -44,7 +51,7 @@ let ChangeLog = React.createClass({
 
       return  <div className="page__change_log">
                 <div>
-                  <h2>Decision History</h2>
+                  <h2 className="change_log__header_text">{changeLogHeaderText}</h2>
                   <small>({subTitle})</small>
 
                   {
