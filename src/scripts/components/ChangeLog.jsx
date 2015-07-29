@@ -17,7 +17,7 @@ let ChangeLog = React.createClass({
     })
   },
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.setState({
       moreLoaded: this.props.moreLoaded
     })
