@@ -1,22 +1,22 @@
-var Header = require('./Header.jsx');
-var React = require('react'),
-    SideBarNav = require('./SideBarNav.jsx');
+const Header = require('./Header.jsx'),
+      React = require('react'),
+      SideBarNav = require('./SideBarNav.jsx');
 
-var Parent = React.createClass({
+let Parent = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       drawerOpen: window.innerWidth > 768 ? true : false
     };
   },
 
-  handleDrawerToggleClick: function(e){
+  handleDrawerToggleClick(e){
     this.setState({
       drawerOpen: !this.state.drawerOpen
     });
   },
 
-  render: function() {
+  render() {
     return (
       <div id="sidebar" className="col-sm-3">
         <Header onDrawerToggleClick={this.handleDrawerToggleClick}/>
