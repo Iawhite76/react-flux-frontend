@@ -27,8 +27,9 @@ let PageContent = React.createClass({
 
     if (page) {
 
-      var pageChangeLog,
+      let pageChangeLog,
           MobileTabsComponent,
+          ChangeLogComponent,
           acf = page.acf;
 
 
@@ -39,6 +40,9 @@ let PageContent = React.createClass({
         }
 
         pageChangeLog = page.acf.change_log || [];
+        if (pageChangeLog.length) {
+          ChangeLogComponent = <ChangeLog pageChangeLog={pageChangeLog} />
+        }
       }
 
 
@@ -50,10 +54,8 @@ let PageContent = React.createClass({
 
         <div id="page_body">
           <div id="page_content" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
-
           {MobileTabsComponent}
-
-          <ChangeLog pageChangeLog={pageChangeLog} />
+          {ChangeLogComponent}
         </div>
 
 
