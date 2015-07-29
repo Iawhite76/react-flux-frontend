@@ -1,8 +1,5 @@
-const React = require('react'),
-      Entities = require('html-entities').XmlEntities;
+const React = require('react');
  
-let entities = new Entities();
-
 let MobileTabs = React.createClass({
   
   getInitialState() {
@@ -28,7 +25,7 @@ let MobileTabs = React.createClass({
                   <h2 className="mobile_tab_header__selected">Android</h2>
                 </div>
 
-                <div dangerouslySetInnerHTML={{__html: entities.decode(acf.android)}}></div>
+                <div dangerouslySetInnerHTML={{__html: acf.android}}></div>
                
               </div>;
       
@@ -39,7 +36,7 @@ let MobileTabs = React.createClass({
                   <h2 onClick={this.handleClick}>Android</h2>
                 </div>
 
-                <div dangerouslySetInnerHTML={{__html: entities.decode(acf.ios)}}></div>
+                <div dangerouslySetInnerHTML={{__html: acf.ios}}></div>
                
               </div>;
     }
