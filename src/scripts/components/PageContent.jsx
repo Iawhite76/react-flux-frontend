@@ -50,16 +50,19 @@ let PageContent = React.createClass({
 
       return (
       <div>
-        <div className="page_header">
-          <h1>{this.state.page.title}</h1>
-        </div>
+        <main className="col-xs-12 col-sm-9">
 
-        <div id="page_body">
-          <div id="page_content" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
-          {MobileTabsComponent}
-          {ChangeLogComponent}
-        </div>
+          <div className="page_header">
+            <h1>{this.state.page.title}</h1>
+          </div>
 
+          <div id="page_body">
+            <div id="page_content" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+            {MobileTabsComponent}
+            {ChangeLogComponent}
+          </div>
+
+        </main>
 
       </div>
       );

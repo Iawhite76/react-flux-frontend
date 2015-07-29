@@ -46,9 +46,9 @@ let PageBrowsingApp = React.createClass({
       <div id="wrapper">
     
        <NavDrawerParent />
-       <main className="col-xs-12 col-sm-9">
-         <PageContent />
-       </main>
+       
+       <PageContent />
+       
       </div>
     );
   }
