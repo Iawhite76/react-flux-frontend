@@ -1,6 +1,6 @@
 const React = require('react'),
       SideBarNav = require('./SideBarNav.jsx'),
-      PageContent = require('./PageContent'),
+      PageContent = require('./PageContent.jsx'),
       PageStore = require('../stores/PageStore'),
       SideBarNavActionCreators = require('../actions/SideBarNavActionCreators');
 

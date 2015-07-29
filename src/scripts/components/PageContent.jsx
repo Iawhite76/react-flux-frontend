@@ -28,24 +28,20 @@ let PageContent = React.createClass({
     if (page) {
 
       var pageChangeLog,
-          MobileTabsComponent;
+          MobileTabsComponent,
+          acf = page.acf;
 
 
-      if (page.acf) {
+      if (acf) {
 
-        if (page.acf.ios && page.acf.android) {
-          MobileTabsComponent = <MobileTabs page={this.state.page} />;
+        if (acf.ios && acf.android) {
+          MobileTabsComponent = <MobileTabs iosContent={acf.ios} androidContent={acf.android} />;
         }
 
-        if (page.acf.change_log) {
-          pageChangeLog = page.acf.change_log;
-        } else {
-          pageChangeLog = [];
-        }
-        
+        pageChangeLog = page.acf.change_log || [];
       }
 
-      
+
       return (
       <div>
         <div className="page_header">

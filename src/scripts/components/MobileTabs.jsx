@@ -1,48 +1,31 @@
-const React = require('react');
- 
+const React = require('react'),
+      MobileTab = require('./MobileTab.jsx');
+
 let MobileTabs = React.createClass({
-  
+
   getInitialState() {
     return {
-      togglePage: false
+      selectedTabName: 'iOS'
     }
   },
 
-  handleClick(e) {
-    e.preventDefault();
+  _handleTabSelect(tabName) {
     this.setState({
-      togglePage: !this.state.togglePage
+      selectedTabName: tabName
     })
   },
 
   render() {
-    let acf = this.props.page.acf;
+    let iosSelected = this.state.selectedTabName == 'iOS';
+    let content = iosSelected ? this.props.iosContent : this.props.androidContent;
 
-    if (this.state.togglePage) {
-      return  <div className="page__mobile_tabs row">
-                <div className="mobile_tab_header_container">
-                  <h2 onClick={this.handleClick}>iOS</h2>
-                  <h2 className="mobile_tab_header__selected">Android</h2>
-                </div>
-
-                <div dangerouslySetInnerHTML={{__html: acf.android}}></div>
-               
-              </div>;
-      
-    } else {
-      return  <div className="page__mobile_tabs row">
-                <div className="mobile_tab_header_container">
-                  <h2 className="mobile_tab_header__selected">iOS</h2>
-                  <h2 onClick={this.handleClick}>Android</h2>
-                </div>
-
-                <div dangerouslySetInnerHTML={{__html: acf.ios}}></div>
-               
-              </div>;
-    }
-
-       
-
+    return  <div className="page__mobile_tabs row">
+              <div className="mobile_tab_header_container">
+                <MobileTab onTabSelect={this._handleTabSelect} selected={iosSelected} name="iOS" />
+                <MobileTab onTabSelect={this._handleTabSelect} selected={!iosSelected} name="Android" />
+              </div>
+              <div dangerouslySetInnerHTML={{__html: content}}></div>
+            </div>;
   }
 });
 
