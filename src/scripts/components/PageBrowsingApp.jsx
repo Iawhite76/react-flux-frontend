@@ -3,7 +3,7 @@ const React = require('react'),
       PageContent = require('./PageContent.jsx'),
       PageStore = require('../stores/PageStore'),
       SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
-      Parent = require('./Parent.jsx');
+      NavDrawerParent = require('./NavDrawerParent.jsx');
 
 
 
@@ -45,7 +45,7 @@ let PageBrowsingApp = React.createClass({
     return (
       <div id="wrapper">
     
-       <Parent />
+       <NavDrawerParent />
        <main className="col-xs-12 col-sm-9">
          <PageContent />
        </main>

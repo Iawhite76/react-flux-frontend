@@ -2,7 +2,7 @@ const React = require('react');
 
 let upsLogo = require('../../assets/images/UPS_logo.svg');
 
-let Header = React.createClass({
+let NavDrawerHeader = React.createClass({
 
   render() {
 
@@ -13,4 +13,4 @@ let Header = React.createClass({
   }
 });
 
-module.exports = Header;
+module.exports = NavDrawerHeader;

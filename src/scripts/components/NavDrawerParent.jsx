@@ -1,4 +1,4 @@
-const Header = require('./Header.jsx'),
+const NavDrawerHeader = require('./NavDrawerHeader.jsx'),
       React = require('react'),
       SideBarNav = require('./SideBarNav.jsx');
 
@@ -19,7 +19,7 @@ let Parent = React.createClass({
   render() {
     return (
       <div id="sidebar" className="col-sm-3">
-        <Header onDrawerToggleClick={this.handleDrawerToggleClick}/>
+        <NavDrawerHeader onDrawerToggleClick={this.handleDrawerToggleClick}/>
         <SideBarNav open={this.state.drawerOpen}/>
       </div>
     );
