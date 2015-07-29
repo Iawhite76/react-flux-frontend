@@ -33,28 +33,7 @@ let SideBarNav = React.createClass({
 
   render() {
     var sidebar = null;
-    // if (this.props.open) {
-    //   sidebar = <div className="drawer">hello</div>;
-    // }
-  
-    // if (this.props.open) {
-    //   sidebar = <div id="sidebar" className="col-lg-3">
-         
-    //               <div id="sidebar_inner">
 
-    //                   <SearchInput searchString={this.state.searchString} />
-
-    //                   <TreeMenu
-    //                     expandIconClass="fa fa-chevron-right"
-    //                     collapseIconClass="fa fa-chevron-down"
-    //                     onTreeNodeCollapseChange={this._onCollapseChange}
-    //                     onTreeNodeSelectChange={this._onSelectChange}
-    //                     data={this.state.navigationMenuObject} />
-
-    //               </div>
-
-    //         </div>;
-    // }
     if (this.props.open) {
       sidebar =   <div id="sidebar_inner" className="drawer">
 
@@ -69,6 +48,7 @@ let SideBarNav = React.createClass({
 
                   </div>
     }
+    
     return  <ReactCSSTransitionGroup transitionName="drawer">
               {sidebar}
             </ReactCSSTransitionGroup>;
