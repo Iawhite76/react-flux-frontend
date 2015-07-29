@@ -42,7 +42,7 @@ let ChangeLog = React.createClass({
           }
         } else {
           numShown = 3;
-          loadMoreButton = <p onClick={this._handleClick}>Load more</p>;
+          loadMoreButton = <a onClick={this._handleClick}>Load more</a>;
         }
       }
 
