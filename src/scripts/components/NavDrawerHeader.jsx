@@ -7,8 +7,9 @@ let NavDrawerHeader = React.createClass({
   render() {
 
   	return 	<div id="sidebar_header">
-		          <img onClick={this.props.onDrawerToggleClick} src={upsLogo} width="45" height="50" alt="UPS logo" />
-		          <h2>Mobile Style Library</h2>
+					  	<i className="fa fa-bars" onClick={this.props.onDrawerToggleClick}></i>
+		          <img src={upsLogo} width="45" height="50" alt="UPS logo" />
+		          <h2 className="hidden-xs">Mobile Style Library</h2>
 		        </div>;
   }
 });

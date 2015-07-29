@@ -3,9 +3,8 @@
 }
 
 #sidebar 
-  background-color: ups-tan;
-  padding: 15px;
-  
+  padding: 0;
+
 #search_input
   i
     color search-icon-color
@@ -22,6 +21,12 @@
   background-color: ups-tan;
   padding: 10px;
   
+  i
+    font-size: 40px;
+    vertical-align: middle;
+    padding-right: 18px;
+    color: ups-brown;
+  
   img, h2 
     display: inline-block;
   
@@ -32,6 +37,10 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width screen-sm-min) 
+  #sidebar_header
+    i
+      display: none;
+      
   #sidebar_inner 
     height: 100vh;
     // padding 0 18px 0 28px
