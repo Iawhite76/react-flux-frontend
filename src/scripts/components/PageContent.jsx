@@ -41,7 +41,7 @@ let PageContent = React.createClass({
 
         pageChangeLog = page.acf.change_log || [];
         if (pageChangeLog.length) {
-          ChangeLogComponent = <ChangeLog pageChangeLog={pageChangeLog} />
+          ChangeLogComponent = <ChangeLog pageChangeLog={pageChangeLog} moreLoaded={false} />
         }
       }
 

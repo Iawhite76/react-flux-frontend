@@ -17,6 +17,12 @@ let ChangeLog = React.createClass({
     })
   },
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      moreLoaded: this.props.moreLoaded
+    })
+  },
+
   render() {
     let loadMoreButton,
         showAllButton,
