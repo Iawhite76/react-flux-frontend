@@ -1,4 +1,5 @@
 const React = require('react/addons'),
+  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
   SideBarNavStore = require('../stores/SideBarNavStore'),
@@ -6,8 +7,6 @@ const React = require('react/addons'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
   SideBarNavActionCreators = require('../actions/SideBarNavActionCreators');
-
-let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 let upsLogo = require('../../assets/images/UPS_logo.svg');
 
@@ -33,27 +32,46 @@ let SideBarNav = React.createClass({
   },
 
   render() {
-    return <div id="sidebar" className="col-lg-3">
+    var sidebar = null;
+    // if (this.props.open) {
+    //   sidebar = <div className="drawer">hello</div>;
+    // }
+  
+    // if (this.props.open) {
+    //   sidebar = <div id="sidebar" className="col-lg-3">
+         
+    //               <div id="sidebar_inner">
 
-              <div id="sidebar_header">
-                <img src={upsLogo} width="45" height="50" alt="UPS logo" />
-                <h2>Mobile Style Library</h2>
-              </div>
+    //                   <SearchInput searchString={this.state.searchString} />
 
-              <div id="sidebar_inner">
+    //                   <TreeMenu
+    //                     expandIconClass="fa fa-chevron-right"
+    //                     collapseIconClass="fa fa-chevron-down"
+    //                     onTreeNodeCollapseChange={this._onCollapseChange}
+    //                     onTreeNodeSelectChange={this._onSelectChange}
+    //                     data={this.state.navigationMenuObject} />
 
-                  <SearchInput searchString={this.state.searchString} />
+    //               </div>
 
-                  <TreeMenu
-                    expandIconClass="fa fa-chevron-right"
-                    collapseIconClass="fa fa-chevron-down"
-                    onTreeNodeCollapseChange={this._onCollapseChange}
-                    onTreeNodeSelectChange={this._onSelectChange}
-                    data={this.state.navigationMenuObject} />
+    //         </div>;
+    // }
+    if (this.props.open) {
+      sidebar =   <div id="sidebar_inner" className="drawer">
 
-              </div>
+                      <SearchInput searchString={this.state.searchString} />
 
-            </div>;
+                      <TreeMenu
+                        expandIconClass="fa fa-chevron-right"
+                        collapseIconClass="fa fa-chevron-down"
+                        onTreeNodeCollapseChange={this._onCollapseChange}
+                        onTreeNodeSelectChange={this._onSelectChange}
+                        data={this.state.navigationMenuObject} />
+
+                  </div>
+    }
+    return  <ReactCSSTransitionGroup transitionName="drawer">
+              {sidebar}
+            </ReactCSSTransitionGroup>;
 
   },
 

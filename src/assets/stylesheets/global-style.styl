@@ -5,6 +5,32 @@
 @import "tree-nav"
 @import "mobile-tabs"
 
+.drawer {
+  z-index: 999;
+  top: 100px;
+  left: 0;
+  position: absolute;
+  width 100%
+  height 100vh
+}
+
+.drawer-enter {
+  left: -100px;
+  transition: .5s;
+}
+
+.drawer-enter.drawer-enter-active {
+  left: 0px;
+}
+
+.drawer-leave {
+  left: 0px;
+  transition: .5s;
+}
+
+.drawer-leave.drawer-leave-active {
+  left: -100px;
+}
 
 h1, .h1, h2, .h2, h3, .h3 {
   margin-top: 0;
@@ -45,7 +71,7 @@ main[class^="col-"] {
 }
 
 #sidebar {
-  height: 100vh;
+  // height: 100vh;
 }
 
 #wrapper {
