@@ -29,7 +29,7 @@ let ChangeLog = React.createClass({
         subTitle,
         numShown,
         changeLog = this.props.pageChangeLog || [],
-        pageChangeLogLabel = this.props.pageChangeLogLabel;
+        changeLogHeaderText = this.props.changeLogHeaderText;
 
     if (changeLog.length) {
       numShown = changeLog.length;
@@ -51,7 +51,7 @@ let ChangeLog = React.createClass({
 
       return  <div className="page__change_log">
                 <div>
-                  <h2>{pageChangeLogLabel}</h2>
+                  <h2 className="change_log__header_text">{changeLogHeaderText}</h2>
                   <small>({subTitle})</small>
 
                   {
