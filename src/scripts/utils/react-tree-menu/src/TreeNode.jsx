@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 var React = require('react/addons'),
   TreeNodeMixin = require('./TreeNodeMixin'),
   noop = require('lodash/utility/noop');
