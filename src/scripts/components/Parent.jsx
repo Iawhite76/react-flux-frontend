@@ -1,4 +1,3 @@
-var Drawer = require('./Drawer.jsx');
 var Header = require('./Header.jsx');
 var React = require('react'),
     SideBarNav = require('./SideBarNav.jsx');
@@ -7,7 +6,7 @@ var Parent = React.createClass({
 
   getInitialState: function() {
     return {
-      drawerOpen: true
+      drawerOpen: window.innerWidth > 768 ? true : false
     };
   },
 

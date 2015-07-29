@@ -9,11 +9,6 @@ var Header = React.createClass({
 		          <img onClick={this.props.onDrawerToggleClick} src={upsLogo} width="45" height="50" alt="UPS logo" />
 		          <h2>Mobile Style Library</h2>
 		        </div>;
-
-    // return <div className="bar bar-nav">
-    //   <a className="icon icon-bars pull-left" onClick={this.props.onDrawerToggleClick}>Click here</a>
-    //   <h1 className="title">My app</h1>
-    // </div>;
   }
 });
 
