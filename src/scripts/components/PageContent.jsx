@@ -42,6 +42,9 @@ let PageContent = React.createClass({
           acf = page.acf,
           pageContent = null;
 
+          // TODO: add field to filter consolodatedPage data by chosen sections
+          // _.find(a, function(x)  { return x.Section === 'Getting Started' })
+
           if (page.slug === 'consolidated-change-log') {
             pageContent = <ConsolidatedChangeLog className="table" data={this.state.consolidatedChangeLogData}  
                                                   itemsPerPage={2} 
