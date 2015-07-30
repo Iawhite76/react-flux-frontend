@@ -19,7 +19,7 @@ let Parent = React.createClass({
   render() {
     return (
       <div id="sidebar" className="col-md-3">
-        <NavDrawerHeader onDrawerToggleClick={this.handleDrawerToggleClick}/>
+        <NavDrawerHeader open={this.state.drawerOpen} onDrawerToggleClick={this.handleDrawerToggleClick}/>
         <SideBarNav open={this.state.drawerOpen}/>
       </div>
     );
