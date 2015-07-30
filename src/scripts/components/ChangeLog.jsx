@@ -1,63 +1,71 @@
 const React = require('react'),
       Entities = require('html-entities').XmlEntities;
- 
+
 let entities = new Entities();
 
 let ChangeLog = React.createClass({
-  
+
   getInitialState() {
     return {
-      pageChangeLog: this.props.pageChangeLog.slice(0, 3)
+      moreLoaded: false
     }
   },
 
-  handleClick(e) {
+  _handleClick() {
     this.setState({
-      pageChangeLog: this.state.pageChangeLog.concat(this.props.pageChangeLog.slice(3, 6))
+      moreLoaded: true
     })
   },
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.setState({
-      pageChangeLog: nextProps.pageChangeLog.slice(0, 3)
-    });
+      moreLoaded: this.props.moreLoaded
+    })
   },
 
   render() {
-    let changeLog = this.state.pageChangeLog;
-
-    let cta;
+    let loadMoreButton,
+        showAllButton,
+        subTitle,
+        numShown,
+        changeLog = this.props.pageChangeLog || [],
+        changeLogHeaderText = this.props.changeLogHeaderText;
 
     if (changeLog.length) {
+      numShown = changeLog.length;
 
-      let lengthOfChangeLog = changeLog.length,
-          propsChangeLogLength = this.props.pageChangeLog.length
-
-      if (lengthOfChangeLog === propsChangeLogLength) {
-        cta = null;
-      } 
-      else if (lengthOfChangeLog === 6){
-        cta = <a href="/#design-principle-the-first">See all changes</a>;
-      } 
-      else {
-        cta = <p onClick={this.handleClick}>Load more</p>;
+      if (changeLog.length > 3) {
+        if (this.state.moreLoaded) {
+          if (changeLog.length > 6) {
+            numShown = 6;
+            showAllButton = <a href="/#design-principle-the-first">See all changes</a>;
+          }
+        } else {
+          numShown = 3;
+          loadMoreButton = <a onClick={this._handleClick}>Load more</a>;
+        }
       }
 
-       
+      subTitle = `last ${numShown} updates`;
+      changeLog = changeLog.slice(0, numShown);
+
       return  <div className="page__change_log">
-                <h2>Decision History </h2>
-                <small>(last 3 updates)</small>
+                <div>
+                  <h2 className="change_log__header_text">{changeLogHeaderText}</h2>
+                  <small>({subTitle})</small>
 
-                {
-                  changeLog.map((logItem, i) => {
-                      return  <p id={`log_item ${i}`} key={`log_item ${i}`}>
-                                <span>{logItem.date} - </span> 
-                                <span>{entities.decode(logItem.description)}</span>
-                              </p>;
-                  })
-                }
+                  {
+                    changeLog.map((logItem, i) => {
+                        return  <p>
+                                  <span>{logItem.date} - </span>
+                                  <span>{entities.decode(logItem.description)}</span>
+                                </p>;
+                    })
+                  }
 
-                {cta}
+                  {loadMoreButton}
+                  {showAllButton}
+                </div>
               </div>;
 
     }

@@ -1,8 +1,10 @@
 const React = require('react'),
       SideBarNav = require('./SideBarNav.jsx'),
-      PageContent = require('./PageContent'),
+      PageContent = require('./PageContent.jsx'),
       PageStore = require('../stores/PageStore'),
-      SideBarNavActionCreators = require('../actions/SideBarNavActionCreators');
+      SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
+      NavDrawerParent = require('./NavDrawerParent.jsx');
+
 
 
 function getStateFromStore() {
@@ -42,12 +44,11 @@ let PageBrowsingApp = React.createClass({
 
     return (
       <div id="wrapper">
-        <header>
-        </header>
-       <SideBarNav />
-       <main className="col-xs-12 col-sm-9">
-         <PageContent />
-       </main>
+    
+       <NavDrawerParent />
+       
+       <PageContent />
+       
       </div>
     );
   }

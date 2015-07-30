@@ -3,11 +3,15 @@
 @import "header"
 @import "page-content"
 @import "tree-nav"
-
+@import "mobile-tabs"
 
 h1, .h1, h2, .h2, h3, .h3 {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+p, a, li, h2 {
+  font-family: Arial, sans-serif;
 }
 
 h1 {
@@ -31,7 +35,6 @@ a {
 
 p {
   font-size: 12px;
-  font-family: Arial, sans-serif;
   font-weight: normal;
   color: #291610;
 }
@@ -40,14 +43,19 @@ main[class^="col-"] {
   padding: 0;
 }
 
-html, body, #sidebar, #content {
-  height: 100vh;
+#sidebar {
+  // height: 100vh;
 }
 
 #wrapper {
   margin: 0 auto;
   max-width: 1200px;
   min-width: 320px;
+}
+
+div.row {
+ margin-left: 0px;
+ margin-right: 0px;
 }
 
 
@@ -63,16 +71,6 @@ html, body, #sidebar, #content {
 
   p {
     font-size: 14px;
-  }
-  
-  main {
-    .page_header {
-      padding 20px 50px
-    }
-
-    #page_body {
-      padding 30px 50px
-    }
   }
 
 }

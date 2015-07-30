@@ -1,7 +1,37 @@
-#sidebar 
+.drawer {
+  z-index: 999;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: calc(100% - 76px);
+}
+
+.drawer-enter {
+  left: -100px;
+  transition: .5s;
+}
+
+.drawer-enter.drawer-enter-active {
+  left: 0px;
+}
+
+.drawer-leave {
+  left: 0px;
+  transition: .5s;
+}
+
+.drawer-leave.drawer-leave-active {
+  left: -100px;
+}
+
+#sidebar, #sidebar_inner, #sidebar_header {
   background-color: ups-tan;
-  padding: 15px;
-  
+}
+
+#sidebar 
+  padding: 0;
+
 #search_input
   i
     color search-icon-color
@@ -15,7 +45,20 @@
       outline: none;
 
 #sidebar_header 
-  padding-bottom: 35px;
+  background-color: ups-tan;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  z-index: 999;
+  overflow-y: auto;
+  
+  i
+    font-size: 40px;
+    vertical-align: middle;
+    padding-right: 18px;
+    color: ups-brown;
   
   img, h2 
     display: inline-block;
@@ -27,9 +70,6 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width screen-sm-min) 
-  #sidebar_inner 
-    padding 0 18px 0 28px
-  
   #search_input 
     position relative
     
@@ -40,3 +80,20 @@
     position absolute
     top 0
     right 10px
+    
+@media (min-width screen-md-min)
+  #sidebar_inner 
+    height: 100vh;
+  
+  #sidebar_header
+    position: relative;
+    overflow-y: visible;
+      
+  .drawer {
+    position: relative;
+    height: 100vh;
+  }
+
+  i
+    display: none;
+  
