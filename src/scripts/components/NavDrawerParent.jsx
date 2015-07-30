@@ -18,6 +18,20 @@ let Parent = React.createClass({
     }
   },
 
+  handleResize(e) {
+    this.setState({
+      drawerOpen: window.innerWidth > 992 ? true : false
+    });
+  },
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+
   render() {
     return (
       <div id="sidebar" className="col-md-3">
