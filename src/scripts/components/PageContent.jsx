@@ -1,11 +1,19 @@
 const React = require('react'),
       PageStore = require('../stores/PageStore'),
       ChangeLog = require('./ChangeLog.jsx'),
-      MobileTabs = require('./MobileTabs.jsx');
+      MobileTabs = require('./MobileTabs.jsx'),
+      Reactable = require('reactable'),
+      ConsolidatedChangeLog = require('./ConsolidatedChangeLog.jsx');
 
 function getStateFromStore() {
   return {
-    page: PageStore.getCurrentPage()
+    page: PageStore.getCurrentPage(),
+    consolidatedChangeLogData: [
+                {Date: '5\/26\/15', Section: 'Getting Started', 'Change Details': 'Update to capitalization rules across platforms (SDC email).'},
+                {Date: '5\/24\/15', Section: 'Apple', 'Change Details': 'Required fields rule updated across platforms (5\/23 meeting).'},
+                {Date: '4\/17\/15', Section: 'Getting Started', 'Change Details': 'Changes made to button UI (ER 1600 review).'},
+                {Date: '2\/14\/15', Section: 'Zoinkers', 'Change Details': 'It&#039;s valentine&#039;s day, y&#039;allll'}
+              ]
   };
 }
 
@@ -31,8 +39,18 @@ let PageContent = React.createClass({
           changeLogHeaderText,
           MobileTabsComponent,
           ChangeLogComponent,
-          acf = page.acf;
+          acf = page.acf,
+          pageContent = null;
 
+          if (page.slug === 'consolidated-change-log') {
+            pageContent = <ConsolidatedChangeLog className="table" data={this.state.consolidatedChangeLogData}  
+                                                  itemsPerPage={2} 
+                                                  sortable={true} 
+                                                  defaultSort={{column: 'Date', direction: 'desc'}, {column: 'Section', direction: 'asc'}}  
+                          />;
+          } else {
+            pageContent = <div id="page_content" dangerouslySetInnerHTML={{__html: page.content}}></div>;
+          }
 
       if (acf) {
 
@@ -57,7 +75,7 @@ let PageContent = React.createClass({
           </div>
 
           <div id="page_body">
-            <div id="page_content" dangerouslySetInnerHTML={{__html: this.state.page.content}}></div>
+            {pageContent}
             {MobileTabsComponent}
             {ChangeLogComponent}
           </div>

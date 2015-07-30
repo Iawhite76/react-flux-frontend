@@ -3,11 +3,7 @@ const React = require('react'),
       PageContent = require('./PageContent.jsx'),
       PageStore = require('../stores/PageStore'),
       SideBarNavActionCreators = require('../actions/SideBarNavActionCreators'),
-      NavDrawerParent = require('./NavDrawerParent.jsx'),
-      Reactable = require('reactable'),
-      ConsolidatedChangeLog = require('./ConsolidatedChangeLog.jsx');
-
-
+      NavDrawerParent = require('./NavDrawerParent.jsx');
 
 function getStateFromStore() {
   return {
@@ -46,14 +42,7 @@ let PageBrowsingApp = React.createClass({
 
     return (
       <div id="wrapper">
-      <ConsolidatedChangeLog className="table" data={[
-        {Date: '5\/26\/15', Section: 'Getting Started', 'Change Details': 'Update to capitalization rules across platforms (SDC email).'},
-        {Date: '5\/24\/15', Section: 'Apple', 'Change Details': 'Required fields rule updated across platforms (5\/23 meeting).'},
-        {Date: '4\/17\/15', Section: 'Getting Started', 'Change Details': 'Changes made to button UI (ER 1600 review).'},
-        {Date: '2\/14\/15', Section: 'Zoinkers', 'Change Details': 'It&#039;s valentine&#039;s day, y&#039;allll'}
-    ]} itemsPerPage={2} 
-        sortable={true} 
-        defaultSort={{column: 'Date', direction: 'desc'}, {column: 'Section', direction: 'asc'}} />
+      
        <NavDrawerParent />
        
        <PageContent />
