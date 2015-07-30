@@ -46,7 +46,8 @@ let PageContent = React.createClass({
             pageContent = <ConsolidatedChangeLog className="table" data={this.state.consolidatedChangeLogData}  
                                                   itemsPerPage={2} 
                                                   sortable={true} 
-                                                  defaultSort={{column: 'Date', direction: 'desc'}, {column: 'Section', direction: 'asc'}}  
+                                                  defaultSort={{column: 'Date', direction: 'desc'}, {column: 'Section', direction: 'asc'}}
+                                                  filterable={['Section']}
                           />;
           } else {
             pageContent = <div id="page_content" dangerouslySetInnerHTML={{__html: page.content}}></div>;
