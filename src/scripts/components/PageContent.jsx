@@ -50,7 +50,7 @@ let PageContent = React.createClass({
 
       return (
       <div>
-        <main className="col-xs-12 col-sm-9">
+        <main className="col-xs-12 col-md-9">
 
           <div className="page_header">
             <h1>{this.state.page.title}</h1>
