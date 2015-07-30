@@ -66,6 +66,7 @@ let SideBarNav = React.createClass({
     let node = SideBarNavStore.getNodeFromLineage(lineage);
     if (node && node.ID !== PageStore.getCurrentPageID() && !node.children) {
       SideBarNavActionCreators.clickNavNode(node.ID);
+      this.props.onDrawerToggleClick()
     }
   }
 });

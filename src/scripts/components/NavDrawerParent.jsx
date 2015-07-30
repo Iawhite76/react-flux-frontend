@@ -11,16 +11,18 @@ let Parent = React.createClass({
   },
 
   handleDrawerToggleClick(e){
-    this.setState({
-      drawerOpen: !this.state.drawerOpen
-    });
+    if (window.innerWidth < 768) {
+      this.setState({
+        drawerOpen: !this.state.drawerOpen
+      });
+    }
   },
 
   render() {
     return (
       <div id="sidebar" className="col-md-3">
-        <NavDrawerHeader open={this.state.drawerOpen} onDrawerToggleClick={this.handleDrawerToggleClick}/>
-        <SideBarNav open={this.state.drawerOpen}/>
+        <NavDrawerHeader open={this.state.drawerOpen} onDrawerToggleClick={this.handleDrawerToggleClick} />
+        <SideBarNav open={this.state.drawerOpen} onDrawerToggleClick={this.handleDrawerToggleClick} />
       </div>
     );
   }
