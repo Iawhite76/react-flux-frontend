@@ -70,22 +70,6 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width screen-sm-min) 
-  .drawer {
-    position: relative;
-    height: 100vh;
-  }
-
-  #sidebar_header
-    position: relative;
-    overflow-y: visible;
-
-    i
-      display: none;
-      
-  #sidebar_inner 
-    height: 100vh;
-    // padding 0 18px 0 28px
-  
   #search_input 
     position relative
     
@@ -96,3 +80,20 @@
     position absolute
     top 0
     right 10px
+    
+@media (min-width screen-md-min)
+  #sidebar_inner 
+    height: 100vh;
+  
+  #sidebar_header
+    position: relative;
+    overflow-y: visible;
+      
+  .drawer {
+    position: relative;
+    height: 100vh;
+  }
+
+  i
+    display: none;
+  

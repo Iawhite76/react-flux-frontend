@@ -6,12 +6,12 @@ let Parent = React.createClass({
 
   getInitialState() {
     return {
-      drawerOpen: window.innerWidth > 768 ? true : false
+      drawerOpen: window.innerWidth > 992 ? true : false
     };
   },
 
   handleDrawerToggleClick(e){
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 992) {
       this.setState({
         drawerOpen: !this.state.drawerOpen
       });
