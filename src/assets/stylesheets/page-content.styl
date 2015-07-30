@@ -1,4 +1,6 @@
 main {
+	margin-top: 69px;
+	
 	img {
 		@extend .img-responsive;
 		width: 100%;
@@ -59,5 +61,10 @@ main {
 	.page__change_log > div {
 	  border-top: 2px solid change-history-border-color;
 	}
-	
+}
+
+@media (min-width screen-md-min) {
+	main {
+		margin-top: 0;
+	}
 }

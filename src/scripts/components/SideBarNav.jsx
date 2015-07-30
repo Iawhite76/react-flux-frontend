@@ -1,4 +1,5 @@
 const React = require('react/addons'),
+  ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
   TreeMenu = require('../utils/react-tree-menu').TreeMenu,
   TreeNode = require('../utils/react-tree-menu').TreeNode,
   SideBarNavStore = require('../stores/SideBarNavStore'),
@@ -6,8 +7,6 @@ const React = require('react/addons'),
   SearchInput = require('./SearchInput.jsx'),
   WebAPIUtils = require('../utils/WebAPIUtils'),
   SideBarNavActionCreators = require('../actions/SideBarNavActionCreators');
-
-let CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 let upsLogo = require('../../assets/images/UPS_logo.svg');
 
@@ -33,27 +32,26 @@ let SideBarNav = React.createClass({
   },
 
   render() {
-    return <div id="sidebar" className="col-lg-3">
+    var sidebar = null;
 
-              <div id="sidebar_header">
-                <img src={upsLogo} width="45" height="50" alt="UPS logo" />
-                <h2>Mobile Style Library</h2>
-              </div>
+    if (this.props.open) {
+      sidebar =   <div id="sidebar_inner" className="drawer">
 
-              <div id="sidebar_inner">
+                      <SearchInput searchString={this.state.searchString} />
 
-                  <SearchInput searchString={this.state.searchString} />
+                      <TreeMenu
+                        expandIconClass="fa fa-chevron-right"
+                        collapseIconClass="fa fa-chevron-down"
+                        onTreeNodeCollapseChange={this._onCollapseChange}
+                        onTreeNodeSelectChange={this._onSelectChange}
+                        data={this.state.navigationMenuObject} />
 
-                  <TreeMenu
-                    expandIconClass="fa fa-chevron-right"
-                    collapseIconClass="fa fa-chevron-down"
-                    onTreeNodeCollapseChange={this._onCollapseChange}
-                    onTreeNodeSelectChange={this._onSelectChange}
-                    data={this.state.navigationMenuObject} />
-
-              </div>
-
-            </div>;
+                  </div>
+    }
+    
+    return  <ReactCSSTransitionGroup transitionName="drawer">
+              {sidebar}
+            </ReactCSSTransitionGroup>;
 
   },
 
@@ -68,6 +66,7 @@ let SideBarNav = React.createClass({
     let node = SideBarNavStore.getNodeFromLineage(lineage);
     if (node && node.ID !== PageStore.getCurrentPageID() && !node.children) {
       SideBarNavActionCreators.clickNavNode(node.ID);
+      this.props.onDrawerToggleClick()
     }
   }
 });
