@@ -1,0 +1,36 @@
+.table > tbody + tbody, .table > tbody > tr > td
+	border-top none
+	
+.consolidated_change_log_table
+	margin 30px 50px
+	
+.reactable-pagination 
+	text-align center
+
+.table > tbody.reactable-pagination > tr > td
+	padding-top 60px
+
+.reactable-page-button
+	border 1px solid ups-teal
+	padding 7px 14px
+	margin-right 5px
+	cursor pointer
+	
+	&.reactable-current-page
+		background-color ups-brown
+		border 1px solid ups-brown
+		color #fff
+
+.reactable-header-sortable 
+	&:after
+		font-family: FontAwesome;
+		content  "\f0dc"
+		margin-left 3px
+		
+	&.reactable-header-sort-desc
+		&:after
+			content "\f0d7"
+			
+	&.reactable-header-sort-asc
+		&:after
+			content  "\f0d8"
