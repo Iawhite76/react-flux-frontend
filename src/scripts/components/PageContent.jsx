@@ -46,12 +46,14 @@ let PageContent = React.createClass({
           // _.find(a, function(x)  { return x.Section === 'Getting Started' })
 
           if (page.slug === 'consolidated-change-log') {
-            pageContent = <ConsolidatedChangeLog className="table consolidated_change_log_table" data={this.state.consolidatedChangeLogData}  
-                                                  itemsPerPage={2} 
-                                                  sortable={true} 
-                                                  defaultSort={{column: 'Date', direction: 'desc'}}
-                                                  filterable={['Section']}
-                          />;
+            pageContent = <div className='table-responsive'>
+                            <ConsolidatedChangeLog className="table consolidated_change_log_table" data={this.state.consolidatedChangeLogData}  
+                                                    itemsPerPage={2} 
+                                                    sortable={true} 
+                                                    defaultSort={{column: 'Date', direction: 'desc'}}
+                                                    filterable={['Section']}
+                            />
+                          </div>;
           } else {
             pageContent = <div id="page_content" dangerouslySetInnerHTML={{__html: page.content}}></div>;
           }
