@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "babel-jest": "*",
-    "babel-loader": "*",
+    "babel-loader": "^5.0.0",
     "bootstrap": "*",
     "bootstrap-webpack": "*",
     "css-loader": "*",
